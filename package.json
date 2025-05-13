@@ -1,0 +1,10 @@
+{
+  "name": "echelon-backend",
+  "version": "1.0.0",
+  "description": "Python backend",
+  "scripts": {
+    "setup": "python -m venv venv && pip install -r requirements.txt",
+    "start": "python app.py"
+  },
+  "private": true
+}
