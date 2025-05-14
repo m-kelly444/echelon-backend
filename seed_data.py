@@ -1,21 +1,9 @@
-import os
-import json
-import hashlib
-import random
-from datetime import datetime
 from echelon.utils.logging import get_logger
-from echelon.database import get_db_connection, init_db
+from echelon.database import init_db
 
 logger = get_logger(__name__)
 
-def generate_sample_threats(count=10):
-    logger.warning("Synthetic threat generation is disabled")
-    return []
-
-def store_sample_threats():
-    logger.warning("Storing sample threats is disabled")
-    return 0
-
 if __name__ == "__main__":
-    logger.info("Seeding data is disabled - no real data will be generated")
-    logger.info("Please implement data importers for real threat intel data")
+    logger.info("Initializing database...")
+    init_db()
+    logger.info("Database initialized successfully.")
