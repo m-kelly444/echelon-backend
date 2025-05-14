@@ -1,12 +1,10 @@
 from flask import Flask, jsonify, request
-import threading
 import os
 from echelon.utils.logging import get_logger
 from echelon.database import init_db
 from echelon.data.manager import ThreatDataManager
 from echelon.ml.model import ThreatMLModel
 from config import SECRET_KEY, ALLOWED_ORIGINS
-import json
 
 logger = get_logger(__name__)
 

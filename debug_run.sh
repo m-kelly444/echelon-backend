@@ -7,16 +7,15 @@ export FLASK_ENV=development
 export PYTHONPATH=$(pwd)
 export LOG_LEVEL=DEBUG
 
-# Use system Python path
-PYTHON_PATH="/Library/Frameworks/Python.framework/Versions/3.12/bin/python3"
+# Create required directories
+mkdir -p data models cache logs
 
-# Ensure DB directory exists
-mkdir -p data
-
-# Initialize database with seed data
-echo "🌱 Setting up database with sample data..."
-$PYTHON_PATH seed_data.py
+# Initialize database with seed data if it doesn't exist
+if [ ! -f "data/echelon.db" ]; then
+    echo "🌱 Setting up database with sample data..."
+    python seed_data.py
+fi
 
 # Start the application with verbose output
 echo "🚀 Starting application..."
-$PYTHON_PATH -m gunicorn 'app:create_app()' --bind 0.0.0.0:5000 --workers 1 --timeout 120 --log-level debug
+python -m gunicorn 'app:create_app()' --bind 0.0.0.0:5000 --workers 1 --timeout 120 --log-level debug
