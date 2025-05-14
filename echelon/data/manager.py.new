@@ -11,9 +11,9 @@ from echelon.database import get_db_connection, execute_query
 logger = get_logger(__name__)
 
 class ThreatDataManager:
-    """Simplified data manager to avoid freezes during initialization"""
+    """Data manager that does not generate synthetic data"""
     def __init__(self):
-        logger.info("Initializing simplified ThreatDataManager...")
+        logger.info("Initializing ThreatDataManager...")
         self.db_lock = threading.Lock()
         # Skip scheduled collection which can cause freezes
     
@@ -24,12 +24,15 @@ class ThreatDataManager:
                     cursor = conn.cursor()
                     cursor.execute("SELECT value FROM taxonomy WHERE type = ?", (type_name,))
                     values = [row['value'] for row in cursor.fetchall()]
+            
+            if not values:
+                logger.warning(f"No taxonomy values found for {type_name}")
+            
             return values
         except Exception as e:
             logger.error(f"Error in get_taxonomy_values: {str(e)}")
-            # No fallback synthetic taxonomies
-            logger.warning(f"No taxonomy values found for {type_name}")
-            return []    
+            return []
+    
     def store_prediction(self, prediction):
         try:
             if 'id' not in prediction:
