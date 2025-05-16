@@ -5,6 +5,9 @@ import re
 from datetime import datetime
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import urllib.parse
+import time
+from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+
 
 # Configuration
 PORT = 8080
@@ -47,6 +50,13 @@ class PredictionHandler(BaseHTTPRequestHandler):
     
     def do_GET(self):
         stats["requests"] += 1
+        
+        # Rate limiting
+        if stats.get("last_request_time"):
+            time_since_last = time.time() - stats.get("last_request_time", 0)
+            if time_since_last < 0.1:  # Max 10 requests per second
+                time.sleep(0.1 - time_since_last)
+        stats["last_request_time"] = time.time()
         
         # Parse URL
         parsed_path = urllib.parse.urlparse(self.path)
@@ -110,7 +120,11 @@ class PredictionHandler(BaseHTTPRequestHandler):
                     self.send_response(503)
                     self.send_header("Content-type", "application/json")
                     self.end_headers()
-                    self.wfile.write(json.dumps({"error": "Model not loaded"}).encode())
+                    self.wfile.write(json.dumps({
+                        "error": "Model not loaded",
+                        "retry_after": 30,
+                        "timestamp": datetime.now().isoformat()
+                    }).encode())
                     stats["errors"] += 1
                     return
                 
@@ -174,6 +188,18 @@ class PredictionHandler(BaseHTTPRequestHandler):
             self.send_header("Content-type", "application/json")
             self.end_headers()
             self.wfile.write(json.dumps({"error": "Not found"}).encode())
+
+
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, min=2, max=10),
+        retry=retry_if_exception_type((Exception))
+    )
+    def _predict_with_retry(self, features):
+        # Wrapper to retry predictions in case of transient errors
+        prediction_proba = model.predict_proba([features])[0]
+        prediction = int(model.predict([features])[0])
+        return prediction, prediction_proba
 
 # Start server
 print(f"Starting server on {HOST}:{PORT}")

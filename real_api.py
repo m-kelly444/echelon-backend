@@ -7,9 +7,39 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from datetime import datetime
 import glob
+import time
+from functools import wraps
+
 
 app = Flask(__name__)
 CORS(app)
+# Error handling decorator
+def handle_api_error(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            # Log the error
+            print(f"API Error in {func.__name__}: {str(e)}")
+            
+            error_response = {
+                "error": True,
+                "message": str(e),
+                "timestamp": datetime.now().isoformat(),
+                "endpoint": func.__name__
+            }
+            
+            # Return appropriate status
+            status_code = 500
+            if isinstance(e, ValueError) or isinstance(e, KeyError):
+                status_code = 400
+            elif isinstance(e, FileNotFoundError):
+                status_code = 404
+                
+            return jsonify(error_response), status_code
+    return wrapper
+
 
 # Load all real data - no fallbacks, no mocks
 def load_all_data():
@@ -121,6 +151,7 @@ all_data = load_all_data()
 
 # API endpoints that use only real data
 @app.route('/', methods=['GET'])
+@handle_api_error
 def home():
     return jsonify({
         "name": "Echelon Real-Data API",
@@ -138,6 +169,7 @@ def home():
     })
 
 @app.route('/cves', methods=['GET'])
+@handle_api_error
 def get_cves():
     limit = min(int(request.args.get('limit', 50)), 500)
     offset = int(request.args.get('offset', 0))
@@ -164,6 +196,7 @@ def get_cves():
     })
 
 @app.route('/techniques', methods=['GET'])
+@handle_api_error
 def get_techniques():
     limit = min(int(request.args.get('limit', 50)), 500)
     offset = int(request.args.get('offset', 0))
@@ -180,6 +213,7 @@ def get_techniques():
     })
 
 @app.route('/alerts', methods=['GET'])
+@handle_api_error
 def get_alerts():
     limit = min(int(request.args.get('limit', 20)), 100)
     offset = int(request.args.get('offset', 0))
