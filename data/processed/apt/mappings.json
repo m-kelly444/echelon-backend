@@ -1,0 +1,510 @@
+[
+  {
+    "pulse_id": "680034fc84efc0751b3bc07d",
+    "pulse_name": "CVE-2025-24054, NTLM Exploit in the Wild",
+    "pulse_description": "A critical vulnerability, CVE-2025-24054, related to NTLM hash disclosure via spoofing, has been actively exploited since March 19, 2025. The flaw allows attackers to leak NTLM hashes or user passwords using a maliciously crafted .library-ms file, potentially compromising systems. A campaign targeting government and private institutions in Poland and Romania used malspam to distribute Dropbox links containing archives exploiting this vulnerability. The exploit can be triggered with minimal user interaction, such as right-clicking or navigating to the folder containing the malicious file. This vulnerability appears to be a variant of the previously patched CVE-2024-43451, sharing several similarities.",
+    "pulse_created": "2025-04-16T22:53:48.712000",
+    "apt_group": "apt28",
+    "apt_name": "APT28",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted sector 'Government' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:32.894344"
+  },
+  {
+    "pulse_id": "680034fc84efc0751b3bc07d",
+    "pulse_name": "CVE-2025-24054, NTLM Exploit in the Wild",
+    "pulse_description": "A critical vulnerability, CVE-2025-24054, related to NTLM hash disclosure via spoofing, has been actively exploited since March 19, 2025. The flaw allows attackers to leak NTLM hashes or user passwords using a maliciously crafted .library-ms file, potentially compromising systems. A campaign targeting government and private institutions in Poland and Romania used malspam to distribute Dropbox links containing archives exploiting this vulnerability. The exploit can be triggered with minimal user interaction, such as right-clicking or navigating to the folder containing the malicious file. This vulnerability appears to be a variant of the previously patched CVE-2024-43451, sharing several similarities.",
+    "pulse_created": "2025-04-16T22:53:48.712000",
+    "apt_group": "apt29",
+    "apt_name": "APT29",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted sector 'Government' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:32.894344"
+  },
+  {
+    "pulse_id": "680034fc84efc0751b3bc07d",
+    "pulse_name": "CVE-2025-24054, NTLM Exploit in the Wild",
+    "pulse_description": "A critical vulnerability, CVE-2025-24054, related to NTLM hash disclosure via spoofing, has been actively exploited since March 19, 2025. The flaw allows attackers to leak NTLM hashes or user passwords using a maliciously crafted .library-ms file, potentially compromising systems. A campaign targeting government and private institutions in Poland and Romania used malspam to distribute Dropbox links containing archives exploiting this vulnerability. The exploit can be triggered with minimal user interaction, such as right-clicking or navigating to the folder containing the malicious file. This vulnerability appears to be a variant of the previously patched CVE-2024-43451, sharing several similarities.",
+    "pulse_created": "2025-04-16T22:53:48.712000",
+    "apt_group": "sandworm",
+    "apt_name": "Sandworm Team",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted sector 'Government' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:32.894344"
+  },
+  {
+    "pulse_id": "680034fc84efc0751b3bc07d",
+    "pulse_name": "CVE-2025-24054, NTLM Exploit in the Wild",
+    "pulse_description": "A critical vulnerability, CVE-2025-24054, related to NTLM hash disclosure via spoofing, has been actively exploited since March 19, 2025. The flaw allows attackers to leak NTLM hashes or user passwords using a maliciously crafted .library-ms file, potentially compromising systems. A campaign targeting government and private institutions in Poland and Romania used malspam to distribute Dropbox links containing archives exploiting this vulnerability. The exploit can be triggered with minimal user interaction, such as right-clicking or navigating to the folder containing the malicious file. This vulnerability appears to be a variant of the previously patched CVE-2024-43451, sharing several similarities.",
+    "pulse_created": "2025-04-16T22:53:48.712000",
+    "apt_group": "muddywater",
+    "apt_name": "MuddyWater",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted sector 'Government' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:32.894344"
+  },
+  {
+    "pulse_id": "6826fc812336b76524ceb0b1",
+    "pulse_name": "Mass Scanning and Exploit Campaigns",
+    "pulse_description": "Trustwave SpiderLabs has identified ongoing malicious activities originating from Proton66 ASN, including vulnerability scanning, exploit attempts, and phishing campaigns. The investigation revealed connections between Proton66 and bulletproof hosting services advertised on underground forums. Mass scanning and exploit campaigns targeting multiple sectors were observed, with technology and financial organizations being the most common targets. A specific IP address linked to SuperBlack ransomware operators was found distributing critical exploits. The analysis also uncovered a potential rebranding of underground hosting services and shifts in IP addresses between different ASNs, suggesting relationships between providers.",
+    "pulse_created": "2025-05-16T08:51:13.169000",
+    "apt_group": "apt29",
+    "apt_name": "APT29",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted sector 'NGO' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:33.465725"
+  },
+  {
+    "pulse_id": "6826fc812336b76524ceb0b1",
+    "pulse_name": "Mass Scanning and Exploit Campaigns",
+    "pulse_description": "Trustwave SpiderLabs has identified ongoing malicious activities originating from Proton66 ASN, including vulnerability scanning, exploit attempts, and phishing campaigns. The investigation revealed connections between Proton66 and bulletproof hosting services advertised on underground forums. Mass scanning and exploit campaigns targeting multiple sectors were observed, with technology and financial organizations being the most common targets. A specific IP address linked to SuperBlack ransomware operators was found distributing critical exploits. The analysis also uncovered a potential rebranding of underground hosting services and shifts in IP addresses between different ASNs, suggesting relationships between providers.",
+    "pulse_created": "2025-05-16T08:51:13.169000",
+    "apt_group": "lazarus",
+    "apt_name": "Lazarus Group",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted sector 'Financial' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:33.465725"
+  },
+  {
+    "pulse_id": "6826fc812336b76524ceb0b1",
+    "pulse_name": "Mass Scanning and Exploit Campaigns",
+    "pulse_description": "Trustwave SpiderLabs has identified ongoing malicious activities originating from Proton66 ASN, including vulnerability scanning, exploit attempts, and phishing campaigns. The investigation revealed connections between Proton66 and bulletproof hosting services advertised on underground forums. Mass scanning and exploit campaigns targeting multiple sectors were observed, with technology and financial organizations being the most common targets. A specific IP address linked to SuperBlack ransomware operators was found distributing critical exploits. The analysis also uncovered a potential rebranding of underground hosting services and shifts in IP addresses between different ASNs, suggesting relationships between providers.",
+    "pulse_created": "2025-05-16T08:51:13.169000",
+    "apt_group": "apt41",
+    "apt_name": "APT41",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted sector 'Technology' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:33.465725"
+  },
+  {
+    "pulse_id": "682768bd8d85a5422eb7c475",
+    "pulse_name": "Shared SSH Keys Expose Phishing Infrastructure Targeting Kuwait",
+    "pulse_description": "An ongoing phishing campaign targeting Kuwait's fisheries, telecommunications, and insurance sectors has been identified, utilizing over 100 domains for credential harvesting. The operation, observed since early 2025, employs cloned login portals and impersonated web pages. The infrastructure shares operational fingerprints, including reused SSH authentication keys and consistent ASN usage, allowing related assets to be linked. The campaign primarily targets the National Fishing Company of Kuwait, automotive insurance sector, and Zain telecommunications. The actors use brand-inspired domain names and transliterations rather than direct typosquatting. Mobile payment lures targeting Zain customers have also been observed, potentially enabling further social engineering attacks.",
+    "pulse_created": "2025-05-16T16:33:01.453000",
+    "apt_group": "apt29",
+    "apt_name": "APT29",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted sector 'NGO' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:33.697332"
+  },
+  {
+    "pulse_id": "682768bd8d85a5422eb7c475",
+    "pulse_name": "Shared SSH Keys Expose Phishing Infrastructure Targeting Kuwait",
+    "pulse_description": "An ongoing phishing campaign targeting Kuwait's fisheries, telecommunications, and insurance sectors has been identified, utilizing over 100 domains for credential harvesting. The operation, observed since early 2025, employs cloned login portals and impersonated web pages. The infrastructure shares operational fingerprints, including reused SSH authentication keys and consistent ASN usage, allowing related assets to be linked. The campaign primarily targets the National Fishing Company of Kuwait, automotive insurance sector, and Zain telecommunications. The actors use brand-inspired domain names and transliterations rather than direct typosquatting. Mobile payment lures targeting Zain customers have also been observed, potentially enabling further social engineering attacks.",
+    "pulse_created": "2025-05-16T16:33:01.453000",
+    "apt_group": "apt41",
+    "apt_name": "APT41",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted sector 'Telecom' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:33.697332"
+  },
+  {
+    "pulse_id": "682768bd8d85a5422eb7c475",
+    "pulse_name": "Shared SSH Keys Expose Phishing Infrastructure Targeting Kuwait",
+    "pulse_description": "An ongoing phishing campaign targeting Kuwait's fisheries, telecommunications, and insurance sectors has been identified, utilizing over 100 domains for credential harvesting. The operation, observed since early 2025, employs cloned login portals and impersonated web pages. The infrastructure shares operational fingerprints, including reused SSH authentication keys and consistent ASN usage, allowing related assets to be linked. The campaign primarily targets the National Fishing Company of Kuwait, automotive insurance sector, and Zain telecommunications. The actors use brand-inspired domain names and transliterations rather than direct typosquatting. Mobile payment lures targeting Zain customers have also been observed, potentially enabling further social engineering attacks.",
+    "pulse_created": "2025-05-16T16:33:01.453000",
+    "apt_group": "muddywater",
+    "apt_name": "MuddyWater",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted sector 'Telecommunications' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:33.697332"
+  },
+  {
+    "pulse_id": "682768bfc09a2c586edd469a",
+    "pulse_name": "The Good, the Bad and the Ugly in Cybersecurity \u2013 Week 20",
+    "pulse_description": "This intelligence update covers recent cybersecurity events. In positive developments, global authorities disrupted a major botnet, arrested a ransomware actor, and dismantled a dark web marketplace. On the negative side, a malicious NPM package was discovered hiding multi-stage malware using Unicode and Google Calendar. The most concerning development involves cyberspies exploiting a zero-day vulnerability in Output Messenger to target Kurdish military users in Iraq, showcasing increased capabilities of the Marbled Dust threat group.",
+    "pulse_created": "2025-05-16T16:33:03.089000",
+    "apt_group": "lazarus",
+    "apt_name": "Lazarus Group",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted region 'Global' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:33.980153"
+  },
+  {
+    "pulse_id": "682773e41dab35a86ec077e6",
+    "pulse_name": "How Interlock Ransomware Affects the Defense Industrial Base Supply Chain",
+    "pulse_description": "Interlock Ransomware has recently targeted National Defense Corporation and its subsidiaries, impacting the defense industrial base supply chain. The group's attack on AMTEC, a manufacturer of ammunition and explosives, has exposed sensitive information about global defense contractors and their supply chains. This incident highlights the cascading effects of such attacks on military operations, national security, and intellectual property. The compromised data includes details about contracts, logistics, and distribution networks of major defense corporations. The attack underscores the critical need for robust cybersecurity measures in the defense sector, especially given the potential involvement of state-sponsored actors and the implications for geopolitical influence and espionage.",
+    "pulse_created": "2025-05-16T17:20:36.674000",
+    "apt_group": "apt28",
+    "apt_name": "APT28",
+    "confidence": 0.4,
+    "reasons": [
+      "Targeted sector 'Defense' found in pulse",
+      "Targeted sector 'Political' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:34.385168"
+  },
+  {
+    "pulse_id": "682773e41dab35a86ec077e6",
+    "pulse_name": "How Interlock Ransomware Affects the Defense Industrial Base Supply Chain",
+    "pulse_description": "Interlock Ransomware has recently targeted National Defense Corporation and its subsidiaries, impacting the defense industrial base supply chain. The group's attack on AMTEC, a manufacturer of ammunition and explosives, has exposed sensitive information about global defense contractors and their supply chains. This incident highlights the cascading effects of such attacks on military operations, national security, and intellectual property. The compromised data includes details about contracts, logistics, and distribution networks of major defense corporations. The attack underscores the critical need for robust cybersecurity measures in the defense sector, especially given the potential involvement of state-sponsored actors and the implications for geopolitical influence and espionage.",
+    "pulse_created": "2025-05-16T17:20:36.674000",
+    "apt_group": "lazarus",
+    "apt_name": "Lazarus Group",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted region 'Global' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:34.385168"
+  },
+  {
+    "pulse_id": "682773e41dab35a86ec077e6",
+    "pulse_name": "How Interlock Ransomware Affects the Defense Industrial Base Supply Chain",
+    "pulse_description": "Interlock Ransomware has recently targeted National Defense Corporation and its subsidiaries, impacting the defense industrial base supply chain. The group's attack on AMTEC, a manufacturer of ammunition and explosives, has exposed sensitive information about global defense contractors and their supply chains. This incident highlights the cascading effects of such attacks on military operations, national security, and intellectual property. The compromised data includes details about contracts, logistics, and distribution networks of major defense corporations. The attack underscores the critical need for robust cybersecurity measures in the defense sector, especially given the potential involvement of state-sponsored actors and the implications for geopolitical influence and espionage.",
+    "pulse_created": "2025-05-16T17:20:36.674000",
+    "apt_group": "sandworm",
+    "apt_name": "Sandworm Team",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted sector 'Industrial' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:34.385168"
+  },
+  {
+    "pulse_id": "682773e41dab35a86ec077e6",
+    "pulse_name": "How Interlock Ransomware Affects the Defense Industrial Base Supply Chain",
+    "pulse_description": "Interlock Ransomware has recently targeted National Defense Corporation and its subsidiaries, impacting the defense industrial base supply chain. The group's attack on AMTEC, a manufacturer of ammunition and explosives, has exposed sensitive information about global defense contractors and their supply chains. This incident highlights the cascading effects of such attacks on military operations, national security, and intellectual property. The compromised data includes details about contracts, logistics, and distribution networks of major defense corporations. The attack underscores the critical need for robust cybersecurity measures in the defense sector, especially given the potential involvement of state-sponsored actors and the implications for geopolitical influence and espionage.",
+    "pulse_created": "2025-05-16T17:20:36.674000",
+    "apt_group": "muddywater",
+    "apt_name": "MuddyWater",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted sector 'Defense' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:34.385168"
+  },
+  {
+    "pulse_id": "67ffb7eba715b936a2c4c2a8",
+    "pulse_name": "Interlock ransomware evolving under the radar",
+    "pulse_description": "The Interlock ransomware group, active since September 2024, has shown adaptability and innovation in its tactics despite a relatively low victim count. They employ fake browser updates and the ClickFix technique for initial access, followed by a multi-stage attack chain involving PowerShell backdoors, credential stealers, and a custom Remote Access Trojan. The group targets various sectors across North America and Europe, conducting Big Game Hunting and double extortion campaigns. Interlock has been observed improving their tools, including evolving their PowerShell backdoor and modifying their ransom notes to emphasize legal repercussions. The group's focus on maintaining relevance while avoiding large-scale visibility suggests a strategic approach to their operations.",
+    "pulse_created": "2025-04-16T14:00:11.178000",
+    "apt_group": "apt28",
+    "apt_name": "APT28",
+    "confidence": 0.4,
+    "reasons": [
+      "Targeted region 'Europe' found in pulse",
+      "Targeted region 'North America' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:34.700656"
+  },
+  {
+    "pulse_id": "67ffb7eba715b936a2c4c2a8",
+    "pulse_name": "Interlock ransomware evolving under the radar",
+    "pulse_description": "The Interlock ransomware group, active since September 2024, has shown adaptability and innovation in its tactics despite a relatively low victim count. They employ fake browser updates and the ClickFix technique for initial access, followed by a multi-stage attack chain involving PowerShell backdoors, credential stealers, and a custom Remote Access Trojan. The group targets various sectors across North America and Europe, conducting Big Game Hunting and double extortion campaigns. Interlock has been observed improving their tools, including evolving their PowerShell backdoor and modifying their ransom notes to emphasize legal repercussions. The group's focus on maintaining relevance while avoiding large-scale visibility suggests a strategic approach to their operations.",
+    "pulse_created": "2025-04-16T14:00:11.178000",
+    "apt_group": "apt29",
+    "apt_name": "APT29",
+    "confidence": 0.4,
+    "reasons": [
+      "Targeted region 'Europe' found in pulse",
+      "Targeted region 'North America' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:34.700656"
+  },
+  {
+    "pulse_id": "67ffb7eba715b936a2c4c2a8",
+    "pulse_name": "Interlock ransomware evolving under the radar",
+    "pulse_description": "The Interlock ransomware group, active since September 2024, has shown adaptability and innovation in its tactics despite a relatively low victim count. They employ fake browser updates and the ClickFix technique for initial access, followed by a multi-stage attack chain involving PowerShell backdoors, credential stealers, and a custom Remote Access Trojan. The group targets various sectors across North America and Europe, conducting Big Game Hunting and double extortion campaigns. Interlock has been observed improving their tools, including evolving their PowerShell backdoor and modifying their ransom notes to emphasize legal repercussions. The group's focus on maintaining relevance while avoiding large-scale visibility suggests a strategic approach to their operations.",
+    "pulse_created": "2025-04-16T14:00:11.178000",
+    "apt_group": "apt41",
+    "apt_name": "APT41",
+    "confidence": 0.4,
+    "reasons": [
+      "Targeted region 'North America' found in pulse",
+      "Targeted region 'Europe' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:34.700656"
+  },
+  {
+    "pulse_id": "67ffb7eba715b936a2c4c2a8",
+    "pulse_name": "Interlock ransomware evolving under the radar",
+    "pulse_description": "The Interlock ransomware group, active since September 2024, has shown adaptability and innovation in its tactics despite a relatively low victim count. They employ fake browser updates and the ClickFix technique for initial access, followed by a multi-stage attack chain involving PowerShell backdoors, credential stealers, and a custom Remote Access Trojan. The group targets various sectors across North America and Europe, conducting Big Game Hunting and double extortion campaigns. Interlock has been observed improving their tools, including evolving their PowerShell backdoor and modifying their ransom notes to emphasize legal repercussions. The group's focus on maintaining relevance while avoiding large-scale visibility suggests a strategic approach to their operations.",
+    "pulse_created": "2025-04-16T14:00:11.178000",
+    "apt_group": "sandworm",
+    "apt_name": "Sandworm Team",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted region 'Europe' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:34.700656"
+  },
+  {
+    "pulse_id": "67ffb7eba715b936a2c4c2a8",
+    "pulse_name": "Interlock ransomware evolving under the radar",
+    "pulse_description": "The Interlock ransomware group, active since September 2024, has shown adaptability and innovation in its tactics despite a relatively low victim count. They employ fake browser updates and the ClickFix technique for initial access, followed by a multi-stage attack chain involving PowerShell backdoors, credential stealers, and a custom Remote Access Trojan. The group targets various sectors across North America and Europe, conducting Big Game Hunting and double extortion campaigns. Interlock has been observed improving their tools, including evolving their PowerShell backdoor and modifying their ransom notes to emphasize legal repercussions. The group's focus on maintaining relevance while avoiding large-scale visibility suggests a strategic approach to their operations.",
+    "pulse_created": "2025-04-16T14:00:11.178000",
+    "apt_group": "muddywater",
+    "apt_name": "MuddyWater",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted region 'Europe' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:34.700656"
+  },
+  {
+    "pulse_id": "682671c9405674c9b44141b2",
+    "pulse_name": "Unfiltered look into LockBit\u2019s operations",
+    "pulse_description": "A breach of LockBit's dark web affiliate panels exposed a rare glimpse into their operations. The leaked data included Bitcoin addresses, admin credentials, and a chat log revealing negotiation tactics and ransom demands. Ransom amounts varied widely, with some victims confused about the demands. The breach exposed LockBit's research into victims' finances and their willingness to provide additional services for a fee. The incident highlights the complexities of cybercrime negotiations and the human stories behind the headlines. Additionally, Cisco Talos observed a trend of attack kill chains being split into two stages, executed by separate threat actors, leading to refined definitions of initial access brokers.",
+    "pulse_created": "2025-05-15T22:59:21.878000",
+    "apt_group": "apt29",
+    "apt_name": "APT29",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted sector 'Research' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:34.974885"
+  },
+  {
+    "pulse_id": "67ffc3f88708691edc04184d",
+    "pulse_name": "BRICKSTORM Backdoor Analysis: A Persistent Espionage Threat to European Industries",
+    "pulse_description": "This analysis examines BRICKSTORM, an espionage backdoor linked to China-nexus cluster UNC5221. It details newly identified Windows variants, expanding on previous Linux presence. The backdoor, used in long-term espionage campaigns, targets European industries of strategic interest to China. BRICKSTORM provides file management and network tunneling capabilities, using multiple layers of encryption and leveraging cloud providers to evade detection. The analysis covers the backdoor's inner workings, including its command and control infrastructure, protocol details, and evasion techniques. It highlights the persistent nature of these intrusions and the challenges they pose to defensive measures. The document concludes with recommendations for detection and mitigation strategies.",
+    "pulse_created": "2025-04-16T14:51:36.804000",
+    "apt_group": "apt28",
+    "apt_name": "APT28",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted region 'Europe' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:35.292297"
+  },
+  {
+    "pulse_id": "67ffc3f88708691edc04184d",
+    "pulse_name": "BRICKSTORM Backdoor Analysis: A Persistent Espionage Threat to European Industries",
+    "pulse_description": "This analysis examines BRICKSTORM, an espionage backdoor linked to China-nexus cluster UNC5221. It details newly identified Windows variants, expanding on previous Linux presence. The backdoor, used in long-term espionage campaigns, targets European industries of strategic interest to China. BRICKSTORM provides file management and network tunneling capabilities, using multiple layers of encryption and leveraging cloud providers to evade detection. The analysis covers the backdoor's inner workings, including its command and control infrastructure, protocol details, and evasion techniques. It highlights the persistent nature of these intrusions and the challenges they pose to defensive measures. The document concludes with recommendations for detection and mitigation strategies.",
+    "pulse_created": "2025-04-16T14:51:36.804000",
+    "apt_group": "apt29",
+    "apt_name": "APT29",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted region 'Europe' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:35.292297"
+  },
+  {
+    "pulse_id": "67ffc3f88708691edc04184d",
+    "pulse_name": "BRICKSTORM Backdoor Analysis: A Persistent Espionage Threat to European Industries",
+    "pulse_description": "This analysis examines BRICKSTORM, an espionage backdoor linked to China-nexus cluster UNC5221. It details newly identified Windows variants, expanding on previous Linux presence. The backdoor, used in long-term espionage campaigns, targets European industries of strategic interest to China. BRICKSTORM provides file management and network tunneling capabilities, using multiple layers of encryption and leveraging cloud providers to evade detection. The analysis covers the backdoor's inner workings, including its command and control infrastructure, protocol details, and evasion techniques. It highlights the persistent nature of these intrusions and the challenges they pose to defensive measures. The document concludes with recommendations for detection and mitigation strategies.",
+    "pulse_created": "2025-04-16T14:51:36.804000",
+    "apt_group": "apt41",
+    "apt_name": "APT41",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted region 'Europe' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:35.292297"
+  },
+  {
+    "pulse_id": "67ffc3f88708691edc04184d",
+    "pulse_name": "BRICKSTORM Backdoor Analysis: A Persistent Espionage Threat to European Industries",
+    "pulse_description": "This analysis examines BRICKSTORM, an espionage backdoor linked to China-nexus cluster UNC5221. It details newly identified Windows variants, expanding on previous Linux presence. The backdoor, used in long-term espionage campaigns, targets European industries of strategic interest to China. BRICKSTORM provides file management and network tunneling capabilities, using multiple layers of encryption and leveraging cloud providers to evade detection. The analysis covers the backdoor's inner workings, including its command and control infrastructure, protocol details, and evasion techniques. It highlights the persistent nature of these intrusions and the challenges they pose to defensive measures. The document concludes with recommendations for detection and mitigation strategies.",
+    "pulse_created": "2025-04-16T14:51:36.804000",
+    "apt_group": "sandworm",
+    "apt_name": "Sandworm Team",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted region 'Europe' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:35.292297"
+  },
+  {
+    "pulse_id": "67ffc3f88708691edc04184d",
+    "pulse_name": "BRICKSTORM Backdoor Analysis: A Persistent Espionage Threat to European Industries",
+    "pulse_description": "This analysis examines BRICKSTORM, an espionage backdoor linked to China-nexus cluster UNC5221. It details newly identified Windows variants, expanding on previous Linux presence. The backdoor, used in long-term espionage campaigns, targets European industries of strategic interest to China. BRICKSTORM provides file management and network tunneling capabilities, using multiple layers of encryption and leveraging cloud providers to evade detection. The analysis covers the backdoor's inner workings, including its command and control infrastructure, protocol details, and evasion techniques. It highlights the persistent nature of these intrusions and the challenges they pose to defensive measures. The document concludes with recommendations for detection and mitigation strategies.",
+    "pulse_created": "2025-04-16T14:51:36.804000",
+    "apt_group": "muddywater",
+    "apt_name": "MuddyWater",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted region 'Europe' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:35.292297"
+  },
+  {
+    "pulse_id": "67ff46c3697a4976dc919b5d",
+    "pulse_name": "JScript to PowerShell: Breaking Down a Loader Delivering XWorm and Rhadamanthys",
+    "pulse_description": "This analysis examines a sophisticated malware loader that utilizes JScript to launch obfuscated PowerShell code, ultimately delivering payloads such as XWorm and Rhadamanthys. The loader employs geofencing tactics, targeting victims in the United States with XWorm RAT, while deploying Rhadamanthys stealer to users outside the U.S. The attack chain involves multiple stages of obfuscation and deobfuscation, including decimal encoding and string manipulation. The final payload is injected into RegSvcs.exe using reflective loading techniques. The loader also performs various cleanup actions to evade detection and remove traces of its activity. Both XWorm and Rhadamanthys are advanced malware variants with capabilities ranging from DDoS attacks to cryptocurrency theft.",
+    "pulse_created": "2025-04-16T05:57:23.018000",
+    "apt_group": "lazarus",
+    "apt_name": "Lazarus Group",
+    "confidence": 0.4,
+    "reasons": [
+      "Targeted region 'United States' found in pulse",
+      "Targeted sector 'Cryptocurrency' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:35.516335"
+  },
+  {
+    "pulse_id": "67ff46c3697a4976dc919b5d",
+    "pulse_name": "JScript to PowerShell: Breaking Down a Loader Delivering XWorm and Rhadamanthys",
+    "pulse_description": "This analysis examines a sophisticated malware loader that utilizes JScript to launch obfuscated PowerShell code, ultimately delivering payloads such as XWorm and Rhadamanthys. The loader employs geofencing tactics, targeting victims in the United States with XWorm RAT, while deploying Rhadamanthys stealer to users outside the U.S. The attack chain involves multiple stages of obfuscation and deobfuscation, including decimal encoding and string manipulation. The final payload is injected into RegSvcs.exe using reflective loading techniques. The loader also performs various cleanup actions to evade detection and remove traces of its activity. Both XWorm and Rhadamanthys are advanced malware variants with capabilities ranging from DDoS attacks to cryptocurrency theft.",
+    "pulse_created": "2025-04-16T05:57:23.018000",
+    "apt_group": "sandworm",
+    "apt_name": "Sandworm Team",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted region 'United States' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:35.516335"
+  },
+  {
+    "pulse_id": "6825f54fbfa4e17e740f0dd6",
+    "pulse_name": "Operation RoundPress targeting high-value webmail servers",
+    "pulse_description": "Operation RoundPress is a Russia-aligned espionage campaign targeting webmail servers through XSS vulnerabilities. The attackers, believed to be the Sednit group, use spearphishing emails to exploit vulnerabilities in Roundcube, Horde, MDaemon, and Zimbra webmail software. Their goal is to steal confidential data from specific email accounts. The operation expanded its targets in 2024, using both known and zero-day vulnerabilities. Victims include government entities and defense companies, primarily in Eastern Europe. The attackers employ various JavaScript payloads (SpyPress) to steal credentials, exfiltrate contacts and emails, and in some cases bypass two-factor authentication. The campaign demonstrates the ongoing threat to organizations with outdated webmail servers.",
+    "pulse_created": "2025-05-15T14:08:15.178000",
+    "apt_group": "apt28",
+    "apt_name": "APT28",
+    "confidence": 1.0,
+    "reasons": [
+      "APT name 'sednit' found in pulse name/description",
+      "Targeted region 'Europe' found in pulse",
+      "Targeted sector 'Government' found in pulse",
+      "Targeted sector 'Defense' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:35.923684"
+  },
+  {
+    "pulse_id": "6825f54fbfa4e17e740f0dd6",
+    "pulse_name": "Operation RoundPress targeting high-value webmail servers",
+    "pulse_description": "Operation RoundPress is a Russia-aligned espionage campaign targeting webmail servers through XSS vulnerabilities. The attackers, believed to be the Sednit group, use spearphishing emails to exploit vulnerabilities in Roundcube, Horde, MDaemon, and Zimbra webmail software. Their goal is to steal confidential data from specific email accounts. The operation expanded its targets in 2024, using both known and zero-day vulnerabilities. Victims include government entities and defense companies, primarily in Eastern Europe. The attackers employ various JavaScript payloads (SpyPress) to steal credentials, exfiltrate contacts and emails, and in some cases bypass two-factor authentication. The campaign demonstrates the ongoing threat to organizations with outdated webmail servers.",
+    "pulse_created": "2025-05-15T14:08:15.178000",
+    "apt_group": "apt29",
+    "apt_name": "APT29",
+    "confidence": 0.6,
+    "reasons": [
+      "Targeted region 'Europe' found in pulse",
+      "Targeted sector 'Government' found in pulse",
+      "Targeted sector 'NGO' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:35.923684"
+  },
+  {
+    "pulse_id": "6825f54fbfa4e17e740f0dd6",
+    "pulse_name": "Operation RoundPress targeting high-value webmail servers",
+    "pulse_description": "Operation RoundPress is a Russia-aligned espionage campaign targeting webmail servers through XSS vulnerabilities. The attackers, believed to be the Sednit group, use spearphishing emails to exploit vulnerabilities in Roundcube, Horde, MDaemon, and Zimbra webmail software. Their goal is to steal confidential data from specific email accounts. The operation expanded its targets in 2024, using both known and zero-day vulnerabilities. Victims include government entities and defense companies, primarily in Eastern Europe. The attackers employ various JavaScript payloads (SpyPress) to steal credentials, exfiltrate contacts and emails, and in some cases bypass two-factor authentication. The campaign demonstrates the ongoing threat to organizations with outdated webmail servers.",
+    "pulse_created": "2025-05-15T14:08:15.178000",
+    "apt_group": "muddywater",
+    "apt_name": "MuddyWater",
+    "confidence": 0.6,
+    "reasons": [
+      "Targeted region 'Europe' found in pulse",
+      "Targeted sector 'Government' found in pulse",
+      "Targeted sector 'Defense' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:35.923684"
+  },
+  {
+    "pulse_id": "6825f54fbfa4e17e740f0dd6",
+    "pulse_name": "Operation RoundPress targeting high-value webmail servers",
+    "pulse_description": "Operation RoundPress is a Russia-aligned espionage campaign targeting webmail servers through XSS vulnerabilities. The attackers, believed to be the Sednit group, use spearphishing emails to exploit vulnerabilities in Roundcube, Horde, MDaemon, and Zimbra webmail software. Their goal is to steal confidential data from specific email accounts. The operation expanded its targets in 2024, using both known and zero-day vulnerabilities. Victims include government entities and defense companies, primarily in Eastern Europe. The attackers employ various JavaScript payloads (SpyPress) to steal credentials, exfiltrate contacts and emails, and in some cases bypass two-factor authentication. The campaign demonstrates the ongoing threat to organizations with outdated webmail servers.",
+    "pulse_created": "2025-05-15T14:08:15.178000",
+    "apt_group": "sandworm",
+    "apt_name": "Sandworm Team",
+    "confidence": 0.4,
+    "reasons": [
+      "Targeted region 'Europe' found in pulse",
+      "Targeted sector 'Government' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:35.923684"
+  },
+  {
+    "pulse_id": "6825f54fbfa4e17e740f0dd6",
+    "pulse_name": "Operation RoundPress targeting high-value webmail servers",
+    "pulse_description": "Operation RoundPress is a Russia-aligned espionage campaign targeting webmail servers through XSS vulnerabilities. The attackers, believed to be the Sednit group, use spearphishing emails to exploit vulnerabilities in Roundcube, Horde, MDaemon, and Zimbra webmail software. Their goal is to steal confidential data from specific email accounts. The operation expanded its targets in 2024, using both known and zero-day vulnerabilities. Victims include government entities and defense companies, primarily in Eastern Europe. The attackers employ various JavaScript payloads (SpyPress) to steal credentials, exfiltrate contacts and emails, and in some cases bypass two-factor authentication. The campaign demonstrates the ongoing threat to organizations with outdated webmail servers.",
+    "pulse_created": "2025-05-15T14:08:15.178000",
+    "apt_group": "apt41",
+    "apt_name": "APT41",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted region 'Europe' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:35.923684"
+  },
+  {
+    "pulse_id": "68264a9cb2b105513148d978",
+    "pulse_name": "Backdoor implant discovered on PyPI posing as debugging utility",
+    "pulse_description": "A sophisticated malicious package named 'dbgpkg' was detected on PyPI, masquerading as a Python debugging utility. The package implants a backdoor on systems, enabling execution of malicious code and data exfiltration. It uses function wrapping techniques to evade detection and is believed to be part of a larger campaign possibly linked to a hacktivist group known as Phoenix Hyena. The campaign also includes other packages like 'discordpydebug' and 'requestsdev'. The attackers' motivation appears to be geopolitical, potentially related to the Russia-Ukraine conflict. The use of specific backdooring techniques and tools like Global Socket Toolkit indicates a high level of sophistication and an intent to establish long-term presence on compromised systems.",
+    "pulse_created": "2025-05-15T20:12:12.226000",
+    "apt_group": "apt28",
+    "apt_name": "APT28",
+    "confidence": 0.4,
+    "reasons": [
+      "Targeted region 'Ukraine' found in pulse",
+      "Targeted sector 'Political' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:36.232278"
+  },
+  {
+    "pulse_id": "68264a9cb2b105513148d978",
+    "pulse_name": "Backdoor implant discovered on PyPI posing as debugging utility",
+    "pulse_description": "A sophisticated malicious package named 'dbgpkg' was detected on PyPI, masquerading as a Python debugging utility. The package implants a backdoor on systems, enabling execution of malicious code and data exfiltration. It uses function wrapping techniques to evade detection and is believed to be part of a larger campaign possibly linked to a hacktivist group known as Phoenix Hyena. The campaign also includes other packages like 'discordpydebug' and 'requestsdev'. The attackers' motivation appears to be geopolitical, potentially related to the Russia-Ukraine conflict. The use of specific backdooring techniques and tools like Global Socket Toolkit indicates a high level of sophistication and an intent to establish long-term presence on compromised systems.",
+    "pulse_created": "2025-05-15T20:12:12.226000",
+    "apt_group": "lazarus",
+    "apt_name": "Lazarus Group",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted region 'Global' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:36.232278"
+  },
+  {
+    "pulse_id": "68264a9cb2b105513148d978",
+    "pulse_name": "Backdoor implant discovered on PyPI posing as debugging utility",
+    "pulse_description": "A sophisticated malicious package named 'dbgpkg' was detected on PyPI, masquerading as a Python debugging utility. The package implants a backdoor on systems, enabling execution of malicious code and data exfiltration. It uses function wrapping techniques to evade detection and is believed to be part of a larger campaign possibly linked to a hacktivist group known as Phoenix Hyena. The campaign also includes other packages like 'discordpydebug' and 'requestsdev'. The attackers' motivation appears to be geopolitical, potentially related to the Russia-Ukraine conflict. The use of specific backdooring techniques and tools like Global Socket Toolkit indicates a high level of sophistication and an intent to establish long-term presence on compromised systems.",
+    "pulse_created": "2025-05-15T20:12:12.226000",
+    "apt_group": "sandworm",
+    "apt_name": "Sandworm Team",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted region 'Ukraine' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:36.232278"
+  },
+  {
+    "pulse_id": "68264a9c6f5993a7d13fcfbc",
+    "pulse_name": "Fileless Execution: PowerShell Based Shellcode Loader Executes Remcos RAT",
+    "pulse_description": "A new PowerShell-based shellcode loader has been discovered, designed to execute a variant of Remcos RAT. The attack chain begins with malicious LNK files in ZIP archives, using mshta.exe for initial execution. The loader employs fileless techniques, executing code directly in memory to evade traditional defenses. It leverages Windows APIs to allocate memory and execute binary code. The Remcos RAT provides full system control, featuring keylogging, screen capture, and credential theft capabilities. It uses advanced evasion techniques like process hollowing and UAC bypass. The malware establishes persistence through registry modifications and connects to a command and control server over TLS. This sophisticated attack emphasizes the need for behavioral analytics and proactive security measures to detect and mitigate such stealthy threats.",
+    "pulse_created": "2025-05-15T20:12:12.695000",
+    "apt_group": "apt28",
+    "apt_name": "APT28",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted sector 'Defense' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:36.441356"
+  },
+  {
+    "pulse_id": "68264a9c6f5993a7d13fcfbc",
+    "pulse_name": "Fileless Execution: PowerShell Based Shellcode Loader Executes Remcos RAT",
+    "pulse_description": "A new PowerShell-based shellcode loader has been discovered, designed to execute a variant of Remcos RAT. The attack chain begins with malicious LNK files in ZIP archives, using mshta.exe for initial execution. The loader employs fileless techniques, executing code directly in memory to evade traditional defenses. It leverages Windows APIs to allocate memory and execute binary code. The Remcos RAT provides full system control, featuring keylogging, screen capture, and credential theft capabilities. It uses advanced evasion techniques like process hollowing and UAC bypass. The malware establishes persistence through registry modifications and connects to a command and control server over TLS. This sophisticated attack emphasizes the need for behavioral analytics and proactive security measures to detect and mitigate such stealthy threats.",
+    "pulse_created": "2025-05-15T20:12:12.695000",
+    "apt_group": "muddywater",
+    "apt_name": "MuddyWater",
+    "confidence": 0.2,
+    "reasons": [
+      "Targeted sector 'Defense' found in pulse"
+    ],
+    "processed_at": "2025-05-16T18:24:36.441356"
+  }
+]

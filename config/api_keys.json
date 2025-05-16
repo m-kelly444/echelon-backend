@@ -1,0 +1,14 @@
+{
+  "alienvault_otx": {
+    "api_key": "eb973af9be8912b285957849dc406df56102f9851510c9c942418bb0e46cf435"
+  },
+  "abuseipdb": {
+    "api_key": "c71cabc38b5f819e0363b0619fdbc29dc788e8a2149d81010b7e61aaec6938a2982150954cd53e3c"
+  },
+  "mitre_attack": {
+    "url": "https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json"
+  },
+  "cisa_kev": {
+    "url": "https://www.cisa.gov/sites/default/files/csv/known_exploited_vulnerabilities.csv"
+  }
+}

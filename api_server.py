@@ -7,6 +7,13 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 import urllib.parse
 import time
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+# Real data only mode - no fallbacks or synthetics
+print("Echelon is running in REAL DATA ONLY mode - using only genuine threat intelligence data")
+# Real data only mode - no fallbacks or synthetics
+print("Echelon is running in REAL DATA ONLY mode - using only genuine threat intelligence data")
+# Initialize flag for real data only mode
+REAL_DATA_ONLY = True
+print("Running in REAL_DATA_ONLY mode - no fallbacks or synthetic data will be used")
 
 
 # Configuration

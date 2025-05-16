@@ -7,14 +7,36 @@ import time
 import sys
 from datetime import datetime
 import ipaddress
-import pycountry
+try:
+    import pycountry
+except ImportError:
+    print("Installing required pycountry package...")
+    import subprocess
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "pycountry"])
+    import pycountry
 import xml.etree.ElementTree as ET
 
 # Load API configuration
 def load_api_config():
     try:
         with open('config/api_keys.json', 'r') as f:
-            return json.load(f)
+            config = json.load(f)
+            
+            # Validate API keys
+            alienvault_key = config.get('alienvault_otx', {}).get('api_key', '')
+            abuseipdb_key = config.get('abuseipdb', {}).get('api_key', '')
+            
+            if not alienvault_key or alienvault_key == 'YOUR_ALIENVAULT_OTX_KEY':
+                print("ERROR: AlienVault OTX API key not configured properly")
+                print("Please edit config/api_keys.json and add a valid API key")
+                sys.exit(1)
+                
+            if not abuseipdb_key or abuseipdb_key == 'YOUR_ABUSEIPDB_KEY':
+                print("ERROR: AbuseIPDB API key not configured properly")
+                print("Please edit config/api_keys.json and add a valid API key")
+                sys.exit(1)
+                
+            return config
     except FileNotFoundError:
         print("API config file not found. Please run the setup script first.")
         sys.exit(1)
@@ -34,10 +56,6 @@ class AlienVaultOTX:
     
     def get_pulses(self, limit=20):
         """Get recent threat intelligence pulses"""
-        if not self.api_key or self.api_key == "YOUR_ALIENVAULT_OTX_KEY":
-            print("AlienVault OTX API key not configured")
-            return []
-            
         url = f"{self.base_url}/pulses/subscribed"
         params = {
             "limit": limit
@@ -48,6 +66,12 @@ class AlienVaultOTX:
             response.raise_for_status()
             data = response.json()
             return data.get("results", [])
+        except requests.exceptions.HTTPError as e:
+            if e.response.status_code == 401:
+                print(f"API Error: Authentication failed (401). Invalid AlienVault OTX API key.")
+            else:
+                print(f"API Error ({e.response.status_code}): {str(e)}")
+            return []
         except Exception as e:
             print(f"Error fetching AlienVault OTX pulses: {e}")
             return []
@@ -59,7 +83,15 @@ class AlienVaultOTX:
         try:
             response = requests.get(url, headers=self.headers)
             response.raise_for_status()
-            return response.json()
+            data = response.json()
+            
+            # Ensure we have a list of indicators
+            if isinstance(data, list):
+                return data
+            elif isinstance(data, dict) and "results" in data:
+                return data["results"]
+            else:
+                return []
         except Exception as e:
             print(f"Error fetching indicators for pulse {pulse_id}: {e}")
             return []
@@ -88,10 +120,6 @@ class AbuseIPDB:
     
     def check_ip(self, ip):
         """Check an IP address for abuse reports"""
-        if not self.api_key or self.api_key == "YOUR_ABUSEIPDB_KEY":
-            print("AbuseIPDB API key not configured")
-            return {}
-            
         url = f"{self.base_url}/check"
         params = {
             "ipAddress": ip,
@@ -103,6 +131,12 @@ class AbuseIPDB:
             response = requests.get(url, headers=self.headers, params=params)
             response.raise_for_status()
             return response.json().get("data", {})
+        except requests.exceptions.HTTPError as e:
+            if e.response.status_code == 401:
+                print(f"API Error: Authentication failed (401). Invalid AbuseIPDB API key.")
+            else:
+                print(f"API Error ({e.response.status_code}): {str(e)}")
+            return {}
         except Exception as e:
             print(f"Error checking IP {ip} in AbuseIPDB: {e}")
             return {}
@@ -119,6 +153,12 @@ class AbuseIPDB:
             response = requests.get(url, headers=self.headers, params=params)
             response.raise_for_status()
             return response.json().get("data", [])
+        except requests.exceptions.HTTPError as e:
+            if e.response.status_code == 401:
+                print(f"API Error: Authentication failed (401). Invalid AbuseIPDB API key.")
+            else:
+                print(f"API Error ({e.response.status_code}): {str(e)}")
+            return []
         except Exception as e:
             print(f"Error fetching blacklist from AbuseIPDB: {e}")
             return []
@@ -252,7 +292,8 @@ class APTMapper:
             
             if score > 0:
                 matches.append({
-                    "apt_group": apt,
+                    "apt_group": apt["id"],
+                    "apt_name": apt["name"],
                     "confidence_score": min(score / 10, 1.0),  # Normalize to 0-1
                     "reasons": reasons
                 })
@@ -261,55 +302,84 @@ class APTMapper:
         matches.sort(key=lambda x: x["confidence_score"], reverse=True)
         return matches
 
-# Geographic data processor using real data
+# Geographic data processor
 class GeoProcessor:
     def __init__(self):
         self.country_codes = {country.alpha_2: country.name for country in pycountry.countries}
-    
-    def ip_to_country(self, ip):
-        """Get country for an IP using AbuseIPDB or other source (simplified)"""
-        # In a real implementation, this would use MaxMind GeoIP or similar
-        # For demo purposes, we'll simulate with a fixed mapping
-        try:
-            # Check if it's a valid IP
-            ipaddress.ip_address(ip)
-            
-            # In a real implementation, use a proper IP geolocation service
-            # For now, return a placeholder
-            return None
-        except:
-            return None
     
     def process_indicators(self, indicators):
         """Process indicators to extract geographic information"""
         geo_data = []
         
-        for indicator in indicators:
-            if indicator.get("type") == "IPv4" or indicator.get("type") == "IPv6":
-                ip = indicator.get("indicator")
-                country = self.ip_to_country(ip)
-                
-                if country:
-                    geo_data.append({
-                        "ip": ip,
-                        "country": country,
-                        "type": indicator.get("type"),
-                        "created": indicator.get("created")
-                    })
+        # Debug the indicators structure
+        if not indicators:
+            print("No indicators provided")
+            return []
+            
+        print(f"Processing {len(indicators)} indicators")
+        
+        # Process each indicator
+        for i, indicator in enumerate(indicators):
+            try:
+                # Check indicator type
+                if isinstance(indicator, dict) and 'type' in indicator:
+                    indicator_type = indicator.get('type')
+                    if indicator_type in ['IPv4', 'IPv6']:
+                        ip = indicator.get('indicator')
+                        country_code = None
+                        
+                        # Try to find country code in the data
+                        if 'country_code' in indicator:
+                            country_code = indicator.get('country_code')
+                        elif 'country' in indicator and len(indicator.get('country', '')) == 2:
+                            country_code = indicator.get('country')
+                        
+                        # Convert country code to name
+                        country_name = None
+                        if country_code and len(country_code) == 2:
+                            country_name = self.country_codes.get(country_code)
+                        
+                        if ip:
+                            geo_data.append({
+                                'ip': ip,
+                                'country_code': country_code,
+                                'country': country_name or 'Unknown',
+                                'type': indicator_type,
+                                'created': indicator.get('created', datetime.now().isoformat())
+                            })
+                elif isinstance(indicator, str):
+                    # If indicator is a string, it's likely just the indicator value
+                    # Try to determine if it's an IP
+                    try:
+                        ipaddress.ip_address(indicator)
+                        # It's a valid IP
+                        geo_data.append({
+                            'ip': indicator,
+                            'country_code': None,
+                            'country': 'Unknown',
+                            'type': 'IPv4' if '.' in indicator else 'IPv6',
+                            'created': datetime.now().isoformat()
+                        })
+                    except ValueError:
+                        # Not an IP address, skip
+                        pass
+            except Exception as e:
+                print(f"Error processing indicator {i}: {e}")
         
         return geo_data
 
-# Main data collection and processing
+# Main data collection function
 def main():
-    print("Starting advanced data collection...")
+    print("Starting real threat intelligence data collection...")
     
-    # Create data directories
+    # Create necessary directories
     os.makedirs("data/raw/otx", exist_ok=True)
     os.makedirs("data/raw/abuseipdb", exist_ok=True)
     os.makedirs("data/processed/geo", exist_ok=True)
     os.makedirs("data/processed/apt", exist_ok=True)
     
     # Load API configuration
+    print("Loading API configuration...")
     config = load_api_config()
     
     # Initialize API clients
@@ -318,51 +388,66 @@ def main():
     apt_mapper = APTMapper()
     geo_processor = GeoProcessor()
     
-    # Collect data from AlienVault OTX
-    print("Collecting data from AlienVault OTX...")
-    pulses = otx.get_pulses(limit=30)
+    # Lists to store our results
+    apt_mappings = []
+    geographic_data = []
+    
+    # Process AlienVault OTX data
+    print("Fetching threat intelligence data from AlienVault OTX...")
+    pulses = otx.get_pulses(limit=20)
+    
+    if not pulses:
+        print("ERROR: Failed to retrieve pulses from AlienVault OTX")
+        print("Please check your API key or network connection")
+        sys.exit(1)
     
     # Save raw pulses
     with open("data/raw/otx/pulses.json", "w") as f:
         json.dump(pulses, f, indent=2)
     
-    # Process pulses for APT attribution
-    apt_mappings = []
-    geographic_data = []
-    
     print(f"Processing {len(pulses)} threat intelligence pulses...")
-    for pulse in pulses:
-        # Map pulse to APT groups
-        apt_matches = apt_mapper.map_pulse_to_apt_groups(pulse)
+    for i, pulse in enumerate(pulses):
+        print(f"Processing pulse {i+1}/{len(pulses)}: {pulse.get('name', 'Unknown')}")
         
-        if apt_matches:
-            timestamp = datetime.now().isoformat()
-            pulse_id = pulse.get("id")
+        try:
+            # Map pulse to APT groups
+            apt_matches = apt_mapper.map_pulse_to_apt_groups(pulse)
             
-            # Get indicators for the pulse
-            indicators = otx.get_indicators(pulse_id)
-            
-            # Extract geographic data
-            geo_data = geo_processor.process_indicators(indicators)
-            
-            # Add to geographic dataset
-            geographic_data.extend(geo_data)
-            
-            # Prepare mapping record
-            for match in apt_matches:
-                mapping = {
-                    "pulse_id": pulse_id,
-                    "pulse_name": pulse.get("name"),
-                    "pulse_description": pulse.get("description"),
-                    "pulse_created": pulse.get("created"),
-                    "apt_group": match["apt_group"]["id"],
-                    "apt_name": match["apt_group"]["name"],
-                    "confidence": match["confidence_score"],
-                    "reasons": match["reasons"],
-                    "processed_at": timestamp
-                }
+            if apt_matches:
+                timestamp = datetime.now().isoformat()
+                pulse_id = pulse.get("id")
                 
-                apt_mappings.append(mapping)
+                # Get indicators for the pulse
+                indicators = otx.get_indicators(pulse_id)
+                
+                # Extract geographic data
+                try:
+                    geo_data = geo_processor.process_indicators(indicators)
+                    
+                    # Only add to geographic dataset if we got some data
+                    if geo_data:
+                        print(f"  Found {len(geo_data)} geographic data points")
+                        geographic_data.extend(geo_data)
+                except Exception as e:
+                    print(f"Error processing geographic data: {e}")
+                
+                # Add APT mappings
+                for match in apt_matches:
+                    mapping = {
+                        "pulse_id": pulse_id,
+                        "pulse_name": pulse.get("name"),
+                        "pulse_description": pulse.get("description"),
+                        "pulse_created": pulse.get("created"),
+                        "apt_group": match["apt_group"],
+                        "apt_name": match["apt_name"],
+                        "confidence": match["confidence_score"],
+                        "reasons": match["reasons"],
+                        "processed_at": timestamp
+                    }
+                    
+                    apt_mappings.append(mapping)
+        except Exception as e:
+            print(f"Error processing pulse: {e}")
     
     # Save APT mappings
     with open("data/processed/apt/mappings.json", "w") as f:
@@ -373,33 +458,46 @@ def main():
         json.dump(geographic_data, f, indent=2)
     
     # Collect data from AbuseIPDB
-    print("Collecting data from AbuseIPDB...")
+    print("\nCollecting data from AbuseIPDB...")
     blacklist = abuse_ip.get_blacklist(limit=100)
     
-    # Save raw blacklist
-    with open("data/raw/abuseipdb/blacklist.json", "w") as f:
-        json.dump(blacklist, f, indent=2)
-    
-    # Process for geographic visualization
-    blacklist_geo = []
-    
-    for ip_entry in blacklist:
-        ip = ip_entry.get("ipAddress")
-        country = ip_entry.get("countryCode")
+    if not blacklist:
+        print("ERROR: Failed to retrieve blacklist from AbuseIPDB")
+        print("Please check your API key or network connection")
+    else:
+        # Save raw blacklist
+        with open("data/raw/abuseipdb/blacklist.json", "w") as f:
+            json.dump(blacklist, f, indent=2)
         
-        if ip and country:
-            blacklist_geo.append({
-                "ip": ip,
-                "country_code": country,
-                "abuse_confidence": ip_entry.get("abuseConfidenceScore"),
-                "last_reported": ip_entry.get("lastReportedAt")
-            })
+        # Process for geographic visualization
+        blacklist_geo = []
+        
+        for ip_entry in blacklist:
+            ip = ip_entry.get("ipAddress")
+            country = ip_entry.get("countryCode")
+            
+            if ip and country:
+                blacklist_geo.append({
+                    "ip": ip,
+                    "country_code": country,
+                    "abuse_confidence": ip_entry.get("abuseConfidenceScore"),
+                    "last_reported": ip_entry.get("lastReportedAt")
+                })
+        
+        # Save processed blacklist
+        with open("data/processed/geo/abuse_locations.json", "w") as f:
+            json.dump(blacklist_geo, f, indent=2)
+        
+        print(f"Processed {len(blacklist_geo)} blacklisted IPs")
     
-    # Save processed blacklist
-    with open("data/processed/geo/abuse_locations.json", "w") as f:
-        json.dump(blacklist_geo, f, indent=2)
+    # Check if we have collected enough data
+    if len(apt_mappings) == 0 and len(geographic_data) == 0:
+        print("\nERROR: No real threat intelligence data was collected")
+        print("The system requires real data to operate in real-data-only mode")
+        sys.exit(1)
     
-    print("Advanced data collection complete!")
+    print("\nReal threat intelligence data collection complete!")
+    print(f"Collected {len(apt_mappings)} APT mappings and {len(geographic_data)} geographic data points")
 
 if __name__ == "__main__":
     main()
