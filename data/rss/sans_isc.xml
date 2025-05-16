@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/css/rss.css" type="text/css"?>
+<rss version="2.0" 
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+>
+<channel>
+<atom:link href="https://isc.sans.edu/rssfeed.xml" rel="self" type="application/rss+xml" />
+<title>SANS Internet Storm Center, InfoCON: green</title>
+<atom:link href="https://isc.sans.edu/rssfeed.xml" rel="self" type="application/rss+xml" /><link>https://isc.sans.edu</link><description><![CDATA[SANS Internet Storm Center - Cooperative Cyber Security Monitor]]></description><language>   en-us</language><lastBuildDate>   Fri, 16 May 2025 20:25:03 +0000</lastBuildDate><pubDate>Fri, 16 May 2025 02:00:03 GMT</pubDate><copyright>(C) SANS Institute 2025</copyright>
+             <generator>isc rss feed maker</generator>
+             <ttl>30</ttl>
+             <webMaster>handlers@sans.org (ISC Handlers)</webMaster>
+             <image>
+               <title>SANS Internet Storm Center, InfoCON: green</title>
+               <url>https://isc.sans.edu/images/status.gif</url>
+               <link>https://isc.sans.edu</link>
+             </image>
+  <item>
+    <title><![CDATA[ISC Stormcast For Friday, May 16th, 2025 https://isc.sans.edu/podcastdetail/9454, (Fri, May 16th)]]></title>
+    <link>https://isc.sans.edu/diary/rss/31956</link>    <guid>https://isc.sans.edu/diary/rss/31956</guid>    <pubDate>Fri, 16 May 2025 02:00:03 GMT</pubDate>  </item>  <item>
+    <title><![CDATA[ISC Stormcast For Thursday, May 15th, 2025 https://isc.sans.edu/podcastdetail/9452, (Thu, May 15th)]]></title>
+    <link>https://isc.sans.edu/diary/rss/31954</link>    <guid>https://isc.sans.edu/diary/rss/31954</guid>    <pubDate>Thu, 15 May 2025 02:00:02 GMT</pubDate>  </item>  <item>
+    <title><![CDATA[Web Scanning SonicWall for CVE-2021-20016 - Update, (Wed, May 14th)]]></title>
+    <link>https://isc.sans.edu/diary/rss/31952</link>    <guid>https://isc.sans.edu/diary/rss/31952</guid><description><![CDATA[ I published on the 29 Apr 2025 a diary &#x5b;1&#x5d; on scanning activity looking for SonicWall and since this publication this activity has grown 10-fold. Over the past 14 days, several BACS students have reported activity related to SonicWall scans all related for the same 2 URLs &#x5b;4&#x5d;&#x5b;5&#x5d; previously mentioned in my last diary. My own DShield sensor was probed by 25 separate IPs during those last 14 days. The three most active IPs were all from the same subnet - 141.98.80.0/24&#xd;]]></description><content:encoded><![CDATA[I published on the 29 Apr 2025 a diary [1] on scanning activity looking for SonicWall and since this publication this activity has grown 10-fold. Over the past 14 days, several BACS students have reported activity related to SonicWall scans all related for the same 2 URLs [4][5] previously mentioned in my last diary. My own DShield sensor was probed by 25 separate IPs during those last 14 days. The three most active IPs were all from the same subnet - 141.98.80.0/24]]></content:encoded>    <pubDate>Thu, 15 May 2025 01:23:29 GMT</pubDate>  </item>  <item>
+    <title><![CDATA[Another day, another phishing campaign abusing google.com open redirects, (Wed, May 14th)]]></title>
+    <link>https://isc.sans.edu/diary/rss/31950</link>    <guid>https://isc.sans.edu/diary/rss/31950</guid><description><![CDATA[ A couple of weeks ago, I came across a phishing campaign that highlights a recurring issue with open redirect vulnerabilities in well-known and trusted services.&#xd;]]></description><content:encoded><![CDATA[A couple of weeks ago, I came across a phishing campaign that highlights a recurring issue with open redirect vulnerabilities in well-known and trusted services.]]></content:encoded>    <pubDate>Wed, 14 May 2025 10:26:57 GMT</pubDate>  </item>  <item>
+    <title><![CDATA[ISC Stormcast For Wednesday, May 14th, 2025 https://isc.sans.edu/podcastdetail/9450, (Wed, May 14th)]]></title>
+    <link>https://isc.sans.edu/diary/rss/31948</link>    <guid>https://isc.sans.edu/diary/rss/31948</guid>    <pubDate>Wed, 14 May 2025 02:00:02 GMT</pubDate>  </item>  <item>
+    <title><![CDATA[Microsoft Patch Tuesday: May 2025, (Tue, May 13th)]]></title>
+    <link>https://isc.sans.edu/diary/rss/31946</link>    <guid>https://isc.sans.edu/diary/rss/31946</guid><description><![CDATA[ Today, Microsoft released its expected update for the May patch on Tuesday. This update fixes 78 vulnerabilities. 11 are rated as critical, and 66 as important. Five of the vulnerabilities have already been exploited and two were publicly known but not yet exploited. 70 of the vulnerabilities were patched today, 8 had patches delivered earlier this month.&#xd;]]></description><content:encoded><![CDATA[Today, Microsoft released its expected update for the May patch on Tuesday. This update fixes 78&nbsp;vulnerabilities. 11 are rated as critical, and 66 as important. Five of the vulnerabilities have already been exploited and two were publicly known but not yet exploited. 70 of the vulnerabilities were patched today, 8 had patches delivered earlier this month.]]></content:encoded>    <pubDate>Tue, 13 May 2025 17:57:17 GMT</pubDate>  </item>  <item>
+    <title><![CDATA[ISC Stormcast For Tuesday, May 13th, 2025 https://isc.sans.edu/podcastdetail/9448, (Tue, May 13th)]]></title>
+    <link>https://isc.sans.edu/diary/rss/31944</link>    <guid>https://isc.sans.edu/diary/rss/31944</guid>    <pubDate>Tue, 13 May 2025 02:00:02 GMT</pubDate>  </item>  <item>
+    <title><![CDATA[Apple Updates Everything: May 2025 Edition, (Mon, May 12th)]]></title>
+    <link>https://isc.sans.edu/diary/rss/31942</link>    <guid>https://isc.sans.edu/diary/rss/31942</guid><description><![CDATA[ Apple released its expected update for all its operating systems. The update, in addition to providing new features, patches 65 different vulnerabilities. Many of these vulnerabilities affect multiple operating systems within the Apple ecosystem.&#xd;]]></description><content:encoded><![CDATA[Apple released its expected update for all its operating systems. The update, in addition to providing new features, patches 65 different vulnerabilities. Many of these vulnerabilities affect multiple operating systems within the Apple ecosystem.]]></content:encoded>    <pubDate>Mon, 12 May 2025 20:30:06 GMT</pubDate>  </item>  <item>
+    <title><![CDATA[It Is 2025, And We Are Still Dealing With Default IoT Passwords And Stupid 2013 Router Vulnerabilities, (Mon, May 12th)]]></title>
+    <link>https://isc.sans.edu/diary/rss/31940</link>    <guid>https://isc.sans.edu/diary/rss/31940</guid><description><![CDATA[ Unipi Technologies is a company developing programmable logic controllers for a number of different applications like home automation, building management, and industrial controls. The modules produced by Unipi are likely to appeal to a more professional audience. All modules are based on the "Marvis" platform, a customized Linux distribution maintained by Unipi.&#xd;]]></description><content:encoded><![CDATA[Unipi Technologies is a company developing programmable logic controllers for a number of different applications like home automation, building management, and industrial controls. The modules produced by Unipi are likely to appeal to a more professional audience. All modules are based on the &quot;Marvis&quot; platform, a customized Linux distribution maintained by Unipi.]]></content:encoded>    <pubDate>Mon, 12 May 2025 13:49:21 GMT</pubDate>  </item>  <item>
+    <title><![CDATA[ISC Stormcast For Monday, May 12th, 2025 https://isc.sans.edu/podcastdetail/9446, (Mon, May 12th)]]></title>
+    <link>https://isc.sans.edu/diary/rss/31938</link>    <guid>https://isc.sans.edu/diary/rss/31938</guid>    <pubDate>Mon, 12 May 2025 01:42:54 GMT</pubDate>  </item></channel>
+</rss>
