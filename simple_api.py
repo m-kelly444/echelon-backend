@@ -94,4 +94,4 @@ def get_cves():
 
 if __name__ == '__main__':
     # Use port 8080 to avoid conflicts with macOS AirPlay (port 5000)
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=5050)
