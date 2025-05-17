@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  name         String
+  email        String    @unique
+  password     String    @map("password_hash")
+  role         String?   @default("user")
+  last_login   DateTime?
+  created_at   DateTime  @default(now())
+  notifications Notification[]
+
+  @@map("users")
+}
+
+model Prediction {
+  id           Int       @id @default(autoincrement())
+  threat_type  String
+  severity     String
+  confidence   Float
+  source       String?
+  ip_address   String?
+  was_accurate Boolean?
+  created_at   DateTime  @default(now())
+
+  @@map("predictions")
+}
+
+model Notification {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  title      String
+  message    String
+  type       String
+  is_read    Boolean  @default(false)
+  created_at DateTime @default(now())
+  user       User     @relation(fields: [user_id], references: [id])
+
+  @@map("notifications")
+}
+
+model ModelPerformance {
+  id                 Int      @id @default(autoincrement())
+  model_name         String
+  accuracy           Float
+  precision_score    Float
+  recall_score       Float
+  f1_score           Float
+  false_positive_rate Float
+  timestamp          DateTime @default(now())
+
+  @@map("model_performance")
+}

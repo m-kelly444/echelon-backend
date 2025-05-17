@@ -1,6 +1,0 @@
-{
-  "id": "T1213.002",
-  "name": "Sharepoint",
-  "description": "Adversaries may leverage the SharePoint repository as a source to mine valuable information. SharePoint will often contain useful information for an adversary to learn about the structure and functionality of the internal network and systems. For example, the following is a list of example information that may hold potential value to an adversary and may also be found on SharePoint:\n\n* Policies, procedures, and standards\n* Physical / logical network diagrams\n* System architecture diagrams\n* Technical system documentation\n* Testing / development credentials (i.e., [Unsecured Credentials](https://attack.mitre.org/techniques/T1552))\n* Work / project schedules\n* Source code snippets\n* Links to network shares and other internal resources\n",
-  "source": "MITRE ATT&CK"
-}

@@ -1,60 +1,27 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+# dependencies
+/node_modules
 
-# Railway specific
-.railway/
+# next.js
+/.next/
+/out/
 
-# Logs
-logs/
-*.log
+# production
+/build
 
-# Backup files
-*.bak
-*.bak.*
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
 
-# Data files that are too large or sensitive
-data/raw/*/
-!data/raw/.gitkeep
-data/processed/*/
-!data/processed/.gitkeep
+# env files
+.env*
 
-# Allow some necessary data directories
-!data/raw/cisa/.gitkeep
-!data/raw/mitre/.gitkeep
-!data/raw/nvd/.gitkeep
-!data/raw/otx/.gitkeep
-!data/raw/abuseipdb/.gitkeep
-!data/processed/cves/.gitkeep
-!data/processed/apt/.gitkeep
-!data/processed/geo/.gitkeep
+# vercel
+.vercel
 
-# Models
-models/*.pkl
+# typescript
+*.tsbuildinfo
+next-env.d.ts
