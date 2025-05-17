@@ -1,0 +1,154 @@
+#!/usr/bin/env python3
+import glob
+import json
+import os
+import pickle
+import re
+import time
+import urllib.parse
+import sys
+from datetime import datetime, timedelta
+from http.server import BaseHTTPRequestHandler, HTTPServer
+
+# Add the current directory to sys.path to fix import issues
+current_dir = os.path.dirname(os.path.abspath(__file__))
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
+
+# Now import MLAttackForecaster
+from models.ml_attack_forecaster import MLAttackForecaster
+
+print("ECHELON: PURE ML-BASED ATTACK FORECASTING - USING ONLY REAL DATA")
+REAL_DATA_ONLY = True
+
+PORT = 8080
+HOST = "0.0.0.0"
+
+forecaster = MLAttackForecaster()
+data_status = forecaster.get_data_status()
+print(f"Data loaded: {data_status['total_data_points']} data points")
+print(f"Model loaded: {data_status['data_counts']['model_loaded']}")
+
+stats = {
+    "start_time": datetime.now().isoformat(),
+    "requests": 0,
+    "predictions": 0,
+    "errors": 0
+}
+class PredictionHandler(BaseHTTPRequestHandler):
+    def _set_headers(self, content_type="application/json"):
+        self.send_response(200)
+        self.send_header("Content-type", content_type)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.end_headers()
+    
+    def do_OPTIONS(self):
+        self._set_headers()
+    
+    def do_GET(self):
+        stats["requests"] += 1
+        
+        if stats.get("last_request_time"):
+            time_since_last = time.time() - stats.get("last_request_time", 0)
+            if time_since_last < 0.1:
+                time.sleep(0.1 - time_since_last)
+        stats["last_request_time"] = time.time()
+        
+        parsed_path = urllib.parse.urlparse(self.path)
+        path = parsed_path.path
+        
+        if path == "/":
+            self._set_headers()
+            response = {
+                "name": "Echelon ML Attack Forecasting API",
+                "version": "2.0",
+                "description": "Machine learning based cyber attack forecasting",
+                "real_data_only": True,
+                "endpoints": [
+                    {"path": "/", "method": "GET", "description": "API information"},
+                    {"path": "/status", "method": "GET", "description": "System status and data information"},
+                    {"path": "/predict", "method": "POST", "description": "ML-based threat prediction"},
+                    {"path": "/predict_attacks", "method": "GET", "description": "ML-derived cyber attack forecast"}
+                ]
+            }
+            self.wfile.write(json.dumps(response).encode())
+        
+        elif path == "/status":
+            self._set_headers()
+            uptime = (datetime.now() - datetime.fromisoformat(stats["start_time"])).total_seconds()
+            
+            response = {
+                "status": "healthy" if data_status["data_counts"]["model_loaded"] else "degraded",
+                "uptime_seconds": int(uptime),
+                "stats": stats,
+                "real_data_only": True,
+                "data_status": data_status
+            }
+            self.wfile.write(json.dumps(response).encode())
+        
+        elif path == "/predict_attacks":
+            self._set_headers()
+            
+            query = urllib.parse.parse_qs(parsed_path.query)
+            days = int(query.get("days", ["30"])[0])
+            
+            forecast = forecaster.generate_attack_forecast(days=days)
+            
+            self.wfile.write(json.dumps(forecast).encode())
+        
+        else:
+            self.send_response(404)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps({"error": "Not found"}).encode())
+    
+    def do_POST(self):
+        stats["requests"] += 1
+        
+        parsed_path = urllib.parse.urlparse(self.path)
+        path = parsed_path.path
+        
+        if path == "/predict":
+            content_length = int(self.headers["Content-Length"])
+            post_data = self.rfile.read(content_length)
+            
+            try:
+                data = json.loads(post_data.decode())
+                
+                cve_id = data.get("cve_id", "")
+                
+                base_score = 5.0
+                if "base_score" in data:
+                    base_score = float(data["base_score"])
+                elif "severity" in data:
+                    base_score = float(data["severity"])
+                
+                prediction = forecaster.predict_threat(cve_id, base_score)
+                
+                self._set_headers()
+                self.wfile.write(json.dumps(prediction).encode())
+                stats["predictions"] += 1
+                
+            except Exception as e:
+                self.send_response(400)
+                self.send_header("Content-type", "application/json")
+                self.end_headers()
+                self.wfile.write(json.dumps({"error": str(e)}).encode())
+                stats["errors"] += 1
+        
+        else:
+            self.send_response(404)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps({"error": "Not found"}).encode())
+
+print(f"Starting ML attack forecasting server on {HOST}:{PORT}")
+server = HTTPServer((HOST, PORT), PredictionHandler)
+
+try:
+    server.serve_forever()
+except KeyboardInterrupt:
+    print("Server stopped by user")
+    server.server_close()
