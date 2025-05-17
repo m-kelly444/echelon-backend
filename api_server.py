@@ -57,7 +57,7 @@ except ImportError as e:
 print("ECHELON: PURE ML-BASED ATTACK FORECASTING - USING ONLY REAL DATA")
 REAL_DATA_ONLY = True
 
-PORT = 8080
+PORT = int(os.environ.get("PORT", 8080))
 HOST = "0.0.0.0"
 
 stats = {
@@ -985,6 +985,52 @@ if __name__ == "__main__":
     print(f"Starting ML attack forecasting server on {HOST}:{PORT}")
     server = HTTPServer((HOST, PORT), PredictionHandler)
 
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print("Server stopped by user")
+        refresh_handler.stop_monitoring()
+        server.server_close()
+
+# Create server variable for gunicorn
+server = HTTPServer((HOST, PORT), PredictionHandler)
+if __name__ == "__main__":
+    print(f"Starting ML attack forecasting server on {HOST}:{PORT}")
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print("Server stopped by user")
+        refresh_handler.stop_monitoring()
+        server.server_close()
+
+# Create server variable for gunicorn
+server = HTTPServer((HOST, PORT), PredictionHandler)
+if __name__ == "__main__":
+    print(f"Starting ML attack forecasting server on {HOST}:{PORT}")
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print("Server stopped by user")
+        refresh_handler.stop_monitoring()
+        server.server_close()
+
+# Function to create app for Gunicorn
+def create_app():
+    from http.server import BaseHTTPRequestHandler, HTTPServer
+    
+    # Use Railway's port or default to 8080
+    port = int(os.environ.get('PORT', 8080))
+    
+    # Create and return the server
+    return HTTPServer((HOST, port), PredictionHandler)
+
+# Modify main block to use the port from environment
+if __name__ == "__main__":
+    # Use Railway's port
+    port = int(os.environ.get('PORT', 8080))
+    print(f"Starting ML attack forecasting server on {HOST}:{port}")
+    
+    server = HTTPServer((HOST, port), PredictionHandler)
     try:
         server.serve_forever()
     except KeyboardInterrupt:
