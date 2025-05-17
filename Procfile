@@ -1,1 +1,1 @@
-web: gunicorn --preload --workers=2 "api_server:create_app()"
+web: python api_server.py
