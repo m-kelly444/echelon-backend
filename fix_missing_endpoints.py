@@ -1,8 +1,5 @@
-#!/usr/bin/env python3
-"""
-Fix missing endpoints in api_server.py
-This script adds the missing /cves and /geo endpoints to the API server.
-"""
+                      
+pass
 import os
 import re
 import sys
@@ -10,35 +7,31 @@ import shutil
 from datetime import datetime
 
 def backup_file(filename):
-    """Create a backup of the given file"""
+                                           
     backup = f"{filename}.bak.{datetime.now().strftime('%Y%m%d%H%M%S')}"
     shutil.copy2(filename, backup)
     print(f"Created backup: {backup}")
 
 def fix_api_server():
-    """Fix the api_server.py file to include missing endpoints"""
+                                                                 
     api_file = 'api_server.py'
     
     if not os.path.exists(api_file):
         print(f"Error: {api_file} not found!")
         return False
-    
-    # Create backup
+
     backup_file(api_file)
-    
-    # Read the file
+
     with open(api_file, 'r') as f:
         content = f.read()
-    
-    # Check if endpoints are already implemented
+
     cves_implemented = "elif path == \"/cves\":" in content
     geo_implemented = "elif path == \"/geo\":" in content
     
     modifications_made = False
-    
-    # Only proceed if there are missing endpoints
+
     if not cves_implemented or not geo_implemented:
-        # Find the location to insert our endpoints (before "# Not found" or similar)
+                                                                                     
         not_found_pattern = r'(\s+)(# Not found\s+else:)'
         
         match = re.search(not_found_pattern, content)
@@ -48,8 +41,7 @@ def fix_api_server():
         
         indent = match.group(1)
         not_found_block = match.group(2)
-        
-        # Prepare endpoint implementations
+
         endpoints_code = []
         
         if not cves_implemented:
@@ -83,11 +75,7 @@ def fix_api_server():
 {indent}        "cves": cves
 {indent}    }}
 {indent}    self.wfile.write(json.dumps(response).encode())
-"""
-            endpoints_code.append(cves_endpoint)
-        
-        if not geo_implemented:
-            geo_endpoint = f"""{indent}# Geographic data endpoint
+pass{indent}# Geographic data endpoint
 {indent}elif path == "/geo":
 {indent}    self._set_headers()
 {indent}    
@@ -116,13 +104,11 @@ def fix_api_server():
 {indent}    self.wfile.write(json.dumps(response).encode())
 """
             endpoints_code.append(geo_endpoint)
-        
-        # Insert the endpoints before the "not found" block
+
         combined_endpoints = "\n".join(endpoints_code)
         content = re.sub(not_found_pattern, combined_endpoints + "\n" + match.group(1) + match.group(2), content)
         modifications_made = True
-    
-    # Check if endpoints are in the API endpoints list
+
     endpoints_pattern = r'("endpoints": \[\s+)(.+?)(\s+\])'
     endpoints_match = re.search(endpoints_pattern, content, re.DOTALL)
     
@@ -140,23 +126,18 @@ def fix_api_server():
             
             if not geo_in_list:
                 new_endpoints.append('                    {"path": "/geo", "method": "GET", "description": "Get geographic threat data"}')
-            
-            # Ensure we add commas correctly
+
             lines = endpoints_list.strip().split('\n')
             last_line = lines[-1]
-            
-            # If the last line doesn't end with a comma, add one
+
             if not last_line.rstrip().endswith(','):
                 lines[-1] = last_line.rstrip() + ','
-            
-            # Add our new endpoints
+
             all_endpoints = '\n'.join(lines + new_endpoints)
-            
-            # Replace the endpoints list
+
             content = re.sub(endpoints_pattern, f'\\1{all_endpoints}\\3', content, flags=re.DOTALL)
             modifications_made = True
-    
-    # Write the modified content back to the file
+
     if modifications_made:
         with open(api_file, 'w') as f:
             f.write(content)

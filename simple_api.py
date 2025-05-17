@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+                      
 import os
 import json
 import csv
@@ -7,17 +7,16 @@ from flask_cors import CORS
 import time
 from functools import wraps
 
-
 app = Flask(__name__)
 CORS(app)
-# Error handling decorator
+                          
 def handle_api_error(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)
         except Exception as e:
-            # Log the error
+                           
             print(f"API Error in {func.__name__}: {str(e)}")
             
             error_response = {
@@ -26,8 +25,7 @@ def handle_api_error(func):
                 "timestamp": time.time(),
                 "endpoint": func.__name__
             }
-            
-            # Return appropriate status
+
             status_code = 500
             if isinstance(e, ValueError) or isinstance(e, KeyError):
                 status_code = 400
@@ -37,12 +35,9 @@ def handle_api_error(func):
             return jsonify(error_response), status_code
     return wrapper
 
-
-# Load real data only
 def load_real_data():
     data = {"techniques": [], "cves": []}
-    
-    # Load MITRE ATT&CK data
+
     if os.path.exists('data/mitre/enterprise_attack.json'):
         try:
             with open('data/mitre/enterprise_attack.json', 'r') as f:
@@ -50,7 +45,7 @@ def load_real_data():
                 
             for obj in attack_data.get('objects', []):
                 if obj.get('type') == 'attack-pattern':
-                    # Get technique ID
+                                      
                     tech_id = ""
                     for ref in obj.get('external_references', []):
                         if ref.get('source_name') == 'mitre-attack':
@@ -66,14 +61,13 @@ def load_real_data():
             print(f"Loaded {len(data['techniques'])} ATT&CK techniques")
         except Exception as e:
             print(f"Error loading ATT&CK data: {e}")
-    
-    # Load CISA KEV data
+
     if os.path.exists('data/api/cisa_kev.csv'):
         try:
             with open('data/api/cisa_kev.csv', 'r') as f:
                 reader = csv.DictReader(f)
                 for row in reader:
-                    # Get CVE ID column (might have different names)
+                                                                    
                     cve_id = next((row[key] for key in row.keys() 
                                   if 'cve' in key.lower() and 'id' in key.lower()), None)
                     
@@ -85,7 +79,6 @@ def load_real_data():
     
     return data
 
-# Load data at startup
 real_data = load_real_data()
 
 @app.route('/', methods=['GET'])
@@ -102,11 +95,10 @@ def home():
 @app.route('/techniques', methods=['GET'])
 @handle_api_error
 def get_techniques():
-    # Get pagination parameters
+                               
     limit = min(int(request.args.get('limit', 50)), 500)
     offset = int(request.args.get('offset', 0))
-    
-    # Return real techniques with pagination
+
     return jsonify({
         "total": len(real_data["techniques"]),
         "techniques": real_data["techniques"][offset:offset+limit]
@@ -115,16 +107,15 @@ def get_techniques():
 @app.route('/cves', methods=['GET'])
 @handle_api_error
 def get_cves():
-    # Get pagination parameters
+                               
     limit = min(int(request.args.get('limit', 50)), 500)
     offset = int(request.args.get('offset', 0))
-    
-    # Return real CVEs with pagination
+
     return jsonify({
         "total": len(real_data["cves"]),
         "cves": real_data["cves"][offset:offset+limit]
     })
 
 if __name__ == '__main__':
-    # Use port 8080 to avoid conflicts with macOS AirPlay (port 5000)
+                                                                     
     app.run(host='0.0.0.0', port=5050)

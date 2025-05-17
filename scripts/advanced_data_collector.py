@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+                      
 import os
 import json
 import csv
@@ -16,13 +16,11 @@ except ImportError:
     import pycountry
 import xml.etree.ElementTree as ET
 
-# Load API configuration
 def load_api_config():
     try:
         with open('config/api_keys.json', 'r') as f:
             config = json.load(f)
-            
-            # Validate API keys
+
             alienvault_key = config.get('alienvault_otx', {}).get('api_key', '')
             abuseipdb_key = config.get('abuseipdb', {}).get('api_key', '')
             
@@ -44,7 +42,6 @@ def load_api_config():
         print("Invalid API config format. Please check the file.")
         sys.exit(1)
 
-# AlienVault OTX integration
 class AlienVaultOTX:
     def __init__(self, api_key):
         self.api_key = api_key
@@ -55,7 +52,7 @@ class AlienVaultOTX:
         }
     
     def get_pulses(self, limit=20):
-        """Get recent threat intelligence pulses"""
+                                                   
         url = f"{self.base_url}/pulses/subscribed"
         params = {
             "limit": limit
@@ -77,15 +74,14 @@ class AlienVaultOTX:
             return []
     
     def get_indicators(self, pulse_id):
-        """Get indicators for a specific pulse"""
+                                                 
         url = f"{self.base_url}/pulses/{pulse_id}/indicators"
         
         try:
             response = requests.get(url, headers=self.headers)
             response.raise_for_status()
             data = response.json()
-            
-            # Ensure we have a list of indicators
+
             if isinstance(data, list):
                 return data
             elif isinstance(data, dict) and "results" in data:
@@ -97,7 +93,7 @@ class AlienVaultOTX:
             return []
     
     def get_ip_reputation(self, ip):
-        """Get reputation data for an IP"""
+                                           
         url = f"{self.base_url}/indicators/IPv4/{ip}/general"
         
         try:
@@ -108,7 +104,6 @@ class AlienVaultOTX:
             print(f"Error fetching IP reputation for {ip}: {e}")
             return {}
 
-# AbuseIPDB integration
 class AbuseIPDB:
     def __init__(self, api_key):
         self.api_key = api_key
@@ -119,7 +114,7 @@ class AbuseIPDB:
         }
     
     def check_ip(self, ip):
-        """Check an IP address for abuse reports"""
+                                                   
         url = f"{self.base_url}/check"
         params = {
             "ipAddress": ip,
@@ -142,7 +137,7 @@ class AbuseIPDB:
             return {}
     
     def get_blacklist(self, limit=100):
-        """Get blacklisted IPs"""
+                                 
         url = f"{self.base_url}/blacklist"
         params = {
             "limit": limit,
@@ -163,22 +158,19 @@ class AbuseIPDB:
             print(f"Error fetching blacklist from AbuseIPDB: {e}")
             return []
 
-# APT mapping based on real world TTPs and indicators
 class APTMapper:
     def __init__(self):
         self.apt_groups = self._load_apt_data()
         
     def _load_apt_data(self):
-        """Load APT group data from MITRE ATT&CK and other sources"""
-        # Define core APT groups with their real-world attributes
-        # This data is based on real threat intel reports
+
         apt_groups = [
             {
                 "id": "apt28",
                 "name": "APT28",
                 "aliases": ["Fancy Bear", "Sofacy", "Sednit", "Strontium"],
                 "origin": "Russia",
-                "primary_techniques": ["T1566", "T1190", "T1133"],  # Spear phishing, Exploit Public-Facing App, External Remote Services
+                "primary_techniques": ["T1566", "T1190", "T1133"],                                                                       
                 "targets": ["Government", "Military", "NATO"],
                 "targeted_regions": ["Europe", "North America", "Ukraine"],
                 "targeted_sectors": ["Government", "Defense", "Political"],
@@ -189,7 +181,7 @@ class APTMapper:
                 "name": "APT29",
                 "aliases": ["Cozy Bear", "The Dukes", "Nobelium"],
                 "origin": "Russia",
-                "primary_techniques": ["T1195", "T1566", "T1059.003"],  # Supply Chain Compromise, Spear Phishing, PowerShell
+                "primary_techniques": ["T1195", "T1566", "T1059.003"],                                                       
                 "targets": ["Government", "Think tanks", "Healthcare"],
                 "targeted_regions": ["Europe", "North America"],
                 "targeted_sectors": ["Government", "Healthcare", "Research", "NGO"],
@@ -200,7 +192,7 @@ class APTMapper:
                 "name": "Lazarus Group",
                 "aliases": ["Hidden Cobra", "Guardians of Peace", "ZINC"],
                 "origin": "North Korea",
-                "primary_techniques": ["T1190", "T1486", "T1055"],  # Exploit Public-Facing App, Data Encrypted for Impact, Process Injection
+                "primary_techniques": ["T1190", "T1486", "T1055"],                                                                           
                 "targets": ["Financial", "Cryptocurrency", "Media"],
                 "targeted_regions": ["Global", "South Korea", "United States"],
                 "targeted_sectors": ["Financial", "Cryptocurrency", "Entertainment"],
@@ -211,7 +203,7 @@ class APTMapper:
                 "name": "APT41",
                 "aliases": ["Winnti", "Barium", "Wicked Panda"],
                 "origin": "China",
-                "primary_techniques": ["T1195", "T1190", "T1059.007"],  # Supply Chain, Exploit Public-Facing App, JavaScript
+                "primary_techniques": ["T1195", "T1190", "T1059.007"],                                                       
                 "targets": ["Healthcare", "Technology", "Gaming"],
                 "targeted_regions": ["East Asia", "North America", "Europe"],
                 "targeted_sectors": ["Healthcare", "Technology", "Gaming", "Telecom"],
@@ -222,7 +214,7 @@ class APTMapper:
                 "name": "Sandworm Team",
                 "aliases": ["BlackEnergy", "Voodoo Bear", "ELECTRUM"],
                 "origin": "Russia",
-                "primary_techniques": ["T1190", "T1133", "T1486"],  # Exploit Public-Facing App, External Remote Services, Data Encrypted for Impact
+                "primary_techniques": ["T1190", "T1133", "T1486"],                                                                                  
                 "targets": ["Energy", "Industrial systems", "Ukraine"],
                 "targeted_regions": ["Ukraine", "Europe", "United States"],
                 "targeted_sectors": ["Energy", "Industrial", "Government"],
@@ -233,7 +225,7 @@ class APTMapper:
                 "name": "MuddyWater",
                 "aliases": ["Earth Vetala", "TEMP.Zagros", "Static Kitten"],
                 "origin": "Iran",
-                "primary_techniques": ["T1566.001", "T1059.001", "T1059.003"],  # Spear Phishing Attachment, PowerShell, Command Scripting
+                "primary_techniques": ["T1566.001", "T1059.001", "T1059.003"],                                                            
                 "targets": ["Government", "Telecommunications", "Defense"],
                 "targeted_regions": ["Middle East", "Central Asia", "Europe"],
                 "targeted_sectors": ["Government", "Telecommunications", "Defense", "Oil and Gas"],
@@ -244,18 +236,16 @@ class APTMapper:
         return apt_groups
     
     def map_pulse_to_apt_groups(self, pulse):
-        """Map an AlienVault OTX pulse to potential APT groups based on IOCs, TTPs, and targets"""
+                                                                                                  
         matches = []
-        
-        # Skip if no tags or malware families in the pulse
+
         if not pulse.get("tags") and not pulse.get("malware_families"):
             return []
         
         for apt in self.apt_groups:
             score = 0
             reasons = []
-            
-            # Check for APT name or aliases in tags
+
             pulse_tags = [tag.lower() for tag in pulse.get("tags", [])]
             apt_identifiers = [apt["name"].lower()] + [alias.lower() for alias in apt.get("aliases", [])]
             
@@ -267,8 +257,7 @@ class APTMapper:
                 if any(identifier in tag for tag in pulse_tags):
                     score += 3
                     reasons.append(f"APT name '{identifier}' found in pulse tags")
-            
-            # Check for malware families
+
             for malware in apt.get("malware_families", []):
                 if malware.lower() in pulse.get("name", "").lower() or malware.lower() in pulse.get("description", "").lower():
                     score += 4
@@ -277,14 +266,12 @@ class APTMapper:
                 if any(malware.lower() in mf.lower() for mf in pulse.get("malware_families", [])):
                     score += 3
                     reasons.append(f"Malware '{malware}' found in pulse malware families")
-            
-            # Check for targeted regions
+
             for region in apt.get("targeted_regions", []):
                 if region.lower() in pulse.get("name", "").lower() or region.lower() in pulse.get("description", "").lower():
                     score += 2
                     reasons.append(f"Targeted region '{region}' found in pulse")
-            
-            # Check for targeted sectors
+
             for sector in apt.get("targeted_sectors", []):
                 if sector.lower() in pulse.get("name", "").lower() or sector.lower() in pulse.get("description", "").lower():
                     score += 2
@@ -294,47 +281,41 @@ class APTMapper:
                 matches.append({
                     "apt_group": apt["id"],
                     "apt_name": apt["name"],
-                    "confidence_score": min(score / 10, 1.0),  # Normalize to 0-1
+                    "confidence_score": min(score / 10, 1.0),                    
                     "reasons": reasons
                 })
-        
-        # Sort by confidence score
+
         matches.sort(key=lambda x: x["confidence_score"], reverse=True)
         return matches
 
-# Geographic data processor
 class GeoProcessor:
     def __init__(self):
         self.country_codes = {country.alpha_2: country.name for country in pycountry.countries}
     
     def process_indicators(self, indicators):
-        """Process indicators to extract geographic information"""
+                                                                  
         geo_data = []
-        
-        # Debug the indicators structure
+
         if not indicators:
             print("No indicators provided")
             return []
             
         print(f"Processing {len(indicators)} indicators")
-        
-        # Process each indicator
+
         for i, indicator in enumerate(indicators):
             try:
-                # Check indicator type
+                                      
                 if isinstance(indicator, dict) and 'type' in indicator:
                     indicator_type = indicator.get('type')
                     if indicator_type in ['IPv4', 'IPv6']:
                         ip = indicator.get('indicator')
                         country_code = None
-                        
-                        # Try to find country code in the data
+
                         if 'country_code' in indicator:
                             country_code = indicator.get('country_code')
                         elif 'country' in indicator and len(indicator.get('country', '')) == 2:
                             country_code = indicator.get('country')
-                        
-                        # Convert country code to name
+
                         country_name = None
                         if country_code and len(country_code) == 2:
                             country_name = self.country_codes.get(country_code)
@@ -348,11 +329,10 @@ class GeoProcessor:
                                 'created': indicator.get('created', datetime.now().isoformat())
                             })
                 elif isinstance(indicator, str):
-                    # If indicator is a string, it's likely just the indicator value
-                    # Try to determine if it's an IP
+
                     try:
                         ipaddress.ip_address(indicator)
-                        # It's a valid IP
+                                         
                         geo_data.append({
                             'ip': indicator,
                             'country_code': None,
@@ -361,38 +341,32 @@ class GeoProcessor:
                             'created': datetime.now().isoformat()
                         })
                     except ValueError:
-                        # Not an IP address, skip
+                                                 
                         pass
             except Exception as e:
                 print(f"Error processing indicator {i}: {e}")
         
         return geo_data
 
-# Main data collection function
 def main():
     print("Starting real threat intelligence data collection...")
-    
-    # Create necessary directories
+
     os.makedirs("data/raw/otx", exist_ok=True)
     os.makedirs("data/raw/abuseipdb", exist_ok=True)
     os.makedirs("data/processed/geo", exist_ok=True)
     os.makedirs("data/processed/apt", exist_ok=True)
-    
-    # Load API configuration
+
     print("Loading API configuration...")
     config = load_api_config()
-    
-    # Initialize API clients
+
     otx = AlienVaultOTX(config["alienvault_otx"]["api_key"])
     abuse_ip = AbuseIPDB(config["abuseipdb"]["api_key"])
     apt_mapper = APTMapper()
     geo_processor = GeoProcessor()
-    
-    # Lists to store our results
+
     apt_mappings = []
     geographic_data = []
-    
-    # Process AlienVault OTX data
+
     print("Fetching threat intelligence data from AlienVault OTX...")
     pulses = otx.get_pulses(limit=20)
     
@@ -400,8 +374,7 @@ def main():
         print("ERROR: Failed to retrieve pulses from AlienVault OTX")
         print("Please check your API key or network connection")
         sys.exit(1)
-    
-    # Save raw pulses
+
     with open("data/raw/otx/pulses.json", "w") as f:
         json.dump(pulses, f, indent=2)
     
@@ -410,28 +383,24 @@ def main():
         print(f"Processing pulse {i+1}/{len(pulses)}: {pulse.get('name', 'Unknown')}")
         
         try:
-            # Map pulse to APT groups
+                                     
             apt_matches = apt_mapper.map_pulse_to_apt_groups(pulse)
             
             if apt_matches:
                 timestamp = datetime.now().isoformat()
                 pulse_id = pulse.get("id")
-                
-                # Get indicators for the pulse
+
                 indicators = otx.get_indicators(pulse_id)
-                
-                # Extract geographic data
+
                 try:
                     geo_data = geo_processor.process_indicators(indicators)
-                    
-                    # Only add to geographic dataset if we got some data
+
                     if geo_data:
                         print(f"  Found {len(geo_data)} geographic data points")
                         geographic_data.extend(geo_data)
                 except Exception as e:
                     print(f"Error processing geographic data: {e}")
-                
-                # Add APT mappings
+
                 for match in apt_matches:
                     mapping = {
                         "pulse_id": pulse_id,
@@ -448,16 +417,13 @@ def main():
                     apt_mappings.append(mapping)
         except Exception as e:
             print(f"Error processing pulse: {e}")
-    
-    # Save APT mappings
+
     with open("data/processed/apt/mappings.json", "w") as f:
         json.dump(apt_mappings, f, indent=2)
-    
-    # Save geographic data
+
     with open("data/processed/geo/threat_locations.json", "w") as f:
         json.dump(geographic_data, f, indent=2)
-    
-    # Collect data from AbuseIPDB
+
     print("\nCollecting data from AbuseIPDB...")
     blacklist = abuse_ip.get_blacklist(limit=100)
     
@@ -465,11 +431,10 @@ def main():
         print("ERROR: Failed to retrieve blacklist from AbuseIPDB")
         print("Please check your API key or network connection")
     else:
-        # Save raw blacklist
+                            
         with open("data/raw/abuseipdb/blacklist.json", "w") as f:
             json.dump(blacklist, f, indent=2)
-        
-        # Process for geographic visualization
+
         blacklist_geo = []
         
         for ip_entry in blacklist:
@@ -483,14 +448,12 @@ def main():
                     "abuse_confidence": ip_entry.get("abuseConfidenceScore"),
                     "last_reported": ip_entry.get("lastReportedAt")
                 })
-        
-        # Save processed blacklist
+
         with open("data/processed/geo/abuse_locations.json", "w") as f:
             json.dump(blacklist_geo, f, indent=2)
         
         print(f"Processed {len(blacklist_geo)} blacklisted IPs")
-    
-    # Check if we have collected enough data
+
     if len(apt_mappings) == 0 and len(geographic_data) == 0:
         print("\nERROR: No real threat intelligence data was collected")
         print("The system requires real data to operate in real-data-only mode")

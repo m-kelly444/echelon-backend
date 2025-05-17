@@ -8,7 +8,6 @@ from datetime import datetime, timedelta
 
 import numpy as np
 
-
 class MLAttackForecaster:
     def __init__(self):
         self.model = None

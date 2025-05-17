@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+                      
 import glob
 import json
 import os
@@ -10,12 +10,10 @@ import sys
 from datetime import datetime, timedelta
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-# Add the current directory to sys.path to fix import issues
 current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
     sys.path.insert(0, current_dir)
 
-# Now import MLAttackForecaster
 from models.ml_attack_forecaster import MLAttackForecaster
 
 print("ECHELON: PURE ML-BASED ATTACK FORECASTING - USING ONLY REAL DATA")

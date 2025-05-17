@@ -7,16 +7,13 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 import urllib.parse
 import time
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
-# Initialize flag for real data only mode
+                                         
 REAL_DATA_ONLY = True
 print("Running in REAL_DATA_ONLY mode - no fallbacks or synthetic data will be used")
 
-
-# Configuration
 PORT = 8080
 HOST = "0.0.0.0"
 
-# Load model
 try:
     with open("models/threat_model.pkl", "rb") as f:
         model = pickle.load(f)
@@ -31,7 +28,6 @@ except Exception as e:
     model = None
     model_metadata = {}
 
-# Tracking stats
 stats = {
     "start_time": datetime.now().isoformat(),
     "requests": 0,
@@ -53,19 +49,16 @@ class PredictionHandler(BaseHTTPRequestHandler):
     
     def do_GET(self):
         stats["requests"] += 1
-        
-        # Rate limiting
+
         if stats.get("last_request_time"):
             time_since_last = time.time() - stats.get("last_request_time", 0)
-            if time_since_last < 0.1:  # Max 10 requests per second
+            if time_since_last < 0.1:                              
                 time.sleep(0.1 - time_since_last)
         stats["last_request_time"] = time.time()
-        
-        # Parse URL
+
         parsed_path = urllib.parse.urlparse(self.path)
         path = parsed_path.path
-        
-        # Home endpoint
+
         if path == "/":
             self._set_headers()
             response = {
@@ -79,8 +72,7 @@ class PredictionHandler(BaseHTTPRequestHandler):
                 ]
             }
             self.wfile.write(json.dumps(response).encode())
-        
-        # Status endpoint
+
         elif path == "/status":
             self._set_headers()
             uptime = (datetime.now() - datetime.fromisoformat(stats["start_time"])).total_seconds()
@@ -96,8 +88,7 @@ class PredictionHandler(BaseHTTPRequestHandler):
                 }
             }
             self.wfile.write(json.dumps(response).encode())
-        
-        # Not found
+
         else:
             self.send_response(404)
             self.send_header("Content-type", "application/json")
@@ -106,12 +97,10 @@ class PredictionHandler(BaseHTTPRequestHandler):
     
     def do_POST(self):
         stats["requests"] += 1
-        
-        # Parse URL
+
         parsed_path = urllib.parse.urlparse(self.path)
         path = parsed_path.path
-        
-        # Prediction endpoint
+
         if path == "/predict":
             content_length = int(self.headers["Content-Length"])
             post_data = self.rfile.read(content_length)
@@ -130,10 +119,8 @@ class PredictionHandler(BaseHTTPRequestHandler):
                     }).encode())
                     stats["errors"] += 1
                     return
-                
-                # Extract features
-                # Feature 1: CVE year
-                cve_year = 2020  # Default
+
+                cve_year = 2020           
                 if "cve_id" in data and re.match(r"CVE-\d+-\d+", data["cve_id"]):
                     try:
                         cve_year = int(data["cve_id"].split("-")[1])
@@ -141,27 +128,23 @@ class PredictionHandler(BaseHTTPRequestHandler):
                         pass
                 elif "cve_year" in data:
                     cve_year = int(data["cve_year"])
-                
-                # Feature 2: CVSS Base Score
-                base_score = 5.0  # Default
+
+                base_score = 5.0           
                 if "base_score" in data:
                     base_score = float(data["base_score"])
                 elif "severity" in data:
                     base_score = float(data["severity"])
-                
-                # Make prediction
+
                 prediction_proba = model.predict_proba([[cve_year, base_score]])[0]
                 prediction = int(model.predict([[cve_year, base_score]])[0])
                 threat_score = float(prediction_proba[1])
-                
-                # Determine threat level
+
                 threat_level = "LOW"
                 if threat_score > 0.7:
                     threat_level = "HIGH"
                 elif threat_score > 0.4:
                     threat_level = "MEDIUM"
-                
-                # Prepare response
+
                 response = {
                     "prediction": prediction,
                     "threat_score": round(threat_score, 4),
@@ -184,14 +167,12 @@ class PredictionHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 self.wfile.write(json.dumps({"error": str(e)}).encode())
                 stats["errors"] += 1
-        
-        # Not found
+
         else:
             self.send_response(404)
             self.send_header("Content-type", "application/json")
             self.end_headers()
             self.wfile.write(json.dumps({"error": "Not found"}).encode())
-
 
     @retry(
         stop=stop_after_attempt(3),
@@ -199,12 +180,11 @@ class PredictionHandler(BaseHTTPRequestHandler):
         retry=retry_if_exception_type((Exception))
     )
     def _predict_with_retry(self, features):
-        # Wrapper to retry predictions in case of transient errors
+                                                                  
         prediction_proba = model.predict_proba([features])[0]
         prediction = int(model.predict([features])[0])
         return prediction, prediction_proba
 
-# Start server
 print(f"Starting server on {HOST}:{PORT}")
 server = HTTPServer((HOST, PORT), PredictionHandler)
 

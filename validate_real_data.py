@@ -1,16 +1,15 @@
-#!/usr/bin/env python3
+                      
 import os
 import json
 import sys
 from datetime import datetime
 
 def validate_data_source(path, source_name):
-    """Validate that a data source exists and has content"""
+                                                            
     if not os.path.exists(path):
         print(f"✗ {source_name} data not found at {path}")
         return False
-    
-    # Check file size
+
     size = os.path.getsize(path)
     if size == 0:
         print(f"✗ {source_name} data is empty")
@@ -20,7 +19,7 @@ def validate_data_source(path, source_name):
     return True
 
 def validate_json_data(path, source_name, required_keys=None):
-    """Validate that JSON data exists, has content, and contains required keys"""
+                                                                                 
     if not validate_data_source(path, source_name):
         return False
     
@@ -35,7 +34,7 @@ def validate_json_data(path, source_name, required_keys=None):
             print(f"✓ {source_name} data contains {len(data)} records")
             
             if required_keys and len(data) > 0:
-                # Check first item for required keys
+                                                    
                 first_item = data[0]
                 missing_keys = [key for key in required_keys if key not in first_item]
                 if missing_keys:
@@ -68,8 +67,7 @@ def main():
     print("========================================")
     
     all_valid = True
-    
-    # Check for API keys - needed for real data
+
     config_valid = validate_json_data('config/api_keys.json', 'API Keys Configuration')
     if config_valid:
         try:
@@ -95,8 +93,7 @@ def main():
             all_valid = False
     else:
         all_valid = False
-    
-    # Check for raw data sources
+
     print("\nChecking raw data sources:")
     if not validate_data_source('data/raw/cisa/kev.csv', 'CISA KEV'):
         all_valid = False
@@ -112,24 +109,21 @@ def main():
     
     if not validate_json_data('data/raw/abuseipdb/blacklist.json', 'AbuseIPDB Blacklist'):
         all_valid = False
-    
-    # Check for processed data
+
     print("\nChecking processed data:")
     if not validate_json_data('data/processed/apt/mappings.json', 'APT Mappings'):
         all_valid = False
     
     if not validate_json_data('data/processed/geo/threat_locations.json', 'Geographic Threat Data'):
         all_valid = False
-    
-    # Check for model
+
     print("\nChecking prediction model:")
     if not validate_data_source('models/threat_model.pkl', 'Prediction Model'):
         all_valid = False
     
     if not validate_json_data('models/model_metadata.json', 'Model Metadata'):
         all_valid = False
-    
-    # Summary
+
     print("\n========================================")
     if all_valid:
         print("✅ ALL REAL DATA SOURCES VALIDATED SUCCESSFULLY")

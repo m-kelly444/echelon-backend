@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
+                      
 import os
 import json
 from datetime import datetime
 
 def check_data_source(path, name, required=True):
-    """Check if a data source exists and has data"""
+                                                    
     if not os.path.exists(path):
         if required:
             print(f"❌ MISSING REQUIRED DATA: {name} ({path})")
@@ -26,7 +26,7 @@ def check_data_source(path, name, required=True):
     return True
 
 def check_api_keys():
-    """Check if API keys are configured"""
+                                          
     if not os.path.exists('config/api_keys.json'):
         print("❌ API keys configuration file not found")
         return False
@@ -63,19 +63,15 @@ def main():
     print(" ECHELON REAL DATA REQUIREMENTS CHECK")
     print(f" {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("========================================")
-    
-    # Track overall status
+
     all_required_available = True
-    
-    # Check API keys
+
     print("\nChecking API keys:")
     if not check_api_keys():
         all_required_available = False
-    
-    # Check required data sources
+
     print("\nChecking required data sources:")
-    
-    # Raw data
+
     if not check_data_source('data/raw/cisa/kev.csv', 'CISA KEV', required=True):
         all_required_available = False
     
@@ -84,19 +80,16 @@ def main():
     
     if not check_data_source('data/raw/nvd/recent.json', 'NVD', required=True):
         all_required_available = False
-    
-    # Processed data
+
     if not check_data_source('data/processed/apt/mappings.json', 'APT Mappings', required=True):
         all_required_available = False
     
     if not check_data_source('data/processed/geo/threat_locations.json', 'Geographic Threat Data', required=True):
         all_required_available = False
-    
-    # Check if model is available
+
     if not check_data_source('models/threat_model.pkl', 'Threat Model', required=True):
         all_required_available = False
-    
-    # Result
+
     print("\n========================================")
     if all_required_available:
         print("✅ ALL REQUIRED REAL DATA IS AVAILABLE")

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+                      
 import os
 import json
 import csv
@@ -10,17 +10,16 @@ import glob
 import time
 from functools import wraps
 
-
 app = Flask(__name__)
 CORS(app)
-# Error handling decorator
+                          
 def handle_api_error(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)
         except Exception as e:
-            # Log the error
+                           
             print(f"API Error in {func.__name__}: {str(e)}")
             
             error_response = {
@@ -29,8 +28,7 @@ def handle_api_error(func):
                 "timestamp": datetime.now().isoformat(),
                 "endpoint": func.__name__
             }
-            
-            # Return appropriate status
+
             status_code = 500
             if isinstance(e, ValueError) or isinstance(e, KeyError):
                 status_code = 400
@@ -40,22 +38,19 @@ def handle_api_error(func):
             return jsonify(error_response), status_code
     return wrapper
 
-
-# Load all real data - no fallbacks, no mocks
 def load_all_data():
     data = {
         "cves": [],
         "techniques": [],
         "alerts": []
     }
-    
-    # Load CISA KEV data (CSV)
+
     try:
         if os.path.exists('data/api/cisa_kev.csv'):
             with open('data/api/cisa_kev.csv', 'r') as f:
                 reader = csv.DictReader(f)
                 for row in reader:
-                    # Only add if we have the necessary data
+                                                            
                     if 'cveID' in row and row['cveID']:
                         data["cves"].append({
                             "id": row.get('cveID', ''),
@@ -69,7 +64,6 @@ def load_all_data():
     except Exception as e:
         print(f"Error loading CISA KEV data: {e}")
 
-    # Load NVD data
     try:
         if os.path.exists('data/api/nvd_api.json'):
             with open('data/api/nvd_api.json', 'r') as f:
@@ -78,7 +72,7 @@ def load_all_data():
                     for vuln in nvd_data['vulnerabilities']:
                         cve = vuln.get('cve', {})
                         if 'id' in cve:
-                            # Extract what we can from NVD
+                                                          
                             data["cves"].append({
                                 "id": cve.get('id', ''),
                                 "description": cve.get('descriptions', [{}])[0].get('value', '') if cve.get('descriptions') else '',
@@ -89,7 +83,6 @@ def load_all_data():
     except Exception as e:
         print(f"Error loading NVD data: {e}")
 
-    # Load MITRE ATT&CK data
     try:
         mitre_files = ['enterprise_attack.json', 'mobile_attack.json', 'ics_attack.json']
         for file_name in mitre_files:
@@ -107,20 +100,18 @@ def load_all_data():
                                     "description": obj.get('description', ''),
                                     "source": f"MITRE {file_name.split('_')[0].upper()} ATT&CK"
                                 }
-                                if technique["id"]:  # Only add if we have an ID
+                                if technique["id"]:                             
                                     data["techniques"].append(technique)
                 print(f"Added {sum(1 for t in data['techniques'] if t['source'].startswith('MITRE ' + file_name.split('_')[0].upper()))} techniques from {file_name}")
     except Exception as e:
         print(f"Error loading MITRE data: {e}")
 
-    # Load RSS feed data
     try:
         for rss_file in glob.glob('data/rss/*.xml'):
             try:
                 tree = ET.parse(rss_file)
                 root = tree.getroot()
-                
-                # RSS format
+
                 items = root.findall('.//item')
                 feed_name = os.path.basename(rss_file).replace('.xml', '')
                 
@@ -146,10 +137,8 @@ def load_all_data():
     
     return data
 
-# Load all data at startup
 all_data = load_all_data()
 
-# API endpoints that use only real data
 @app.route('/', methods=['GET'])
 @handle_api_error
 def home():
@@ -176,15 +165,13 @@ def get_cves():
     search = request.args.get('search', '')
     
     results = all_data["cves"]
-    
-    # Apply search if provided
+
     if search:
         results = [cve for cve in results if 
                    search.lower() in cve.get('id', '').lower() or 
                    search.lower() in cve.get('name', '').lower() or
                    search.lower() in cve.get('description', '').lower()]
-    
-    # Apply pagination
+
     paginated = results[offset:offset+limit]
     
     return jsonify({
@@ -200,8 +187,7 @@ def get_cves():
 def get_techniques():
     limit = min(int(request.args.get('limit', 50)), 500)
     offset = int(request.args.get('offset', 0))
-    
-    # Apply pagination
+
     paginated = all_data["techniques"][offset:offset+limit]
     
     return jsonify({
@@ -220,12 +206,10 @@ def get_alerts():
     source = request.args.get('source', '')
     
     results = all_data["alerts"]
-    
-    # Filter by source if provided
+
     if source:
         results = [alert for alert in results if source.lower() in alert.get('source', '').lower()]
-    
-    # Apply pagination
+
     paginated = results[offset:offset+limit]
     
     return jsonify({
@@ -238,7 +222,7 @@ def get_alerts():
 
 @app.route('/cve/<cve_id>', methods=['GET'])
 def get_cve(cve_id):
-    # Find the specific CVE
+                           
     for cve in all_data["cves"]:
         if cve.get('id', '').upper() == cve_id.upper():
             return jsonify(cve)
